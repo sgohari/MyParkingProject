@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My Parking</string>
+
+    <string name="home_page_heading">Customer Activity Home Page</string>
+</resources>
