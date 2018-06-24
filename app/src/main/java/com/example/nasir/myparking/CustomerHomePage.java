@@ -9,5 +9,7 @@ public class CustomerHomePage extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_home_page);
+
+
     }
 }

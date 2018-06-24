@@ -2,4 +2,6 @@
     <string name="app_name">My Parking</string>
 
     <string name="home_page_heading">Customer Activity Home Page</string>
+    <string name="parking_around_me">Parking Around Me</string>
+    <string name="parking_at_destination">Parking at Destination</string>
 </resources>
