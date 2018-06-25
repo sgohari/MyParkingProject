@@ -7,6 +7,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -38,9 +39,31 @@ public class ParkingAtDestinationActivity extends FragmentActivity implements On
     public void onMapReady (GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Add a marker in Toronto and move the camera
+        LatLng gbrownCasaLoma = new LatLng(43.676120, -79.410520);
+        mMap.addMarker(new MarkerOptions().position(gbrownCasaLoma).title("Casa Loma Compus").
+                icon(BitmapDescriptorFactory.fromResource(R.mipmap.gbrown))).
+                setSnippet("160 Kendal Ave, Toronto, ON M5R 1M3");
+        //moves the camera focus to reffered latite and Altitute
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(gbrownCasaLoma));
+
+        // Add a marker in Toronto and move the camera
+        LatLng gbrownStJames = new LatLng(43.650934, -79.370200);
+        mMap.addMarker(new MarkerOptions().position(gbrownStJames).title("St. James Campus").
+                icon(BitmapDescriptorFactory.fromResource(R.mipmap.gbrown))).
+                setSnippet("200 King St E, Toronto, ON M5A 3W8");
+        //moves the camera focus to reffered latite and Altitute
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(gbrownStJames));
+
+        // Add a marker in Toronto and move the camera
+        LatLng gbrownWaterFront = new LatLng(43.644070, -79.365427);
+        mMap.addMarker(new MarkerOptions().position(gbrownWaterFront).title("Waterfront Campus").
+                icon(BitmapDescriptorFactory.fromResource(R.mipmap.gbrown))).
+                setSnippet("51 Dockside Dr, Toronto, ON M5A 1B");
+        //moves the camera focus to reffered latite and Altitute
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(gbrownWaterFront));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(14),700, null);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(12.3f));
     }
 }
