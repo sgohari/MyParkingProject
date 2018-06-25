@@ -25,7 +25,7 @@ public class CustomerHomePage extends AppCompatActivity {
         btnParkingAtDestination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                startActivity(new Intent(CustomerHomePage.this,ParkingAtDestinationActivity.class));
+                startActivity(new Intent(CustomerHomePage.this,DestinationActivity.class));
             }
         });
     }

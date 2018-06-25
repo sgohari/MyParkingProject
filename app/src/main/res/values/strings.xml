@@ -6,6 +6,12 @@
     <string name="parking_at_destination">Parking at Destination</string>
     <string name="title_activity_parking_around">Map</string>
     <string name="title_activity_parking_at_destination">Map</string>
+    <string name="streetTV">Street:</string>
+    <string name="cityTV">City:</string>
+    <string name="provinceTV">Province:</string>
+    <string name="enter_cityHint">Enter city</string>
+    <string name="postal_codeTV">Postal Code:</string>
+    <string name="enter_streetHint">Enter street...</string>
 
     <string-array name="centennial_college">
         <item>Story Arts Centre\n\t951 Carlaw Ave, Toronto, ON M4K 3M2\n</item>
@@ -14,4 +20,11 @@
         <item>Pickering Compus \n\t1340 Pickering Pkwy, Pickering, ON L1V</item>
         <item>Morning Side Compus \n\t755 Morningside Ave, Scarborough,\n\tON M1C 4Z4</item>
     </string-array>
+
+    <string name="provinces">
+        <item>ON</item>
+        <item>AB</item>
+        <item>VA</item>
+    </string>
+    <string name="enter_postal_codeHint">Enter Postal Code...</string>
 </resources>
