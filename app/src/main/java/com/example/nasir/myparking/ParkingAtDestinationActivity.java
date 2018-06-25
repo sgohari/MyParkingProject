@@ -7,18 +7,17 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class ParkingAroundActivity extends FragmentActivity implements OnMapReadyCallback {
+public class ParkingAtDestinationActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_parking_around);
+        setContentView(R.layout.activity_parking_at_destination);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -38,9 +37,10 @@ public class ParkingAroundActivity extends FragmentActivity implements OnMapRead
     @Override
     public void onMapReady (GoogleMap googleMap) {
         mMap = googleMap;
-        //marker in Progress Compus and move the camera
-        LatLng progressCompus = new LatLng(43.784401, -79.229276);
-        mMap.addMarker(new MarkerOptions().position(progressCompus).title("Progress Compus"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(progressCompus));
+
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
