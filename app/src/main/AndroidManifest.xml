@@ -46,7 +46,10 @@
         <activity
             android:name=".ParkingAtDestinationActivity"
             android:label="@string/title_activity_parking_at_destination" />
-        <activity android:name=".DestinationActivity"></activity>
+        <activity android:name=".DestinationActivity" />
+        <activity
+            android:name=".DestinationMapsActivity"
+            android:label="@string/title_activity_destination_maps"></activity>
     </application>
 
 </manifest>

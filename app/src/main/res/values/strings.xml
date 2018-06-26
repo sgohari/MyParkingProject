@@ -27,4 +27,5 @@
         <item>VA</item>
     </string>
     <string name="enter_postal_codeHint">Enter Postal Code...</string>
+    <string name="title_activity_destination_maps">Map</string>
 </resources>
