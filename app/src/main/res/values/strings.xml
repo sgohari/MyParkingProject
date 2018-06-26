@@ -12,12 +12,13 @@
     <string name="enter_cityHint">Enter city</string>
     <string name="postal_codeTV">Postal Code:</string>
     <string name="enter_streetHint">Enter street...</string>
+    <string name="headingListView">Select a parking       </string>
 
     <string-array name="centennial_college">
-        <item>Story Arts Centre\n\t951 Carlaw Ave, Toronto, ON M4K 3M2\n</item>
-        <item>Ashtonbee Compus \n\t75 Ashtonbee Rd B2-11 ​75, Scarborough,\n\tON M1L 4C9\n</item>
-        <item>Progress Compus \n\t941 Progress Ave, Scarborough, ON M1G 3T8\n</item>
-        <item>Pickering Compus \n\t1340 Pickering Pkwy, Pickering, ON L1V</item>
+        <item>Story Arts Centre\n\t951 Carlaw Ave, Toronto, ON M4K \n\t3M2\n</item>
+        <item>Ashtonbee Compus \n\t75 Ashtonbee Rd B2-11 ​75, \n\tScarborough,\n\tON M1L 4C9\n</item>
+        <item>Progress Compus \n\t941 Progress Ave, Scarborough, ON \n\tM1G 3T8\n</item>
+        <item>Pickering Compus \n\t1340 Pickering Pkwy, Pickering, ON \n\tL1V</item>
         <item>Morning Side Compus \n\t755 Morningside Ave, Scarborough,\n\tON M1C 4Z4</item>
     </string-array>
 
