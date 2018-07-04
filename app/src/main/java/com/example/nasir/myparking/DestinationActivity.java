@@ -29,7 +29,7 @@ public class DestinationActivity extends AppCompatActivity {
 
         String address = street_Name +" "+city_Name+" Ontario Canada "+postal_code;
 
-        Intent intent = new Intent(this,DestinationMapsActivity.class);
+        Intent intent = new Intent(DestinationActivity.this,DestinationMapsActivity.class);
         intent.putExtra("address",address);
         startActivity(intent);
 
