@@ -4,6 +4,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -48,48 +49,62 @@ public class DestinationMapsActivity extends FragmentActivity implements OnMapRe
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        //Available Parking-spots
         final LatLng downtown = new LatLng(43.648188, -79.392968);
         final LatLng richmond_hill = new LatLng(43.835833, -79.413896);
         final LatLng pickering = new LatLng(43.837087, -79.086135);
-        final LatLng sheppard = new LatLng(43.795130, -79.281837);
+        final LatLng sheppard = new LatLng(43.795130,-79.281837);
 
-        LatLng[] parkings = {downtown, richmond_hill,pickering,sheppard};
-
+        //Address input by the user
         String inputAddress = getIntent().getStringExtra("address");
+
         Geocoder geoCoder = new Geocoder(
                 getBaseContext(), Locale.getDefault());
         try {List<Address> addresses = geoCoder.getFromLocationName(
                 inputAddress, 5);
             if (addresses.size() > 0) {
                 LatLng destinedAddress = new LatLng(
-                        (int) (addresses.get(0).getLatitude()),
-                        (int) (addresses.get(0).getLongitude()));
+                        (addresses.get(0).getLatitude()),
+                        (addresses.get(0).getLongitude()));
 
-                String nearestParkingLatitude = Double.toString(NearestParking(destinedAddress).latitude);
+                //Check for null value
+                try {
+                    LatLng NEAREST_PARKING_LOT = NearestParking(destinedAddress);
+                    double LATITUDE_TO_CHECK = NEAREST_PARKING_LOT.latitude;
+                    String nearestParkingLatitude = Double.toString(LATITUDE_TO_CHECK);
 
-                switch (nearestParkingLatitude)
+                    switch (nearestParkingLatitude) {
+                        case "43.648188":
+                            mMap.addMarker(new MarkerOptions().position(downtown).title("Best Parking GO"));
+                            mMap.moveCamera(CameraUpdateFactory.zoomTo(12.3f));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLng(downtown));
+                            break;
+                        case "43.835833":
+                            mMap.addMarker(new MarkerOptions().position(richmond_hill).title("Viva Free Parking"));
+                            mMap.moveCamera(CameraUpdateFactory.zoomTo(12.3f));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLng(richmond_hill));
+                            break;
+                        case "43.837087":
+                            mMap.addMarker(new MarkerOptions().position(sheppard).title("Pickering GO"));
+                            mMap.moveCamera(CameraUpdateFactory.zoomTo(12.3f));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLng(sheppard));
+                            break;
+                        case "43.795130":
+                            mMap.addMarker(new MarkerOptions().position(pickering).title("Sheppard Parking Lot"));
+                            mMap.moveCamera(CameraUpdateFactory.zoomTo(12.3f));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLng(pickering));
+
+
+                    }
+                } catch (NullPointerException e)
                 {
-                    case "43.648188":
-                        mMap.addMarker(new MarkerOptions().position(downtown).title("Best Parking GO"));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(downtown));
-                        break;
-                    case "43.835833":
-                        mMap.addMarker(new MarkerOptions().position(richmond_hill).title("Best Parking GO"));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(richmond_hill));
-                        break;
-                    case "43.795130":
-                        mMap.addMarker(new MarkerOptions().position(sheppard).title("Best Parking GO"));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(sheppard));
-                        break;
-                    case "43.837087":
-                        mMap.addMarker(new MarkerOptions().position(pickering).title("Best Parking GO"));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(pickering));
-
-
-
+                    Log.e("Null distance", "The distance to the nearest parking lot failed to be calculated");
                 }
 
             }
+
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -105,19 +120,23 @@ public class DestinationMapsActivity extends FragmentActivity implements OnMapRe
 
         LatLng[] parkings = {downtown, richmond_hill,pickering,sheppard};
 
+        //Distance(s) between the destination and the nearest parking spot.
+        ArrayList<Double> distances = new ArrayList<>();
+
         for (LatLng coords:parkings
              ) {
 
-            ArrayList<Double> distances = new ArrayList<>();
+
             distances.add(calculateDistance(coords,inputAddress));
-
-            int shortestDistancePosition = distances.indexOf(Collections.min(distances));
-
-            return parkings[shortestDistancePosition];
 
         }
 
-        return null;
+        if (distances.size() != parkings.length)
+            return null;
+
+        int shortestDistancePosition = distances.indexOf(Collections.min(distances));
+
+        return parkings[shortestDistancePosition];
     }
 
     public double calculateDistance(LatLng parkingLot, LatLng inputAddress1)

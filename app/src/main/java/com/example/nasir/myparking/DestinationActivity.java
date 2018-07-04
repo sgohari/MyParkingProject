@@ -27,7 +27,7 @@ public class DestinationActivity extends AppCompatActivity {
         String city_Name = city.getText().toString();
         String postal_code = postalCode.getText().toString();
 
-        String address = street_Name +","+city_Name+", ON,Canada,"+postal_code;
+        String address = street_Name +" "+city_Name+" Ontario Canada "+postal_code;
 
         Intent intent = new Intent(this,DestinationMapsActivity.class);
         intent.putExtra("address",address);
