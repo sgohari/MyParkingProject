@@ -48,16 +48,18 @@
             android:label="@string/title_activity_parking_around" />
         <activity
             android:name=".ParkingAtDestinationActivity"
-            android:label="@string/title_activity_parking_at_destination"
-            >
+            android:label="@string/title_activity_parking_at_destination">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
         <activity android:name=".DestinationActivity" />
-        <activity android:name=".NearByParkingsActivity"/>
-        <activity android:name=".DestinationMapsActivity"
-            android:label="Map"/>
+        <activity android:name=".NearByParkingsActivity" />
+        <activity
+            android:name=".DestinationMapsActivity"
+            android:label="Map" />
+        <activity android:name=".ReservationsActivity" />
+        <activity android:name=".ReceiptActivity"></activity>
     </application>
 
 </manifest>

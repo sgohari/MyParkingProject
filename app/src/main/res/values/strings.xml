@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">My Parking</string>
 
+    <string name="btn_reservation">Reserve Now</string>
     <string name="home_page_heading">Customer Activity Home Page</string>
     <string name="parking_around_me">Parking Around Me</string>
     <string name="parking_at_destination">Parking at Destination</string>
@@ -29,4 +30,24 @@
     </string>
     <string name="enter_postal_codeHint">Enter Postal Code...</string>
     <string name="title_activity_destination_maps">Map</string>
+
+    <string name="rv_heading">Reserve Your Spot Here</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="parking_lot_name">Parking Lot Name</string>
+    <string name="parking_lot_address">Parking Lot Address</string>
+    <string name="timing">Timing of Booking</string>
+    <string name="from">From </string>
+    <string name="to">To</string>
+    <string name="payment_options">Payments Options</string>
+    <string name="rd_credit">Credit</string>
+    <string name="rd_debit">Debit</string>
+    <string name="credit_car_number">Card Number</string>
+    <string name="expire_date">Expire Date</string>
+    <string name="hint_month">MM</string>
+    <string name="hint_year">YY</string>
+    <string name="security_code">Security Code</string>
+    <string name="hint_security_code">XXX</string>
+
+    <string name="customer_name">Customer Name</string>
+    <string name="customer_name">Customer Name</string>
 </resources>

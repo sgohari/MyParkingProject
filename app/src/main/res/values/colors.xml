@@ -6,4 +6,7 @@
 
     <color name="headingColor">#000000</color>
     <color name="homePageColor">#999999</color>
+
+
+    <color name="blackColor">#000000</color>
 </resources>
