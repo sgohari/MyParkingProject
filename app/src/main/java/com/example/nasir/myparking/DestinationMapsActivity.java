@@ -1,10 +1,12 @@
 package com.example.nasir.myparking;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -144,4 +146,8 @@ public class DestinationMapsActivity extends FragmentActivity implements OnMapRe
         return Math.sqrt( Math.pow(parkingLot.latitude - inputAddress1.latitude,2) + Math.pow(parkingLot.longitude - inputAddress1.longitude,2));
     }
 
+    public void Moving_Reseration (View view) {
+
+        startActivity(new Intent(DestinationMapsActivity.this,ReservationsActivity.class));
+    }
 }

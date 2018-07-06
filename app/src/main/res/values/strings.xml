@@ -43,9 +43,13 @@
     <string name="rd_debit">Debit</string>
     <string name="credit_car_number">Card Number</string>
     <string name="expire_date">Expire Date</string>
-    <string name="hint_month">MM</string>
-    <string name="hint_year">YY</string>
+    <string name="hint_month">MM/YY</string>
     <string name="security_code">Security Code</string>
     <string name="hint_security_code">XXX</string>
+    <string name="btn_confirmation">Confirm Now</string>
+    <string name="btn_clear">Clear</string>
 
+    <string name="heading_receipt">Here is Your Receipt</string>
+
+    <string name="message">Thanks you for using MyParking app</string>
 </resources>

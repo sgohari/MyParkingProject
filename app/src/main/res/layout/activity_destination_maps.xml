@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DestinationMapsActivity"
-    map:uiZoomControls="true"/>
+
+<RelativeLayout xmlns:andoir="http://schemas.android.com/apk/res/android"
+    andoir:layout_width="match_parent"
+    andoir:layout_height="match_parent"
+    andoir:orientation="vertical"
+    >
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="461dp"
+        map:uiZoomControls="true"
+        tools:context=".DestinationMapsActivity" />
+
+
+    <Button
+        andoir:id="@+id/btnReserveNowD"
+        andoir:layout_width="wrap_content"
+        andoir:layout_height="wrap_content"
+        andoir:layout_alignParentBottom="true"
+        andoir:layout_alignParentStart="true"
+        andoir:onClick="Moving_Reseration"
+        andoir:text="@string/btn_reservation" />
+</RelativeLayout>
