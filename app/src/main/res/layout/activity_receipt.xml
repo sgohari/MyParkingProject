@@ -20,12 +20,13 @@
 
     <TextView
         android:id="@+id/displayTxt"
+        style="@style/receipt_content_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/lbHeadds"
-        android:layout_marginTop="94dp"
-        style="@style/receipt_content_style" />
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="111dp" />
 
     <TextView
         android:id="@+id/textView2"

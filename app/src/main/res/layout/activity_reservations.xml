@@ -57,7 +57,7 @@
         android:layout_marginTop="0dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/parking_lot_name" />
+        android:hint="@string/parking_lot_name" />
 
     <TextView
         android:id="@+id/LBparkingAddress"

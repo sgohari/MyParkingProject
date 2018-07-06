@@ -56,10 +56,7 @@
 
     <style name="receipt_content_style">
         <item name="android:textSize">18dp</item>
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingBottom">5dp</item>
-        <item name="android:textAlignment">center</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/blackColor</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 </resources>
