@@ -9,4 +9,7 @@
 
 
     <color name="blackColor">#000000</color>
+
+
+    <color name="custom_window">#03555A</color>
 </resources>

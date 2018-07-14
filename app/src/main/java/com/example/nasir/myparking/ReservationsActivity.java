@@ -53,7 +53,7 @@ public class ReservationsActivity extends AppCompatActivity {
 
         if(TextUtils.isEmpty(getName)){
 
-            Toast.makeText(ReservationsActivity.this, "EditText is Empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(ReservationsActivity.this, "Customer's Name is Empty", Toast.LENGTH_LONG).show();
             custNameET.setFocusable(true);
         }
         else if (TextUtils.isEmpty(getPkLotName))

@@ -150,4 +150,9 @@ public class DestinationMapsActivity extends FragmentActivity implements OnMapRe
 
         startActivity(new Intent(DestinationMapsActivity.this,ReservationsActivity.class));
     }
+
+    public void move_Back (View view) {
+
+        startActivity(new Intent(DestinationMapsActivity.this,DestinationActivity.class));
+    }
 }

@@ -21,7 +21,16 @@
         andoir:layout_width="144dp"
         andoir:layout_height="wrap_content"
         andoir:layout_alignParentBottom="true"
-        andoir:layout_alignParentStart="true"
+        andoir:layout_alignParentEnd="true"
         andoir:text="@string/btn_reservation" />
+
+    <Button
+        andoir:id="@+id/backBack"
+        andoir:layout_width="wrap_content"
+        andoir:layout_height="wrap_content"
+        andoir:layout_alignParentBottom="true"
+        andoir:layout_alignParentStart="true"
+        andoir:onClick="move_Back"
+        andoir:text="Back" />
 
 </RelativeLayout>
