@@ -25,7 +25,7 @@ public class ReservationsActivity extends AppCompatActivity {
 
         EditText custNameET= (EditText)findViewById(R.id.customerNameET);
 
-        custNameET.addTextChangedListener((TextWatcher) this);
+       // custNameET.addTextChangedListener((TextWatcher) this);
 
 
         EditText pkLotName=(EditText)findViewById(R.id.parkingNameET);
@@ -38,23 +38,7 @@ public class ReservationsActivity extends AppCompatActivity {
 
 
     }
-    public void afterTextChanged(Editable edit) {
-        String textFromEditView = edit.toString();
-        //first method
-        ArrayList[] ArrayList;
-        //ArrayList [] = new ArrayList;
-        //second method
-        try
-        {
-            boolean isOnlyAlphabet = textFromEditView.matches("/^[a-z]+$/i");
-            if(isOnlyAlphabet == false)
-            {
-                edit.replace(0, edit.length(), "only alphabets");
-            }
-        }
-        catch(NumberFormatException e){}
 
-    }
     public void confirm_Onclick (View view) {
 
         EditText custNameET= (EditText)findViewById(R.id.customerNameET);
