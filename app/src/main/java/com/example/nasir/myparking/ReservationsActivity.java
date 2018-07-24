@@ -3,12 +3,18 @@ package com.example.nasir.myparking;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ReservationsActivity extends AppCompatActivity {
 
@@ -17,9 +23,38 @@ public class ReservationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservations);
 
+        EditText custNameET= (EditText)findViewById(R.id.customerNameET);
+
+        custNameET.addTextChangedListener((TextWatcher) this);
+
+
+        EditText pkLotName=(EditText)findViewById(R.id.parkingNameET);
+        EditText pkAddress=(EditText)findViewById(R.id.parkingLotAddressET);
+        EditText from=(EditText)findViewById(R.id.fromET);
+        EditText to=(EditText)findViewById(R.id.toET);
+        EditText cardNumber=(EditText)findViewById(R.id.cardNumberET);
+        EditText expDate=(EditText)findViewById(R.id.expireDateET);
+        EditText securityCode=(EditText)findViewById(R.id.securityCodeET);
+
 
     }
+    public void afterTextChanged(Editable edit) {
+        String textFromEditView = edit.toString();
+        //first method
+        ArrayList[] ArrayList;
+        //ArrayList [] = new ArrayList;
+        //second method
+        try
+        {
+            boolean isOnlyAlphabet = textFromEditView.matches("/^[a-z]+$/i");
+            if(isOnlyAlphabet == false)
+            {
+                edit.replace(0, edit.length(), "only alphabets");
+            }
+        }
+        catch(NumberFormatException e){}
 
+    }
     public void confirm_Onclick (View view) {
 
         EditText custNameET= (EditText)findViewById(R.id.customerNameET);

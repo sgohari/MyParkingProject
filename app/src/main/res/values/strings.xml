@@ -16,11 +16,11 @@
     <string name="headingListView">Select a parking       </string>
 
     <string-array name="centennial_college">
-        <item>Story Arts Centre\n\t951 Carlaw Ave, Toronto, ON M4K \n\t3M2\n</item>
-        <item>Ashtonbee Compus \n\t75 Ashtonbee Rd B2-11 ​75, \n\tScarborough,\n\tON M1L 4C9\n</item>
-        <item>Progress Compus \n\t941 Progress Ave, Scarborough, ON \n\tM1G 3T8\n</item>
-        <item>Pickering Compus \n\t1340 Pickering Pkwy, Pickering, ON \n\tL1V</item>
-        <item>Morning Side Compus \n\t755 Morningside Ave, Scarborough,\n\tON M1C 4Z4</item>
+        <item>Story Arts Lot\n\t951 Carlaw Ave, Toronto, ON M4K \n\t3M2\n</item>
+        <item>Ashtonbee Lot \n\t75 Ashtonbee Rd B2-11 ​75, \n\tScarborough,\n\tON M1L 4C9\n</item>
+        <item>Progress Lot \n\t941 Progress Ave, Scarborough, ON \n\tM1G 3T8\n</item>
+        <item>Pickering Lot \n\t1340 Pickering Pkwy, Pickering, ON \n\tL1V</item>
+        <item>Morning Side Lot \n\t755 Morningside Ave, Scarborough,\n\tON M1C 4Z4</item>
     </string-array>
 
     <string name="provinces">

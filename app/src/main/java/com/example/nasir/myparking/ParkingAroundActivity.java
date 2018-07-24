@@ -66,31 +66,38 @@ public class ParkingAroundActivity extends FragmentActivity implements OnMapRead
         mMap = googleMap;
         //marker in Progress Compus and move the camera
         LatLng progressCompus = new LatLng(43.784401, -79.229276);
-        mMap.addMarker(new MarkerOptions().position(progressCompus).title("Progress Compus").snippet("941 Progress Ave, Scarborough, ON M1G 3T8")
+        mMap.addMarker(new MarkerOptions().position(progressCompus).title("Progress Lot")
+                .snippet("941 Progress Ave,"+"\n"+" Scarborough, ON M1G 3T8")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(progressCompus));
         //marker for morning side compus
         LatLng trontMorningSide= new LatLng(43.786668,-79.192882);
-        mMap.addMarker(new MarkerOptions().position(trontMorningSide).title("Morning Side Compus").snippet("755 Morningside Ave, Scarborough,ON M1C 4Z4")
+        mMap.addMarker(new MarkerOptions().position(trontMorningSide).title("Morning Side Lot")
+                .snippet("755 Morningside Ave,"+"\n"+
+                " Scarborough,ON M1C 4Z4")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(trontMorningSide));
         //marker for Ashtonbee compuse
         LatLng ashtonbee=new LatLng(43.730703,-79.290422);
-        mMap.addMarker(new MarkerOptions().position(ashtonbee).title("Ashtonbee Compus")
-                .snippet("75 Ashtonbee Rd B2-11 75, Scarborough,ON M1L 4C9").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
+        mMap.addMarker(new MarkerOptions().position(ashtonbee).title("Ashtonbee Lot")
+                .snippet("75 Ashtonbee Rd"+"\n"+"B2-11 75,"+"\n"+"Scarborough,ON M1L 4C9")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(ashtonbee));
 
         //marker for Center for art
         LatLng artStory= new LatLng(43.684367,-79.348863);
-        mMap.addMarker(new MarkerOptions().position(artStory).title("Story Arts Compus ").snippet("951 Carlaw Ave, Toronto, ON M4K 3M2")
+        mMap.addMarker(new MarkerOptions().position(artStory).title("Story Arts Lot ")
+                .snippet("951 Carlaw Ave,"+"\n"+" Toronto, ON M4K 3M2")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+
 
         //moves the camera focus to reffered latite and Altitute
         mMap.moveCamera(CameraUpdateFactory.newLatLng(artStory));
 
         //marker for Center for art
         LatLng pickering= new LatLng(43.833037,-79.086306);
-        mMap.addMarker(new MarkerOptions().position(pickering).title("Pickering Compus").snippet("1340 Pickering Pkwy, Pickering, ON L1V")
+        mMap.addMarker(new MarkerOptions().position(pickering).title("Pickering Lot")
+                .snippet("1340 Pickering Pkwy,"+"\n"+"Pickering, ON L1V")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
         //moves the camera focus to reffered latite and Altitute
@@ -114,6 +121,8 @@ public class ParkingAroundActivity extends FragmentActivity implements OnMapRead
         title.setText(marker.getTitle());
         snipped.setText(marker.getSnippet());
         return view;
+
+
     }
 
     @Override
