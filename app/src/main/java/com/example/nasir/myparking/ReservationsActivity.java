@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputFilter;
-import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
@@ -15,30 +13,21 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ReservationsActivity extends AppCompatActivity {
 
-    Calendar calendar;
-    Date dateMonth, dateYear;
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservations);
 
-        final EditText custNameET= (EditText)findViewById(R.id.customerNameET);
+        EditText custNameET= (EditText)findViewById(R.id.customerNameET);
 
-        custNameET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange (View v, boolean hasFocus) {
-                if (custNameET.getText().toString().equals("[^0-9]")){
-                    custNameET.setError("Only WORDS");
-                }
-            }
-        });
+       // custNameET.addTextChangedListener((TextWatcher) this);
+
+
         EditText pkLotName=(EditText)findViewById(R.id.parkingNameET);
         EditText pkAddress=(EditText)findViewById(R.id.parkingLotAddressET);
         EditText from=(EditText)findViewById(R.id.fromET);
@@ -82,7 +71,8 @@ public class ReservationsActivity extends AppCompatActivity {
 
 
         if(TextUtils.isEmpty(getName)){
-                Toast.makeText(ReservationsActivity.this, "Customer's Name is Empty", Toast.LENGTH_LONG).show();
+
+            Toast.makeText(ReservationsActivity.this, "Customer's Name is Empty", Toast.LENGTH_LONG).show();
             custNameET.setFocusable(true);
         }
         else if (TextUtils.isEmpty(getPkLotName))
