@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="vertical"
     android:background="@drawable/sbackground"
     tools:context=".ReservationsActivity">
 
@@ -36,8 +37,8 @@
         android:layout_below="@+id/TextViewDisplay"
         android:layout_marginEnd="18dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/customer_name" />
+        android:hint="@string/customer_name"
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/LBparkingName"
@@ -72,7 +73,7 @@
         android:id="@+id/parkingLotAddressET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/customerNameET"
         android:layout_below="@+id/parkingNameET"
         android:ems="10"
         android:hint="Lot Address"
@@ -215,11 +216,10 @@
     <Button
         android:id="@+id/btnConfirmRV"
         android:layout_width="wrap_content"
-        android:layout_height="38dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/lbID"
-        android:text="@string/btn_confirmation"
-        />
+        android:text="@string/btn_confirmation" />
 
     <Button
         android:id="@+id/btnClearRV"

@@ -22,8 +22,10 @@ import java.util.regex.Pattern;
 public class ReservationsActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText custNameET,pkLotName,pkAddress,timeFrom,timeTo,cardNumber,expDate,securityCode;
-
+    String getName,getPkLotName,getkAddress,getFrom,getTo,getCardNumber,getExpireDate,getSecurity;
     SQLiteDatabase myParkingDatabase;
+
+    Button btnSaves, btnClears;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -35,6 +37,10 @@ public class ReservationsActivity extends AppCompatActivity implements View.OnCl
 
         myParkingDatabase.execSQL("CREATE TABLE IF NOT EXISTS Reservation(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), lotname VARCHAR(255), parkingAddress VARCHAR (255),timeFrom VARCHAR (255),timeTo VARCHAR(255), cardNumbers VARCHAR(255), expiryDates VARCHAR(255), securityCodes VARCHAR(255));");
 
+        btnSaves=(Button)findViewById(R.id.btnConfirmRV);
+        btnClears=(Button)findViewById(R.id.btnClearRV);
+        btnSaves.setOnClickListener(this);
+        btnClears.setOnClickListener(this);
 
         custNameET= (EditText)findViewById(R.id.customerNameET);
         pkLotName=(EditText)findViewById(R.id.parkingNameET);
@@ -53,18 +59,18 @@ public class ReservationsActivity extends AppCompatActivity implements View.OnCl
     public void onClick (View v) {
         if (v.getId()==R.id.btnConfirmRV){
 
-            Intent intentNext = new Intent(ReservationsActivity.this, ReceiptActivity.class);
-            intentNext.putExtra("Name", custNameET.getText().toString());
-            intentNext.putExtra("parkingLotName", pkLotName.getText().toString());
-            intentNext.putExtra("parkingAddress", pkAddress.getText().toString());
-            String getName = custNameET.getText().toString();
-            String getPkLotName=pkLotName.getText().toString();
-            String getkAddress=pkAddress.getText().toString();
-            String getFrom=timeFrom.getText().toString();
-            String getTo=timeTo.getText().toString();
-            String getCardNumber=cardNumber.getText().toString();
-            String getExpireDate=expDate.getText().toString();
-            String getSecurity=securityCode.getText().toString();
+           Intent intentNext = new Intent(ReservationsActivity.this, ReceiptActivity.class);
+           intentNext.putExtra("Name", custNameET.getText().toString());
+           intentNext.putExtra("parkingLotName", pkLotName.getText().toString());
+           intentNext.putExtra("parkingAddress", pkAddress.getText().toString());
+            getName = custNameET.getText().toString();
+            getPkLotName=pkLotName.getText().toString();
+            getkAddress=pkAddress.getText().toString();
+            getFrom=timeFrom.getText().toString();
+            getTo=timeTo.getText().toString();
+            getCardNumber=cardNumber.getText().toString();
+            getExpireDate=expDate.getText().toString();
+            getSecurity=securityCode.getText().toString();
 
             if (getName.equals("")|| getPkLotName.equals("")|| getkAddress.equals("")|| getFrom.equals("")|| getTo.equals("") || getCardNumber.equals("")|| getExpireDate.equals("")||getSecurity.equals(""))
             {
@@ -72,7 +78,7 @@ public class ReservationsActivity extends AppCompatActivity implements View.OnCl
                 return;
             }else {
 
-                myParkingDatabase.execSQL("Insert Into Reservation(name, lotname, parkingAddress,timeFrom, timeTo, cardNumbers, expiryDates, securityCodes)VALUES('" +getName+ "','" +getPkLotName+ "','" +getkAddress+ "','"+getFrom+"','"+getTo+"','"+getCardNumber+"','"+getExpireDate+"','"+getSecurity+"'); ");
+                myParkingDatabase.execSQL("Insert Into Reservation(name,lotname,parkingAddress,timeFrom,timeTo,cardNumbers,expiryDates,securityCodes)VALUES('" +getName+ "','" +getPkLotName+ "','" +getkAddress+ "','"+getFrom+"','"+getTo+"','"+getCardNumber+"','"+getExpireDate+"','"+getSecurity+"'); ");
                 //sqLiteDatabase.execSQL("Insert Into Reg(name, phone, address)VALUES('" + _name + "','" + _phone + "','" + _address + "'); ");
                 Toast.makeText(this,"Record Saved ",Toast.LENGTH_LONG).show();
 
