@@ -122,4 +122,23 @@ public class ReservationsActivity extends AppCompatActivity {
         }
 
     }
+
+    //Clear click event
+    public void clearReservation_OnClick(View view) {
+        EditText custNameET= (EditText)findViewById(R.id.customerNameET);
+        EditText pkLotName=(EditText)findViewById(R.id.parkingNameET);
+        EditText pkAddress=(EditText)findViewById(R.id.parkingLotAddressET);
+        EditText from=(EditText)findViewById(R.id.fromET);
+        EditText to=(EditText)findViewById(R.id.toET);
+        EditText cardNumber=(EditText)findViewById(R.id.cardNumberET);
+        EditText expDate=(EditText)findViewById(R.id.expireDateET);
+        EditText securityCode=(EditText)findViewById(R.id.securityCodeET);
+
+        EditText[] editTexts = {custNameET,pkLotName,pkAddress,from,to,cardNumber,expDate,securityCode};
+
+        for (EditText et:editTexts
+             ) {
+            et.setText("");
+        }
+    }
 }
