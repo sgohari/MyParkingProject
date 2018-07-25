@@ -123,6 +123,7 @@ public class ReservationsActivity extends AppCompatActivity {
 
     }
 
+    //Clear click event
     public void clearReservation_OnClick(View view) {
         EditText custNameET= (EditText)findViewById(R.id.customerNameET);
         EditText pkLotName=(EditText)findViewById(R.id.parkingNameET);
