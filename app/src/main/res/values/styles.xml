@@ -57,6 +57,6 @@
     <style name="receipt_content_style">
         <item name="android:textSize">18dp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/blackColor</item>
     </style>
 </resources>
