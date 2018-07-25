@@ -1,6 +1,9 @@
 package com.example.nasir.myparking;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,129 +19,87 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ReservationsActivity extends AppCompatActivity {
+public class ReservationsActivity extends AppCompatActivity implements View.OnClickListener {
+
+    EditText custNameET,pkLotName,pkAddress,timeFrom,timeTo,cardNumber,expDate,securityCode;
+
+    SQLiteDatabase myParkingDatabase;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservations);
 
-        EditText custNameET= (EditText)findViewById(R.id.customerNameET);
+        //Database created
+        myParkingDatabase=openOrCreateDatabase("myParkingDB",Context.MODE_PRIVATE,null);
 
-       // custNameET.addTextChangedListener((TextWatcher) this);
-
-
-        EditText pkLotName=(EditText)findViewById(R.id.parkingNameET);
-        EditText pkAddress=(EditText)findViewById(R.id.parkingLotAddressET);
-        EditText from=(EditText)findViewById(R.id.fromET);
-        EditText to=(EditText)findViewById(R.id.toET);
-        EditText cardNumber=(EditText)findViewById(R.id.cardNumberET);
-        EditText expDate=(EditText)findViewById(R.id.expireDateET);
-        EditText securityCode=(EditText)findViewById(R.id.securityCodeET);
+        myParkingDatabase.execSQL("CREATE TABLE IF NOT EXISTS Reservation(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), lotname VARCHAR(255), parkingAddress VARCHAR (255),timeFrom VARCHAR (255),timeTo VARCHAR(255), cardNumbers VARCHAR(255), expiryDates VARCHAR(255), securityCodes VARCHAR(255));");
 
 
-    }
-
-    public void confirm_Onclick (View view) {
-
-        EditText custNameET= (EditText)findViewById(R.id.customerNameET);
-        EditText pkLotName=(EditText)findViewById(R.id.parkingNameET);
-        EditText pkAddress=(EditText)findViewById(R.id.parkingLotAddressET);
-        EditText from=(EditText)findViewById(R.id.fromET);
-        EditText to=(EditText)findViewById(R.id.toET);
-        EditText cardNumber=(EditText)findViewById(R.id.cardNumberET);
-        EditText expDate=(EditText)findViewById(R.id.expireDateET);
-        EditText securityCode=(EditText)findViewById(R.id.securityCodeET);
+        custNameET= (EditText)findViewById(R.id.customerNameET);
+        pkLotName=(EditText)findViewById(R.id.parkingNameET);
+        pkAddress=(EditText)findViewById(R.id.parkingLotAddressET);
+        timeFrom=(EditText)findViewById(R.id.fromET);
+        timeTo=(EditText)findViewById(R.id.toET);
+        cardNumber=(EditText)findViewById(R.id.cardNumberET);
+        expDate=(EditText)findViewById(R.id.expireDateET);
+        securityCode=(EditText)findViewById(R.id.securityCodeET);
 
         RadioButton rdCredit = (RadioButton)findViewById(R.id.rdCredit);
         RadioButton rdDebit =(RadioButton)findViewById(R.id.rdDebit);
-
-        Intent intentNext = new Intent(ReservationsActivity.this, ReceiptActivity.class);
-
-        intentNext.putExtra("Name", custNameET.getText().toString());
-        intentNext.putExtra("parkingLotName", pkLotName.getText().toString());
-        intentNext.putExtra("parkingAddress", pkAddress.getText().toString());
-
-
-        String getName = custNameET.getText().toString();
-        String getPkLotName=pkLotName.getText().toString();
-        String getkAddress=pkAddress.getText().toString();
-        String getFrom=from.getText().toString();
-        String getTo=to.getText().toString();
-        String getCardNumber=cardNumber.getText().toString();
-        String getExpireDate=expDate.getText().toString();
-        String getSecurity=securityCode.getText().toString();
-
-
-        if(TextUtils.isEmpty(getName)){
-
-            Toast.makeText(ReservationsActivity.this, "Customer's Name is Empty", Toast.LENGTH_LONG).show();
-            custNameET.setFocusable(true);
-        }
-        else if (TextUtils.isEmpty(getPkLotName))
-        {
-            Toast.makeText(ReservationsActivity.this, "Type Parking Lot Name", Toast.LENGTH_LONG).show();
-            pkLotName.setFocusable(true);
-        }
-
-        else if (TextUtils.isEmpty(getkAddress))
-        {
-            Toast.makeText(ReservationsActivity.this, "Type the Address of Lot", Toast.LENGTH_LONG).show();
-            pkAddress.setFocusable(true);
-        }
-
-        else if (TextUtils.isEmpty(getFrom))
-        {
-            Toast.makeText(ReservationsActivity.this, "Type Timing", Toast.LENGTH_LONG).show();
-            from.setFocusable(true);
-        }
-
-        else if (TextUtils.isEmpty(getTo))
-        {
-            Toast.makeText(ReservationsActivity.this, "Type Timing", Toast.LENGTH_LONG).show();
-            to.setFocusable(true);
-        }
-
-        else if (TextUtils.isEmpty(getCardNumber))
-        {
-            Toast.makeText(ReservationsActivity.this, "Type Credit Card Number", Toast.LENGTH_LONG).show();
-            cardNumber.setFocusable(true);
-        }
-
-        else if (TextUtils.isEmpty(getExpireDate))
-        {
-            Toast.makeText(ReservationsActivity.this, "Type Expire Date", Toast.LENGTH_LONG).show();
-            expDate.setFocusable(true);
-        }
-
-        else if (TextUtils.isEmpty(getSecurity))
-        {
-            Toast.makeText(ReservationsActivity.this, "Type Security Code", Toast.LENGTH_LONG).show();
-            securityCode.setFocusable(true);
-        }
-        else {
-
-            startActivity(intentNext);
-        }
-
     }
 
-    //Clear click event
-    public void clearReservation_OnClick(View view) {
-        EditText custNameET= (EditText)findViewById(R.id.customerNameET);
-        EditText pkLotName=(EditText)findViewById(R.id.parkingNameET);
-        EditText pkAddress=(EditText)findViewById(R.id.parkingLotAddressET);
-        EditText from=(EditText)findViewById(R.id.fromET);
-        EditText to=(EditText)findViewById(R.id.toET);
-        EditText cardNumber=(EditText)findViewById(R.id.cardNumberET);
-        EditText expDate=(EditText)findViewById(R.id.expireDateET);
-        EditText securityCode=(EditText)findViewById(R.id.securityCodeET);
+    @Override
+    public void onClick (View v) {
+        if (v.getId()==R.id.btnConfirmRV){
 
-        EditText[] editTexts = {custNameET,pkLotName,pkAddress,from,to,cardNumber,expDate,securityCode};
+            Intent intentNext = new Intent(ReservationsActivity.this, ReceiptActivity.class);
+            intentNext.putExtra("Name", custNameET.getText().toString());
+            intentNext.putExtra("parkingLotName", pkLotName.getText().toString());
+            intentNext.putExtra("parkingAddress", pkAddress.getText().toString());
+            String getName = custNameET.getText().toString();
+            String getPkLotName=pkLotName.getText().toString();
+            String getkAddress=pkAddress.getText().toString();
+            String getFrom=timeFrom.getText().toString();
+            String getTo=timeTo.getText().toString();
+            String getCardNumber=cardNumber.getText().toString();
+            String getExpireDate=expDate.getText().toString();
+            String getSecurity=securityCode.getText().toString();
 
-        for (EditText et:editTexts
-             ) {
-            et.setText("");
+            if (getName.equals("")|| getPkLotName.equals("")|| getkAddress.equals("")|| getFrom.equals("")|| getTo.equals("") || getCardNumber.equals("")|| getExpireDate.equals("")||getSecurity.equals(""))
+            {
+                Toast.makeText(this,"Fields are Required",Toast.LENGTH_LONG).show();
+                return;
+            }else {
+
+                myParkingDatabase.execSQL("Insert Into Reservation(name, lotname, parkingAddress,timeFrom, timeTo, cardNumbers, expiryDates, securityCodes)VALUES('" +getName+ "','" +getPkLotName+ "','" +getkAddress+ "','"+getFrom+"','"+getTo+"','"+getCardNumber+"','"+getExpireDate+"','"+getSecurity+"'); ");
+                //sqLiteDatabase.execSQL("Insert Into Reg(name, phone, address)VALUES('" + _name + "','" + _phone + "','" + _address + "'); ");
+                Toast.makeText(this,"Record Saved ",Toast.LENGTH_LONG).show();
+
+                startActivity(intentNext);
+
+                return;
+
+            }
+
+        }
+
+        if (v.getId()==R.id.btnClearRV){
+            EditText custNameET= (EditText)findViewById(R.id.customerNameET);
+            EditText pkLotName=(EditText)findViewById(R.id.parkingNameET);
+            EditText pkAddress=(EditText)findViewById(R.id.parkingLotAddressET);
+            EditText from=(EditText)findViewById(R.id.fromET);
+            EditText to=(EditText)findViewById(R.id.toET);
+            EditText cardNumber=(EditText)findViewById(R.id.cardNumberET);
+            EditText expDate=(EditText)findViewById(R.id.expireDateET);
+            EditText securityCode=(EditText)findViewById(R.id.securityCodeET);
+
+            EditText[] editTexts = {custNameET,pkLotName,pkAddress,from,to,cardNumber,expDate,securityCode};
+
+            for (EditText et:editTexts
+                    ) {
+                et.setText("");
+            }
         }
     }
 }
