@@ -34,4 +34,10 @@ public class DestinationActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void clearAddress_OnClick(View view) {
+        streetName.setText("");
+        city.setText("");
+        postalCode.setText("");
+    }
 }

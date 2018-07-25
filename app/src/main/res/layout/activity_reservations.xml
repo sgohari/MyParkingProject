@@ -227,6 +227,7 @@
         android:layout_height="36dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:onClick="clearReservation_OnClick"
         android:text="@string/btn_clear" />
 
 
