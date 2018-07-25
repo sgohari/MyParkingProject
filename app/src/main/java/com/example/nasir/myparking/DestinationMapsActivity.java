@@ -78,22 +78,22 @@ public class DestinationMapsActivity extends FragmentActivity implements OnMapRe
                     switch (nearestParkingLatitude) {
                         case "43.648188":
                             mMap.addMarker(new MarkerOptions().position(downtown).title("Best Parking GO"));
-                            mMap.moveCamera(CameraUpdateFactory.zoomTo(12.3f));
+                            mMap.moveCamera(CameraUpdateFactory.zoomTo(10.2f));
                             mMap.moveCamera(CameraUpdateFactory.newLatLng(downtown));
                             break;
                         case "43.835833":
                             mMap.addMarker(new MarkerOptions().position(richmond_hill).title("Viva Free Parking"));
-                            mMap.moveCamera(CameraUpdateFactory.zoomTo(12.3f));
+                            mMap.moveCamera(CameraUpdateFactory.zoomTo(10.2f));
                             mMap.moveCamera(CameraUpdateFactory.newLatLng(richmond_hill));
                             break;
                         case "43.837087":
                             mMap.addMarker(new MarkerOptions().position(sheppard).title("Pickering GO"));
-                            mMap.moveCamera(CameraUpdateFactory.zoomTo(12.3f));
+                            mMap.moveCamera(CameraUpdateFactory.zoomTo(10.2f));
                             mMap.moveCamera(CameraUpdateFactory.newLatLng(sheppard));
                             break;
                         case "43.795130":
                             mMap.addMarker(new MarkerOptions().position(pickering).title("Sheppard Parking Lot"));
-                            mMap.moveCamera(CameraUpdateFactory.zoomTo(12.3f));
+                            mMap.moveCamera(CameraUpdateFactory.zoomTo(10.2f));
                             mMap.moveCamera(CameraUpdateFactory.newLatLng(pickering));
 
 

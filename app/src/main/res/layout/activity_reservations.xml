@@ -9,6 +9,13 @@
     tools:context=".ReservationsActivity">
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+    </ScrollView>
     <TextView
         android:id="@+id/TextViewDisplay"
         style="@style/heading_for_activities"
@@ -194,21 +201,12 @@
         android:inputType="datetime"
         android:hint="@string/hint_month" />
 
-    <TextView
-        android:id="@+id/LBsecurityCode"
-        style="@style/rv_content_style"
-        android:layout_width="123dp"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/lbID"
-        android:layout_below="@+id/expireDateET"
-        android:text="@string/security_code" />
-
     <EditText
         android:id="@+id/securityCodeET"
         android:layout_width="183dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/customerNameET"
         android:layout_below="@+id/expireDateET"
+        android:layout_toEndOf="@+id/LBparkingName"
         android:ems="10"
         android:hint="@string/hint_security_code"
         android:inputType="textPersonName" />
@@ -228,6 +226,15 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:text="@string/btn_clear" />
+
+    <TextView
+        android:id="@+id/LBsecurityCode"
+        style="@style/rv_content_style"
+        android:layout_width="111dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/lbID"
+        android:layout_below="@+id/expireDateET"
+        android:text="@string/security_code" />
 
 
 </RelativeLayout>
