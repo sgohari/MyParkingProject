@@ -43,6 +43,12 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/blackColor</item>
     </style>
+    <style name="rv_editText_content_style">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/blackColor</item>
+    </style>
     <!--Style for the main_activity-->
     <style name="heading_for_activities">
         <item name="android:textSize">24dp</item>

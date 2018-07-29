@@ -16,6 +16,9 @@
         android:layout_alignParentTop="true">
 
     </ScrollView>
+
+
+
     <TextView
         android:id="@+id/TextViewDisplay"
         style="@style/heading_for_activities"
@@ -38,12 +41,13 @@
 
     <EditText
         android:id="@+id/customerNameET"
-        android:layout_width="wrap_content"
+        android:layout_width="188dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/TextViewDisplay"
         android:layout_marginEnd="18dp"
         android:ems="10"
+        style="@style/rv_editText_content_style"
         android:hint="@string/customer_name"
         android:inputType="textPersonName" />
 
@@ -64,6 +68,7 @@
         android:layout_below="@+id/customerNameET"
         android:layout_marginTop="0dp"
         android:ems="10"
+        style="@style/rv_editText_content_style"
         android:inputType="textPersonName"
         android:hint="@string/parking_lot_name" />
 
@@ -83,6 +88,7 @@
         android:layout_alignStart="@+id/customerNameET"
         android:layout_below="@+id/parkingNameET"
         android:ems="10"
+        style="@style/rv_editText_content_style"
         android:hint="Lot Address"
         android:inputType="textPersonName" />
 
@@ -91,9 +97,8 @@
         style="@style/rv_content_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="201dp"
+        android:layout_below="@+id/parkingLotAddressET"
+        android:layout_toEndOf="@+id/lbID"
         android:text="@string/timing" />
 
     <TextView
@@ -102,7 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/lbID"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/textView3"
         android:text="@string/from" />
 
     <EditText
@@ -112,28 +117,29 @@
         android:layout_alignStart="@+id/TextViewDisplay"
         android:layout_below="@+id/textView3"
         android:ems="10"
+        style="@style/rv_editText_content_style"
         android:inputType="time"
         android:hint="00:00" />
 
     <TextView
         android:id="@+id/LBto"
         style="@style/rv_content_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/parkingLotAddressET"
-        android:layout_centerVertical="true"
+        android:layout_width="45dp"
+        android:layout_height="41dp"
+        android:layout_alignStart="@+id/customerNameET"
+        android:layout_below="@+id/textView3"
         android:text="@string/to" />
 
     <EditText
         android:id="@+id/toET"
+        style="@style/rv_editText_content_style"
         android:layout_width="141dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_alignEnd="@+id/customerNameET"
         android:layout_below="@+id/textView3"
-        android:layout_marginEnd="45dp"
         android:ems="10"
-        android:inputType="time"
-        android:hint="00:00" />
+        android:hint="00:00"
+        android:inputType="time" />
 
     <TextView
         android:id="@+id/textView7"
@@ -174,13 +180,14 @@
 
     <EditText
         android:id="@+id/cardNumberET"
+        style="@style/rv_editText_content_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/customerNameET"
         android:layout_below="@+id/rdCredit"
-        android:layout_toEndOf="@+id/lbID"
         android:ems="10"
-        android:inputType="number"
-        android:hint="0000000000....." />
+        android:hint="0000000000....."
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/LBexpDate"
@@ -193,20 +200,22 @@
 
     <EditText
         android:id="@+id/expireDateET"
+        style="@style/rv_editText_content_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/customerNameET"
         android:layout_below="@+id/cardNumberET"
-        android:layout_toEndOf="@+id/lbID"
         android:ems="10"
-        android:inputType="datetime"
-        android:hint="@string/hint_month" />
+        android:hint="@string/hint_month"
+        android:inputType="datetime" />
 
     <EditText
         android:id="@+id/securityCodeET"
-        android:layout_width="183dp"
+        style="@style/rv_editText_content_style"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/customerNameET"
         android:layout_below="@+id/expireDateET"
-        android:layout_toEndOf="@+id/LBparkingName"
         android:ems="10"
         android:hint="@string/hint_security_code"
         android:inputType="textPersonName" />
@@ -214,7 +223,7 @@
     <Button
         android:id="@+id/btnConfirmRV"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="59dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/lbID"
         android:text="@string/btn_confirmation" />
@@ -222,9 +231,10 @@
     <Button
         android:id="@+id/btnClearRV"
         android:layout_width="105dp"
-        android:layout_height="36dp"
+        android:layout_height="63dp"
+        android:layout_alignEnd="@+id/customerNameET"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
+        android:onClick="clear_onClick"
         android:text="@string/btn_clear" />
 
     <TextView
@@ -235,6 +245,14 @@
         android:layout_alignStart="@+id/lbID"
         android:layout_below="@+id/expireDateET"
         android:text="@string/security_code" />
+
+    <Button
+        android:id="@+id/btnAll"
+        android:layout_width="wrap_content"
+        android:layout_height="59dp"
+        android:layout_alignTop="@+id/btnConfirmRV"
+        android:layout_centerHorizontal="true"
+        android:text="View All" />
 
 
 </RelativeLayout>
