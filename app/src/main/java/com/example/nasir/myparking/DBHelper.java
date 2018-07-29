@@ -69,4 +69,31 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor re = db.rawQuery("select * from "+table_name,null);
         return re;
     }
+
+
+    // for updating of table
+    public boolean updateData( String id, String CUSTNAME, String PKNAME, String PKADDRESS, String TIMEFROM, String TIMETO, String CARDNUMBER, String EXPIRYDATE, String SECURITYCODE){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(col_1,id);
+        values.put(col_2,CUSTNAME);
+        values.put(col_3,PKNAME);
+        values.put(col_4,PKADDRESS);
+        values.put(col_5,TIMEFROM);
+        values.put(col_6,TIMETO);
+        values.put(col_7,CARDNUMBER);
+        values.put(col_8,EXPIRYDATE);
+        values.put(col_9,SECURITYCODE);
+
+        db.update(table_name,values,"id=?",new String[]{id});
+
+        return true;
+    }
+
+    //for deleting records
+    public Integer deleteData(String id){
+
+        SQLiteDatabase database=this.getWritableDatabase();
+        return database.delete(table_name,"id= ?", new String[]{id});
+    }
 }
