@@ -1,7 +1,6 @@
 package com.example.nasir.myparking;
 
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,19 +20,6 @@ public class DestinationActivity extends AppCompatActivity {
     private EditText streetName;
     private EditText city;
     private EditText postalCode;
-
-    private boolean  postalCodeIsValid;
-    private boolean cityIsValid;
-    private boolean streetIsValid;
-
-    final Matcher[] matcher = new Matcher[2];
-
-    String regexPC = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
-    String regexSt = "\\d+\\s+([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)";
-
-    //Patterns
-     Pattern pattern;
-     Pattern pattern1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,18 +47,14 @@ public class DestinationActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                matcher[1] = pattern1.matcher(streetName.getText());
+
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
-                if (matcher[1].matches() && !(TextUtils.isEmpty(streetName.getText()))) {
+                if (!(isNumeric(streetName.getText().toString())) && !(TextUtils.isEmpty(streetName.getText()))) {
                     streetName.setError("Enter a valid street number");
-                    streetIsValid = false;
                 }
-                else
-                    streetIsValid = true;
             }
         });
 
@@ -90,21 +72,18 @@ public class DestinationActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if ((isNumeric(city.getText().toString())) || TextUtils.isEmpty(city.getText())) {
+                if ((isNumeric(city.getText().toString())) && !(TextUtils.isEmpty(city.getText()))) {
                     city.setError("Enter a valid city name");
-                    cityIsValid = false;
                 }
-                else
-                    cityIsValid = true;
             }
         });
 
         //Postal code validation
         //Postal code regex
+        String regex = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
 
-
-         pattern = Pattern.compile(regexPC);
-        pattern1 = Pattern.compile(regexSt);
+        final Pattern pattern = Pattern.compile(regex);
+        final Matcher[] matcher = new Matcher[1];
 
         postalCode.addTextChangedListener(new TextWatcher() {
             @Override
@@ -120,14 +99,11 @@ public class DestinationActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-               postalCodeIsValid = matcher[0].matches();
-                if (!(postalCodeIsValid) || TextUtils.isEmpty(postalCode.getText()))
+              boolean postalCodeIsValid = matcher[0].matches();
+                if (!(postalCodeIsValid))
                         {
                             postalCode.setError("Enter valid postal code ");
-                            postalCodeIsValid = false;
                         }
-                        else
-                            postalCodeIsValid = true;
             }
         });
 
@@ -151,17 +127,15 @@ public class DestinationActivity extends AppCompatActivity {
 
     public void findDestination_OnClick(View view) {
 
-        if(streetIsValid && cityIsValid && postalCodeIsValid) {
-            String street_Name = streetName.getText().toString();
-            String city_Name = city.getText().toString();
-            String postal_code = postalCode.getText().toString();
+        String street_Name = streetName.getText().toString();
+        String city_Name = city.getText().toString();
+        String postal_code = postalCode.getText().toString();
 
-            String address = street_Name + " " + city_Name + " Ontario Canada " + postal_code;
+        String address = street_Name +" "+city_Name+" Ontario Canada "+postal_code;
 
-            Intent intent = new Intent(DestinationActivity.this, DestinationMapsActivity.class);
-            intent.putExtra("address", address);
-            startActivity(intent);
-        }
+        Intent intent = new Intent(DestinationActivity.this,DestinationMapsActivity.class);
+        intent.putExtra("address",address);
+        startActivity(intent);
 
     }
 
