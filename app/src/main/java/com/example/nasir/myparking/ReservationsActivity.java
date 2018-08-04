@@ -1,5 +1,6 @@
 package com.example.nasir.myparking;
-
+//Author
+//date
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
@@ -40,7 +42,10 @@ public class ReservationsActivity extends AppCompatActivity {
         btnView =(Button)findViewById(R.id.btnAll);
 
         custNameET= (EditText)findViewById(R.id.customerNameET);
+
+
         pkLotName=(EditText)findViewById(R.id.parkingNameET);
+        pkLotName.setInputType(InputType.TYPE_CLASS_TEXT);
         pkAddress=(EditText)findViewById(R.id.parkingLotAddressET);
         timeFrom=(EditText)findViewById(R.id.fromET);
         timeTo=(EditText)findViewById(R.id.toET);
@@ -54,6 +59,7 @@ public class ReservationsActivity extends AppCompatActivity {
 
         insertingData();
         viewAllRecords();
+
     }
 
     public void insertingData(){
@@ -74,14 +80,31 @@ public class ReservationsActivity extends AppCompatActivity {
                 getCardNumber=cardNumber.getText().toString();
                 getExpireDate=expDate.getText().toString();
                 getSecurity=securityCode.getText().toString();
-                boolean isInserted = myDb.insertData(custNameET.getText().toString(),pkLotName.getText().toString(),pkAddress.getText().toString(),timeFrom.getText().toString(),timeTo.getText().toString(),cardNumber.getText().toString(),expDate.getText().toString(),securityCode.getText().toString());
+                if (getName.equals("")|| getPkLotName.equals("")|| getkAddress.equals("")|| getFrom.equals("")|| getTo.equals("") || getCardNumber.equals("")|| getExpireDate.equals("")||getSecurity.equals(""))
+                {
+                    if (cardNumber.getText().toString().length()>16){
+                        Toast.makeText(ReservationsActivity.this,"card number Must be 16 digits",Toast.LENGTH_LONG).show();
+
+                    } else if (expDate.getText().toString().length()>5){
+                        Toast.makeText(ReservationsActivity.this,"time must be in '00:00' format ",Toast.LENGTH_LONG).show();
+
+                    }else if (timeFrom.getText().toString().length()>5){
+                        Toast.makeText(ReservationsActivity.this,"time from must be in '00:00' format ",Toast.LENGTH_LONG).show();
+
+                    } else if (timeTo.getText().toString().length()>5){
+                        Toast.makeText(ReservationsActivity.this,"time to must be in '00:00' format ",Toast.LENGTH_LONG).show();
+
+                    }else if (securityCode.getText().toString().length()>3){
+                        Toast.makeText(ReservationsActivity.this,"security code must be 3 digits ",Toast.LENGTH_LONG).show();
+
+                    }
+                    Toast.makeText(ReservationsActivity.this,"Fields are Required",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                    boolean isInserted = myDb.insertData(custNameET.getText().toString(),pkLotName.getText().toString(),pkAddress.getText().toString(),timeFrom.getText().toString(),timeTo.getText().toString(),cardNumber.getText().toString(),expDate.getText().toString(),securityCode.getText().toString());
                 if (isInserted==true){
 
-                    if (getName.equals("")|| getPkLotName.equals("")|| getkAddress.equals("")|| getFrom.equals("")|| getTo.equals("") || getCardNumber.equals("")|| getExpireDate.equals("")||getSecurity.equals(""))
-                    {
-                        Toast.makeText(ReservationsActivity.this,"Fields are Required",Toast.LENGTH_LONG).show();
-                        return;
-                    }
                     startActivity(intentNext);
 
                     Toast.makeText(ReservationsActivity.this,"Record Added to DB",Toast.LENGTH_LONG).show();
@@ -151,4 +174,6 @@ public class ReservationsActivity extends AppCompatActivity {
         builder.setMessage(message);
         builder.show();
     }
+
+
 }

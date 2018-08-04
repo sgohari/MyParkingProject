@@ -35,6 +35,20 @@ public class DestinationActivity extends AppCompatActivity {
 
     public void findDestination_OnClick(View view) {
 
+        if (streetName.getText().toString().isEmpty()) {
+            streetName.setError("Enter a street name");
+            return;
+
+        }
+        if (city.getText().toString().isEmpty()) {
+            city.setError("Enter a city name");
+            return;
+        }
+        if (postalCode.getText().toString().isEmpty()) {
+            postalCode.setError("Enter a postal code");
+            return;
+        }
+        
         String street_Name = streetName.getText().toString();
         String city_Name = city.getText().toString();
         String postal_code = postalCode.getText().toString();
