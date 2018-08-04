@@ -31,6 +31,7 @@ public class DestinationActivity extends AppCompatActivity {
     String regexPC = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
     String regexSt = "\\d+\\s+([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)";
 
+    //Patterns
      Pattern pattern;
      Pattern pattern1;
     @Override
