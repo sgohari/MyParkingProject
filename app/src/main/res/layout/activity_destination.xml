@@ -97,5 +97,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/findDestinationBtn"
-        android:onClick="findDestination_OnClick"/>
+        android:onClick="findDestination_OnClick"
+        />
 </android.support.constraint.ConstraintLayout>
