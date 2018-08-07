@@ -1,5 +1,10 @@
 package com.example.nasir.myparking;
-
+/*
+ * Author: Syed Nasir Gohary
+ * Date: 2018/07/15
+ *Subject: Comp231
+ * Project Name: myParking
+ * */
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;

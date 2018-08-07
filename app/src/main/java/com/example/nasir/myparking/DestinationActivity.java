@@ -127,6 +127,15 @@ public class DestinationActivity extends AppCompatActivity {
 
     public void findDestination_OnClick(View view) {
 
+        String street_Name = streetName.getText().toString();
+        String city_Name = city.getText().toString();
+        String postal_code = postalCode.getText().toString();
+
+        String address = street_Name +" "+city_Name+" Ontario Canada "+postal_code;
+
+        Intent intent = new Intent(DestinationActivity.this,DestinationMapsActivity.class);
+        intent.putExtra("address",address);
+
         if (streetName.getText().toString().isEmpty()) {
             streetName.setError("Enter a street name");
             return;
@@ -140,15 +149,6 @@ public class DestinationActivity extends AppCompatActivity {
             postalCode.setError("Enter a postal code");
             return;
         }
-        
-        String street_Name = streetName.getText().toString();
-        String city_Name = city.getText().toString();
-        String postal_code = postalCode.getText().toString();
-
-        String address = street_Name +" "+city_Name+" Ontario Canada "+postal_code;
-
-        Intent intent = new Intent(DestinationActivity.this,DestinationMapsActivity.class);
-        intent.putExtra("address",address);
         startActivity(intent);
 
     }
