@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
 
+
+    DBHelper myDatabaseHelper;
     Button btnLogin, btnRegister;
     EditText edtUserName, edtPassword;
     @Override
@@ -24,25 +26,35 @@ public class Login extends AppCompatActivity {
 
         edtUserName=(EditText)findViewById(R.id.userNameET);
         edtPassword=(EditText)findViewById(R.id.passwordET);
+        myDatabaseHelper=new DBHelper(this);
 
        btnLogin =(Button)findViewById(R.id.btnLogin);
+       btnRegister=(Button)findViewById(R.id.btnRegister);
+       btnRegister.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick (View v) {
+               startActivity(new Intent(Login.this,Registration.class));
+           }
+       });
+
        btnLogin.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick (View v) {
+               String user = edtUserName.getText().toString();
+               String pass = edtPassword.getText().toString();
 
-               String userName = edtUserName.getText().toString();
-               String pass =edtPassword.getText().toString();
+               //String currentUser = myDatabaseHelper.SearchExistingAccount(user);
 
-               if (userName.equals("customer") || pass.equals("password")){
+               if (user.equals("customer")|| pass.equals("pass")){
+                   Toast.makeText(Login.this, "Login Successfuly", Toast.LENGTH_LONG).show();
                    startActivity(new Intent(Login.this,CustomerHomePage.class));
                }
-               if (userName.equals("admin") || pass.equals("password")){
+               if (user.equals("admin")||pass.equals("password")){
                    startActivity(new Intent(Login.this,AdminHomepage.class));
 
                }
-
-               else {
-                   Toast.makeText(Login.this,"User and password does not exist",Toast.LENGTH_LONG).show();
+               else{
+                   Toast.makeText(Login.this, "Account Does not Exist", Toast.LENGTH_LONG).show();
                }
            }
        });

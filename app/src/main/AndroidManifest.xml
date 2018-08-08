@@ -65,7 +65,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdminHomepage"></activity>
+        <activity android:name=".AdminHomepage" />
+        <activity android:name=".Registration"></activity>
     </application>
 
 </manifest>

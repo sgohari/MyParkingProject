@@ -18,8 +18,8 @@ public class AdminHomepage extends AppCompatActivity {
 
     DBHelper myDB;
 
-    EditText names,address,marks,id;
-    Button btnAdd, btnView,btnUpdate,btnDelete,btnToListView;
+    EditText id,custNameAdminET,pkLotNameAdminET,pkLotAddressAdminET,timingFromAdminET,timingToAdminET,cardNumberAdminET,expiryDateAdminET,securityCodeAdminET;
+    Button btnAdd, btnView,btnUpdate,btnDelete,btnSearch;
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,15 +27,21 @@ public class AdminHomepage extends AppCompatActivity {
 
         myDB = new DBHelper(this);
 
-        names=(EditText)findViewById(R.id.nameET);
-        address=(EditText)findViewById(R.id.addressET);
-        marks= (EditText)findViewById(R.id.marksET);
+        custNameAdminET=(EditText)findViewById(R.id.custNameAdminET);
+        pkLotNameAdminET=(EditText)findViewById(R.id.pkLotNameAdminET);
+        pkLotAddressAdminET=(EditText)findViewById(R.id.pkLotAddressAdminET);
+        timingFromAdminET=(EditText)findViewById(R.id.timingFromAdminET);
+        timingToAdminET=(EditText)findViewById(R.id.timingToAdminET);
+        cardNumberAdminET=(EditText)findViewById(R.id.cardNumberAdminET);
+        expiryDateAdminET=(EditText)findViewById(R.id.expireDateET);
+        securityCodeAdminET=(EditText)findViewById(R.id.securityCodeAdminET);
         id=(EditText)findViewById(R.id.idET);
         btnAdd=(Button)findViewById(R.id.btnAdd);
 
         btnView = (Button)findViewById(R.id.btnViewAll);
         btnUpdate=(Button)findViewById(R.id.btnUpdate);
         btnDelete=(Button)findViewById(R.id.btnDelete);
+        btnSearch=(Button)findViewById(R.id.btnSearchAdmin);
 
         addData();
         viewAll();
@@ -125,8 +131,9 @@ public class AdminHomepage extends AppCompatActivity {
                     while (res.moveToNext()){
                         buffer.append("id :"+res.getString(0)+"\n");
                         buffer.append("Name"+res.getString(1)+"\n");
-                        buffer.append("Parking Lot Address:"+res.getString(2)+"\n");
-                        buffer.append("Parking lot Name: "+res.getString(3)+"\n");
+                        buffer.append("Parking Lot Name: "+res.getString(2)+"\n");
+                        buffer.append("Parking lot Address: "+res.getString(3)+"\n");
+
                     }
 
                     //show all
@@ -136,6 +143,7 @@ public class AdminHomepage extends AppCompatActivity {
             }
         });
     }
+
 
     public void showMessages(String title, String message){
 

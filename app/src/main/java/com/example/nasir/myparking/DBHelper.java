@@ -25,22 +25,35 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String col_8="exprirydate";
     public static final String col_9="securitycode";
 
+    //Table Name
+    public static String REGISTRATION_TABLE = "Registration";
+    public static final String COLUMN_ID = "Registration_id";
+    public static final String COLUMN_USERNAME = "_name";
+    public static final String COLUMN_PASSWORD = "_password";
+    public static final String COLUMN_FNAME = "_firstname";
+    public static final String COLUMN_LNAME = "_lastname";
+    public static final String COLUMN_ADDRESS = "_address";
+    public static final String COLUMN_CITY = "_city";
+    public static final String COLUMN_PCODE = "_postal_code";
+
     public DBHelper (Context context) {
         super(context, databse_name, null, 1);
-
-
     }
 
     @Override
     public void onCreate (SQLiteDatabase db) {
 
         db.execSQL("create table "+table_name+" (id INTEGER primary key autoincrement, cname TEXT, pklname TEXT, pkaddress TEXT, timefrom TEXT, timeto TEXT , cardnumber TEXT, exprirydate TEXT, securitycode TEXT)");
+        db.execSQL("create table "+REGISTRATION_TABLE+" (id INTEGER primary key autoincrement, _name TEXT, _password TEXT, _firstname TEXT, _lastname TEXT, _address TEXT , _city TEXT, _postal_code TEXT)");
+
     }
 
     @Override
     public void onUpgrade (SQLiteDatabase db, int oldVersion, int newVersion) {
 
         db.execSQL("drop table if exists "+table_name);
+        db.execSQL("drop table if exists "+REGISTRATION_TABLE);
+        onCreate(db);
         onCreate(db);
     }
 
@@ -65,7 +78,28 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
         }
     }
+    public boolean insertDataRegistration (String USERNAME, String PASSWORD, String FIRSTNAME, String LASTNAME, String ADDRESS, String CITY, String POSTALCODE){
+        SQLiteDatabase db=this.getWritableDatabase();
 
+        ContentValues RGvalues = new ContentValues();
+        RGvalues.put(COLUMN_USERNAME,USERNAME);
+        RGvalues.put(COLUMN_PASSWORD,PASSWORD);
+        RGvalues.put(COLUMN_FNAME,FIRSTNAME);
+        RGvalues.put(COLUMN_LNAME,LASTNAME);
+        RGvalues.put(COLUMN_ADDRESS,ADDRESS);
+        RGvalues.put(COLUMN_CITY,CITY);
+        RGvalues.put(COLUMN_PCODE,POSTALCODE);
+
+        long outCome=db.insert(REGISTRATION_TABLE,null,RGvalues);
+
+        if (outCome==-1){
+
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
     //checking if Sqlite is accepting the records
     public Cursor getAllData(){
 
@@ -74,6 +108,14 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor re = db.rawQuery("select * from "+table_name,null);
         return re;
     }
+
+   /* public Cursor searchOne(){
+
+        SQLiteDatabase db= this.getWritableDatabase();
+
+        //Cursor c =db.rawQuery("Select * From "+table_name,"id=?",new String[]{id});
+        return c;
+    }*/
 
 
     // for updating of table
@@ -100,5 +142,43 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase database=this.getWritableDatabase();
         return database.delete(table_name,"id= ?", new String[]{id});
+    }
+
+    public boolean checkLogin(String username, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String s;
+        Cursor c = db.rawQuery("SELECT * FROM "+REGISTRATION_TABLE+" WHERE " + username + " =? AND" + password + " =?", null);
+
+        if(c.getCount() <= 0) {
+            c.close();
+            db.close();
+            return false;
+        } else {
+            c.close();
+            db.close();
+            return true;
+        }
+    }
+
+    public String SearchExistingAccount(String user){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT "+ COLUMN_USERNAME + ", " + COLUMN_PASSWORD + " FROM " + REGISTRATION_TABLE;
+        Cursor cursor = db.rawQuery(query, null);
+        String userName, password;
+        password = "Not Found";
+        if (cursor.moveToFirst()){
+            do {
+                userName = cursor.getString(0);
+
+                if (userName.equals(user)){
+                    password = cursor.getString(1);
+                    break;
+                }
+            }
+            while(cursor.moveToNext());
+        }
+        return password;
     }
 }
