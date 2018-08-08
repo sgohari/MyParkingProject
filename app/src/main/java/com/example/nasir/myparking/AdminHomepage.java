@@ -43,6 +43,7 @@ public class AdminHomepage extends AppCompatActivity {
         btnDelete=(Button)findViewById(R.id.btnDelete);
         btnSearch=(Button)findViewById(R.id.btnSearchAdmin);
 
+        //methods
         addData();
         viewAll();
         updateData();
