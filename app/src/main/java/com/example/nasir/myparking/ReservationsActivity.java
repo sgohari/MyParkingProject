@@ -13,13 +13,17 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +32,7 @@ public class ReservationsActivity extends AppCompatActivity {
     EditText custNameET,pkLotName,pkAddress,timeFrom,timeTo,cardNumber,expDate,securityCode;
     String getName,getPkLotName,getkAddress,getFrom,getTo,getCardNumber,getExpireDate,getSecurity;
     Button btnSaves, btnClears,btnView;
+     Date RTimeFrom, RTimeTo, result;
 
     DBHelper myDb;
     @Override
@@ -80,21 +85,41 @@ public class ReservationsActivity extends AppCompatActivity {
                 getCardNumber=cardNumber.getText().toString();
                 getExpireDate=expDate.getText().toString();
                 getSecurity=securityCode.getText().toString();
+
+                try
+                {
+                    DateFormat fmt = new SimpleDateFormat("HH:mm");
+                    DateFormat mmyy = new SimpleDateFormat("MMyyyy");
+                    mmyy.setLenient(false);
+                    result = mmyy.parse(getExpireDate); // <- should not be a valid date!
+
+                    RTimeFrom = fmt.parse(getFrom);
+                    RTimeTo = fmt.parse(getTo);
+
+
+                }catch(Exception e)
+                {
+                    Toast.makeText(ReservationsActivity.this,"Failed To Parse",Toast.LENGTH_LONG).show();
+                }
+
+
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm"); //HH = 24h format
+                dateFormat.setLenient(false); // 25:61 would be invalid
+
                 if (getName.equals("")|| getPkLotName.equals("")|| getkAddress.equals("")|| getFrom.equals("")|| getTo.equals("") || getCardNumber.equals("")|| getExpireDate.equals("")||getSecurity.equals(""))
                 {
                     if (cardNumber.getText().toString().length()>16){
                         Toast.makeText(ReservationsActivity.this,"card number Must be 16 digits",Toast.LENGTH_LONG).show();
 
-                    } else if (expDate.getText().toString().length()>5){
-                        Toast.makeText(ReservationsActivity.this,"time must be in '00:00' format ",Toast.LENGTH_LONG).show();
+                    } else if (getExpireDate.length() > 5){
+                        Toast.makeText(ReservationsActivity.this,"Date must be in 'MMyyyy' format ",Toast.LENGTH_LONG).show();
 
-                    }else if (timeFrom.getText().toString().length()>5){
+                    }else if (RTimeFrom.getTime() != RTimeFrom.compareTo(RTimeFrom) || timeFrom.length() > 4 || timeTo.length() > 4){
                         Toast.makeText(ReservationsActivity.this,"time from must be in '00:00' format ",Toast.LENGTH_LONG).show();
+                    }
 
-                    } else if (timeTo.getText().toString().length()>5){
-                        Toast.makeText(ReservationsActivity.this,"time to must be in '00:00' format ",Toast.LENGTH_LONG).show();
-
-                    }else if (securityCode.getText().toString().length()>3){
+                    else if (securityCode.getText().toString().length()>3){
                         Toast.makeText(ReservationsActivity.this,"security code must be 3 digits ",Toast.LENGTH_LONG).show();
 
                     }
@@ -102,7 +127,7 @@ public class ReservationsActivity extends AppCompatActivity {
                     return;
                 }
 
-                    boolean isInserted = myDb.insertData(custNameET.getText().toString(),pkLotName.getText().toString(),pkAddress.getText().toString(),timeFrom.getText().toString(),timeTo.getText().toString(),cardNumber.getText().toString(),expDate.getText().toString(),securityCode.getText().toString());
+                    boolean isInserted = myDb.insertData(custNameET.getText().toString(),pkLotName.getText().toString(),pkAddress.getText().toString(),RTimeFrom.toString(),RTimeTo.toString(),cardNumber.getText().toString(),result.toString(),securityCode.getText().toString());
                 if (isInserted==true){
 
                     startActivity(intentNext);
