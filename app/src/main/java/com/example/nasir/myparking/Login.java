@@ -6,12 +6,19 @@ package com.example.nasir.myparking;
  * Project Name: myParking
  * */
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.service.autofill.FillEventHistory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import static com.example.nasir.myparking.DBHelper.COLUMN_PASSWORD;
+import static com.example.nasir.myparking.DBHelper.COLUMN_USERNAME;
+import static com.example.nasir.myparking.DBHelper.REGISTRATION_TABLE;
 
 public class Login extends AppCompatActivity {
 
@@ -24,39 +31,40 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        edtUserName=(EditText)findViewById(R.id.userNameET);
-        edtPassword=(EditText)findViewById(R.id.passwordET);
-        myDatabaseHelper=new DBHelper(this);
+        edtUserName = (EditText) findViewById(R.id.userNameET);
+        edtPassword = (EditText) findViewById(R.id.passwordET);
 
-       btnLogin =(Button)findViewById(R.id.btnLogin);
-       btnRegister=(Button)findViewById(R.id.btnRegister);
-       btnRegister.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick (View v) {
-               startActivity(new Intent(Login.this,Registration.class));
-           }
-       });
 
-       btnLogin.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick (View v) {
-               String user = edtUserName.getText().toString();
-               String pass = edtPassword.getText().toString();
+        myDatabaseHelper = new DBHelper(getApplicationContext());
 
-               //String currentUser = myDatabaseHelper.SearchExistingAccount(user);
 
-               if (user.equals("customer")|| pass.equals("pass")){
-                   Toast.makeText(Login.this, "Login Successfuly", Toast.LENGTH_LONG).show();
-                   startActivity(new Intent(Login.this,CustomerHomePage.class));
-               }
-               if (user.equals("admin")||pass.equals("password")){
-                   startActivity(new Intent(Login.this,AdminHomepage.class));
 
-               }
-               else{
-                   Toast.makeText(Login.this, "Account Does not Exist", Toast.LENGTH_LONG).show();
-               }
-           }
-       });
+        btnRegister = (Button) findViewById(R.id.btnRegister);
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login.this, Registration.class));
+            }
+        });
+
+}
+public void btnclick (View view)
+{
+
+    final String user = edtUserName.getText().toString();
+    final String pass = edtPassword.getText().toString();
+    final String currentuser = myDatabaseHelper.SearchExistingAccount(user);
+
+    if (pass.equals(currentuser))
+    {
+        Toast.makeText(Login.this, "Login Successfuly", Toast.LENGTH_LONG).show();
+    }
+    else{
+
+        Toast.makeText(Login.this, "Account Does not Exist" + currentuser, Toast.LENGTH_LONG).show();
     }
 }
+       }
+
+
+
