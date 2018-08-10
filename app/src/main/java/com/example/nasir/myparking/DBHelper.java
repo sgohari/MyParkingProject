@@ -10,6 +10,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -35,6 +36,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ADDRESS = "_address";
     public static final String COLUMN_CITY = "_city";
     public static final String COLUMN_PCODE = "_postal_code";
+    Customer_obj customer = new Customer_obj();
+
 
     public DBHelper (Context context) {
         super(context, databse_name, null, 1);
@@ -43,7 +46,8 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate (SQLiteDatabase db) {
 
-        db.execSQL("create table "+table_name+" (id INTEGER primary key autoincrement, cname TEXT, pklname TEXT, pkaddress TEXT, timefrom TEXT, timeto TEXT , cardnumber TEXT, exprirydate TEXT, securitycode TEXT)");
+      db.execSQL("create table "+table_name+" (id INTEGER primary key autoincrement, cname TEXT, pklname TEXT, pkaddress TEXT, timefrom TEXT, timeto TEXT , cardnumber TEXT, exprirydate TEXT, securitycode TEXT)");
+
         db.execSQL("create table "+REGISTRATION_TABLE+" (id INTEGER primary key autoincrement, _name TEXT, _password TEXT, _firstname TEXT, _lastname TEXT, _address TEXT , _city TEXT, _postal_code TEXT)");
 
     }
@@ -51,8 +55,8 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade (SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        db.execSQL("drop table if exists "+table_name);
         db.execSQL("drop table if exists "+REGISTRATION_TABLE);
+
         onCreate(db);
         onCreate(db);
     }
@@ -161,24 +165,22 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public String SearchExistingAccount(String user){
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String query = "SELECT "+ COLUMN_USERNAME + ", " + COLUMN_PASSWORD + " FROM " + REGISTRATION_TABLE;
-        Cursor cursor = db.rawQuery(query, null);
-        String userName, password;
-        password = "Not Found";
-        if (cursor.moveToFirst()){
-            do {
-                userName = cursor.getString(0);
-
-                if (userName.equals(user)){
-                    password = cursor.getString(1);
+    public String SearchExistingAccount(String uname){
+        SQLiteDatabase db=this.getReadableDatabase();
+        String query = "SELECT _name, _password FROM "+ REGISTRATION_TABLE + " where _name = ? ";
+        Cursor cursor = db.rawQuery(query, new String[] {uname});
+        String a, b;
+        b = null;
+        if(cursor.moveToLast()){
+            do{
+                a = cursor.getString(0);
+                if(a.equals(uname)){
+                    b = cursor.getString(1);
                     break;
                 }
-            }
-            while(cursor.moveToNext());
+            }while(cursor.moveToNext());
         }
-        return password;
+        return b;
     }
 }
+

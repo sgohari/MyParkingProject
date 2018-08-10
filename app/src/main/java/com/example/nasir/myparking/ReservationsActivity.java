@@ -23,6 +23,7 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -89,7 +90,8 @@ public class ReservationsActivity extends AppCompatActivity {
                 try
                 {
                     DateFormat fmt = new SimpleDateFormat("HH:mm");
-                    DateFormat mmyy = new SimpleDateFormat("MMyyyy");
+                    DateFormat mmyy = new SimpleDateFormat("MM/yyyy");
+                    Calendar currentDate = Calendar.getInstance();
                     mmyy.setLenient(false);
                     result = mmyy.parse(getExpireDate); // <- should not be a valid date!
 
@@ -97,23 +99,14 @@ public class ReservationsActivity extends AppCompatActivity {
                     RTimeTo = fmt.parse(getTo);
 
 
-                }catch(Exception e)
-                {
-                    Toast.makeText(ReservationsActivity.this,"Failed To Parse",Toast.LENGTH_LONG).show();
-                }
-
-
-
-                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm"); //HH = 24h format
-                dateFormat.setLenient(false); // 25:61 would be invalid
 
                 if (getName.equals("")|| getPkLotName.equals("")|| getkAddress.equals("")|| getFrom.equals("")|| getTo.equals("") || getCardNumber.equals("")|| getExpireDate.equals("")||getSecurity.equals(""))
                 {
                     if (cardNumber.getText().toString().length()>16){
                         Toast.makeText(ReservationsActivity.this,"card number Must be 16 digits",Toast.LENGTH_LONG).show();
 
-                    } else if (getExpireDate.length() > 5){
-                        Toast.makeText(ReservationsActivity.this,"Date must be in 'MMyyyy' format ",Toast.LENGTH_LONG).show();
+                    } else if (!currentDate.after(mmyy)){
+                        Toast.makeText(ReservationsActivity.this,"Date must be in 'MM/yyyy and greater than year format ",Toast.LENGTH_LONG).show();
 
                     }else if (RTimeFrom.getTime() != RTimeFrom.compareTo(RTimeFrom) || timeFrom.length() > 4 || timeTo.length() > 4){
                         Toast.makeText(ReservationsActivity.this,"time from must be in '00:00' format ",Toast.LENGTH_LONG).show();
@@ -137,8 +130,17 @@ public class ReservationsActivity extends AppCompatActivity {
                 }else {
                     Toast.makeText(ReservationsActivity.this,"Record is not added to DB",Toast.LENGTH_LONG).show();
                 }
+                }catch(Exception e)
+                {
+                    Toast.makeText(ReservationsActivity.this,"Something Went Absolutely Wrong, " +
+                            "please follow the hints and make sure all fields are filled!!",Toast.LENGTH_LONG).show();
+                }
+
+
             }
-        });
+
+        }
+        );
     }
 
     public void clear_onClick(View view){
