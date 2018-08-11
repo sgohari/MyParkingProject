@@ -1,39 +1,34 @@
 package com.example.nasir.myparking;
 //Author
 //date
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ReservationsActivity extends AppCompatActivity {
 
     EditText custNameET,pkLotName,pkAddress,timeFrom,timeTo,cardNumber,expDate,securityCode;
-    String getName,getPkLotName,getkAddress,getFrom,getTo,getCardNumber,getExpireDate,getSecurity;
+    String getName,getPkLotName,getkAddress,getFrom,getTo,getCardNumber,getExpireDate,getSecurity, cardTyps;
     Button btnSaves, btnClears,btnView;
-     Date RTimeFrom, RTimeTo, result;
+    Date RTimeFrom, RTimeTo, result;
+    RadioGroup rdGroup;
+    RadioButton rdCredit,rdDebit;
 
     DBHelper myDb;
     @Override
@@ -49,7 +44,6 @@ public class ReservationsActivity extends AppCompatActivity {
 
         custNameET= (EditText)findViewById(R.id.customerNameET);
 
-
         pkLotName=(EditText)findViewById(R.id.parkingNameET);
         pkLotName.setInputType(InputType.TYPE_CLASS_TEXT);
         pkAddress=(EditText)findViewById(R.id.parkingLotAddressET);
@@ -59,12 +53,15 @@ public class ReservationsActivity extends AppCompatActivity {
         expDate=(EditText)findViewById(R.id.expireDateET);
         securityCode=(EditText)findViewById(R.id.securityCodeET);
 
-        RadioButton rdCredit = (RadioButton)findViewById(R.id.rdCredit);
-        RadioButton rdDebit =(RadioButton)findViewById(R.id.rdDebit);
+        rdGroup=(RadioGroup)findViewById(R.id.rdgGenders);
+
 
 
         insertingData();
         viewAllRecords();
+        rdButton_View();
+
+        displaySharedInfor();
 
     }
 
@@ -120,7 +117,7 @@ public class ReservationsActivity extends AppCompatActivity {
                     return;
                 }
 
-                    boolean isInserted = myDb.insertData(custNameET.getText().toString(),pkLotName.getText().toString(),pkAddress.getText().toString(),RTimeFrom.toString(),RTimeTo.toString(),cardNumber.getText().toString(),result.toString(),securityCode.getText().toString());
+                    boolean isInserted = myDb.insertData(custNameET.getText().toString(),pkLotName.getText().toString(),pkAddress.getText().toString(),RTimeFrom.toString(),RTimeTo.toString(), cardTyps,cardNumber.getText().toString(),result.toString(),securityCode.getText().toString());
                 if (isInserted==true){
 
                     startActivity(intentNext);
@@ -134,10 +131,7 @@ public class ReservationsActivity extends AppCompatActivity {
                 {
                     Toast.makeText(ReservationsActivity.this,"Something Went Absolutely Wrong, " +
                             "please follow the hints and make sure all fields are filled!!",Toast.LENGTH_LONG).show();
-                }
-
-
-            }
+                } }
 
         }
         );
@@ -202,5 +196,29 @@ public class ReservationsActivity extends AppCompatActivity {
         builder.show();
     }
 
+public void rdButton_View(){
+        rdGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged (RadioGroup group, int checkedId) {
+                rdCredit = (RadioButton)findViewById(R.id.rdCredit);
+                rdDebit =(RadioButton)findViewById(R.id.rdDebit);
 
+                if (checkedId==R.id.rdCredit) {
+                    cardTyps =rdCredit.getText().toString();
+                }
+                else if (checkedId==R.id.rdDebit){
+                    cardTyps =rdDebit.getText().toString();
+                }
+            }
+        });
+
+}
+    public void displaySharedInfor(){
+
+        SharedPreferences sharedPreferences=getSharedPreferences("markerContent", Context.MODE_PRIVATE);
+        String title = sharedPreferences.getString("title","");
+        String snipped=sharedPreferences.getString("snipped","");
+        pkLotName.setText(title);
+        pkAddress.setText(snipped);
+    }
 }

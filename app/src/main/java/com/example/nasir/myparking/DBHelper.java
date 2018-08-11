@@ -12,6 +12,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.net.PortUnreachableException;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final String databse_name="parking.db";
@@ -22,9 +24,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String col_4="pkaddress";
     public static final String col_5="timefrom";
     public static final String col_6 ="timeto";
-    public static final String col_7="cardnumber";
-    public static final String col_8="exprirydate";
-    public static final String col_9="securitycode";
+    public static final String col_7="cardtype";
+    public static final String col_8="cardnumber";
+    public static final String col_9="exprirydate";
+    public static final String col_10="securitycode";
 
     //Table Name
     public static String REGISTRATION_TABLE = "Registration";
@@ -56,12 +59,12 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade (SQLiteDatabase db, int oldVersion, int newVersion) {
 
         db.execSQL("drop table if exists "+REGISTRATION_TABLE);
+        db.execSQL("drop table if exists "+table_name);
 
-        onCreate(db);
         onCreate(db);
     }
 
-    public boolean insertData (String CUSTNAME, String PKNAME, String PKADDRESS, String TIMEFROM, String TIMETO, String CARDNUMBER, String EXPIRYDATE, String SECURITYCODE ){
+    public boolean insertData (String CUSTNAME, String PKNAME, String PKADDRESS, String TIMEFROM, String TIMETO,String CARDTYPE, String CARDNUMBER, String EXPIRYDATE, String SECURITYCODE ){
         SQLiteDatabase db=this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -70,9 +73,10 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(col_4,PKADDRESS);
         values.put(col_5,TIMEFROM);
         values.put(col_6,TIMETO);
-        values.put(col_7,CARDNUMBER);
+        values.put(col_7,CARDTYPE);
+        values.put(col_8,CARDNUMBER);
         values.put(col_8,EXPIRYDATE);
-        values.put(col_9,SECURITYCODE);
+        values.put(col_10,SECURITYCODE);
 
         long result=db.insert(table_name,null,values);
 
@@ -123,7 +127,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     // for updating of table
-    public boolean updateData( String id, String CUSTNAME, String PKNAME, String PKADDRESS, String TIMEFROM, String TIMETO, String CARDNUMBER, String EXPIRYDATE, String SECURITYCODE){
+    public boolean updateData( String id, String CUSTNAME, String PKNAME, String PKADDRESS, String TIMEFROM, String TIMETO, String CARDTYPE, String CARDNUMBER, String EXPIRYDATE, String SECURITYCODE){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(col_1,id);
@@ -132,9 +136,10 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(col_4,PKADDRESS);
         values.put(col_5,TIMEFROM);
         values.put(col_6,TIMETO);
-        values.put(col_7,CARDNUMBER);
-        values.put(col_8,EXPIRYDATE);
-        values.put(col_9,SECURITYCODE);
+        values.put(col_7,CARDTYPE);
+        values.put(col_8,CARDNUMBER);
+        values.put(col_9,EXPIRYDATE);
+        values.put(col_10,SECURITYCODE);
 
         db.update(table_name,values,"id=?",new String[]{id});
 

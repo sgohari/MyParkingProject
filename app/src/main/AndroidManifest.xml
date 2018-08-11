@@ -52,7 +52,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".DestinationActivity" />
-        <activity android:name=".NearByParkingsActivity" />
         <activity
             android:name=".DestinationMapsActivity"
             android:label="Map" />
