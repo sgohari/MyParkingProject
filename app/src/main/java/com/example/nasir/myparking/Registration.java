@@ -9,13 +9,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class Registration extends AppCompatActivity {
-
     //Call Database
     DBHelper myDB;
-
     //Initialized Button
     Button registerRG;
-
     //Initialized Edit Text
     EditText UserName,Password,FirstName,LastName,Address,City,Postal_Code;
     @Override
@@ -30,9 +27,7 @@ public class Registration extends AppCompatActivity {
         Address = (EditText)findViewById(R.id.editAddress);
         City = (EditText)findViewById(R.id.editCity);
         Postal_Code = (EditText)findViewById(R.id.editPostCode);
-
-
-
+        
         //Initialized Button
         registerRG = (Button)findViewById(R.id.btnSave);
 

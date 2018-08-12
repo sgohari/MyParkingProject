@@ -1,7 +1,9 @@
 package com.example.nasir.myparking;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -28,7 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 
-public class ParkingAroundActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.InfoWindowAdapter {
+public class ParkingAroundActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.InfoWindowAdapter, GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap;
 
@@ -42,6 +44,104 @@ public class ParkingAroundActivity extends FragmentActivity implements OnMapRead
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+        // Check if the networkig provider is enabled.
+        if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
+                @Override
+                public void onLocationChanged (Location location) {
+
+                    double latitude=location.getLatitude();
+                    double longitude =location.getLongitude();
+
+                    LatLng latLng=new LatLng(latitude, longitude);
+
+                    Geocoder geocoder= new Geocoder(getApplicationContext());
+                    try {
+                        List<Address> addressList=geocoder.getFromLocation(latitude,longitude,3);
+                        String str = addressList.get(0).getLocality()+" , ";
+                        str+=addressList.get(0).getCountryName();
+
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(str));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,10.2f));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+
+                @Override
+                public void onStatusChanged (String provider, int status, Bundle extras) {
+
+                }
+
+                @Override
+                public void onProviderEnabled (String provider) {
+
+                }
+
+                @Override
+                public void onProviderDisabled (String provider) {
+
+                }
+            });
+
+        }
+else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,
+            new LocationListener() {
+                @Override
+                public void onLocationChanged (Location location) {
+
+                    double latitude=location.getLatitude();
+                    double longitude =location.getLongitude();
+
+                    LatLng latLng=new LatLng(latitude, longitude);
+
+                    Geocoder geocoder= new Geocoder(getApplicationContext());
+                    try {
+                        List<Address> addressList=geocoder.getFromLocation(latitude,longitude,3);
+                        String str = addressList.get(0).getLocality()+" , ";
+                        str+=addressList.get(0).getCountryName();
+
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(str));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,10.2f));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                @Override
+                public void onStatusChanged (String provider, int status, Bundle extras) {
+
+                }
+
+                @Override
+                public void onProviderEnabled (String provider) {
+
+                }
+
+                @Override
+                public void onProviderDisabled (String provider) {
+
+                }
+            });
+        }
 
         Button btnReserve=(Button)findViewById(R.id.btnReserveNow);
         btnReserve.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +164,7 @@ public class ParkingAroundActivity extends FragmentActivity implements OnMapRead
     @Override
     public void onMapReady (GoogleMap googleMap) {
         mMap = googleMap;
+
         //marker in Progress Compus and move the camera
         LatLng progressCompus = new LatLng(43.784401, -79.229276);
         mMap.addMarker(new MarkerOptions().position(progressCompus).title("Progress Lot")
@@ -86,7 +187,7 @@ public class ParkingAroundActivity extends FragmentActivity implements OnMapRead
 
         //marker for Center for art
         LatLng artStory= new LatLng(43.684367,-79.348863);
-        mMap.addMarker(new MarkerOptions().position(artStory).title("Story Arts Lot ")
+        mMap.addMarker(new MarkerOptions().position(artStory).title("Story Arts Lot")
                 .snippet("951 Carlaw Ave,"+"\n"+" Toronto, ON M4K 3M2")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
@@ -104,6 +205,7 @@ public class ParkingAroundActivity extends FragmentActivity implements OnMapRead
         mMap.moveCamera(CameraUpdateFactory.newLatLng(pickering));
         mMap.setInfoWindowAdapter(this);
 
+        mMap.setOnInfoWindowClickListener(this);
 
         mMap.animateCamera(CameraUpdateFactory.zoomTo(12),700, null);
         mMap.getUiSettings().setZoomControlsEnabled(true);
@@ -122,11 +224,63 @@ public class ParkingAroundActivity extends FragmentActivity implements OnMapRead
         snipped.setText(marker.getSnippet());
         return view;
 
-
     }
 
     @Override
     public View getInfoContents (Marker marker) {
         return null;
+    }
+
+    @Override
+    public void onInfoWindowClick (Marker marker) {
+
+        SharedPreferences marketInfo= getSharedPreferences("markerContent", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = marketInfo.edit();
+
+        if (marker.getTitle().equals("Pickering Lot")){
+            editor.putString("title",marker.getTitle().toString());
+            editor.putString("snipped",marker.getSnippet().toString());
+            editor.apply();
+
+            startActivity(new Intent(ParkingAroundActivity.this,ReservationsActivity.class));
+        }
+        if (marker.getTitle().equals("Story Arts Lot")){
+            editor.putString("title",marker.getTitle().toString());
+            editor.putString("snipped",marker.getSnippet().toString());
+            editor.apply();
+            startActivity(new Intent(ParkingAroundActivity.this,ReservationsActivity.class));
+
+        }
+        if (marker.getTitle().equals("Ashtonbee Lot")){
+            editor.putString("title",marker.getTitle().toString());
+            editor.putString("snipped",marker.getSnippet().toString());
+            editor.apply();
+            startActivity(new Intent(ParkingAroundActivity.this,ReservationsActivity.class));
+
+        }
+        if (marker.getTitle().equals("Morning Side Lot")){
+            editor.putString("title",marker.getTitle().toString());
+            editor.putString("snipped",marker.getSnippet().toString());
+            editor.apply();
+            startActivity(new Intent(ParkingAroundActivity.this,ReservationsActivity.class));
+
+        }
+        if (marker.getTitle().equals("Progress Lot")){
+            editor.putString("title",marker.getTitle().toString());
+            editor.putString("snipped",marker.getSnippet().toString());
+            editor.apply();
+
+            startActivity(new Intent(ParkingAroundActivity.this,ReservationsActivity.class));
+
+        }
+
+        if (marker.getTitle().equals("Morning Side Lot")){
+            editor.putString("title",marker.getTitle().toString());
+            editor.putString("snipped",marker.getSnippet().toString());
+            editor.apply();
+
+            startActivity(new Intent(ParkingAroundActivity.this,ReservationsActivity.class));
+
+        }
     }
 }
