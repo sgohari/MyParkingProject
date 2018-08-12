@@ -5,8 +5,17 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     tools:context=".Registration">
 
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="400dp"
+        android:layout_height="100dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        app:srcCompat="@drawable/myparking_logo" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -14,132 +23,105 @@
         android:layout_gravity="center_horizontal"
         android:padding="15dp"
         android:text="@string/reg_Form"
-        android:textSize="50px" />
+        android:textSize="50px"
+        android:textStyle="bold" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/userName"
-            android:padding="10dp" />
+
 
         <EditText
             android:id="@+id/editUserName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/userName"
-            />
+            android:layout_height="50dp"
+            android:background="#11000000"
+            android:hint="@string/userName" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/userPass"
-            android:padding="10dp" />
+
 
         <EditText
             android:id="@+id/editPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/userPass"
-            />
+            android:layout_height="50dp"
+            android:background="#11000000"
+            android:hint="@string/userPass" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/fName"
-            android:padding="10dp" />
+
 
         <EditText
             android:id="@+id/editFName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/fName"
-            />
+            android:layout_height="50dp"
+            android:background="#11000000"
+            android:hint="@string/fName" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/lNam"
-            android:padding="10dp"/>
+
 
         <EditText
             android:id="@+id/editLName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/lNam"
-            />
+            android:layout_height="50dp"
+            android:background="#11000000"
+            android:hint="@string/lNam" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/address"
-            android:padding="10dp"/>
+
 
         <EditText
             android:id="@+id/editAddress"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/address"
-            />
+            android:layout_height="50dp"
+            android:background="#11000000"
+            android:hint="@string/address" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/city"
-            android:padding="10dp"/>
+
 
         <EditText
             android:id="@+id/editCity"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/city"
-            />
+            android:layout_height="50dp"
+            android:background="#11000000"
+            android:hint="@string/city" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/pCode"
-            android:padding="10dp"/>
+
 
         <EditText
             android:id="@+id/editPostCode"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/pCode"
-            />
+            android:layout_height="50dp"
+            android:background="#11000000"
+            android:hint="@string/pCode" />
 
     </LinearLayout>
 

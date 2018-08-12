@@ -6,18 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".DestinationActivity"
     android:paddingBottom="40dp"
-    android:paddingTop="20dp">
+    android:paddingTop="20dp"
+    android:background="@drawable/gradient">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="160dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/myparking_logo"
+        tools:layout_editor_absoluteX="122dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <LinearLayout
         android:id="@+id/TextViewLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="132dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
+
 
         <TextView
             style="@style/textViewStyle"
@@ -39,10 +47,11 @@
     <LinearLayout
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="20dp"
         android:orientation="vertical"
         app:layout_constraintStart_toEndOf="@+id/TextViewLayout"
-       >
+        tools:layout_editor_absoluteY="111dp">
+
         <LinearLayout
             android:id="@+id/EditTextLayout"
             android:layout_width="fill_parent"
@@ -69,20 +78,20 @@
                 android:spinnerMode="dialog">
 
             </Spinner>
+
             <EditText
 
                 android:id="@+id/postalCodeET"
-                android:hint="@string/enter_postal_codeHint"
-                style="@style/editTextStyle"/>
+                style="@style/editTextStyle"
+                android:hint="@string/enter_postal_codeHint" />
         </LinearLayout>
-
 
 
     </LinearLayout>
 
     <Button
         android:id="@+id/clearBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="144dp"
         android:layout_height="wrap_content"
         android:onClick="clearAddress_OnClick"
         android:text="Clear"
@@ -90,13 +99,14 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/findDestinationBtn"
+        android:layout_width="144dp"
 
+        android:layout_height="wrap_content"
+        android:onClick="findDestination_OnClick"
         android:text="Find"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/findDestinationBtn"
-        android:onClick="findDestination_OnClick"
-        />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 </android.support.constraint.ConstraintLayout>

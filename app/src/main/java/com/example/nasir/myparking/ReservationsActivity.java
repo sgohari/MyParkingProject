@@ -117,16 +117,16 @@ public class ReservationsActivity extends AppCompatActivity {
                     return;
                 }
 
-                    boolean isInserted = myDb.insertData(custNameET.getText().toString(),pkLotName.getText().toString(),pkAddress.getText().toString(),RTimeFrom.toString(),RTimeTo.toString(), cardTyps,cardNumber.getText().toString(),result.toString(),securityCode.getText().toString());
-                if (isInserted==true){
+                    boolean isInserted=false; //= myDb.insertData(custNameET.getText().toString(),pkLotName.getText().toString(),pkAddress.getText().toString(),RTimeFrom.toString(),RTimeTo.toString(), cardTyps,cardNumber.getText().toString(),result.toString(),securityCode.getText().toString());
+               if (isInserted==true){
 
                     startActivity(intentNext);
 
                     Toast.makeText(ReservationsActivity.this,"Record Added to DB",Toast.LENGTH_LONG).show();
 
-                }else {
+               }else {
                     Toast.makeText(ReservationsActivity.this,"Record is not added to DB",Toast.LENGTH_LONG).show();
-                }
+               }
                 }catch(Exception e)
                 {
                     Toast.makeText(ReservationsActivity.this,"Something Went Absolutely Wrong, " +

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="vertical"
-    android:background="@drawable/sbackground"
+    android:background="@drawable/gradient"
     android:orientation="vertical"
     tools:context=".ReservationsActivity">
 

@@ -3,7 +3,7 @@ package com.example.nasir.myparking;
  * Author: Syed Nasir Gohary
  * Date: 2018/08/06
  *Subject: Comp231
- * Project Name: myParking
+ * Project Name: myparking
  * */
 import android.content.Context;
 import android.content.Intent;
@@ -65,10 +65,10 @@ public class Login extends AppCompatActivity {
 
 
         if (edtUserName.getText().toString().equals("")) {
-            Toast.makeText(Login.this, "Type a User Name!!", Toast.LENGTH_LONG).show();
+            edtUserName.setError("Please Enter Username");
 
         } else if (edtPassword.getText().toString().isEmpty()) {
-            Toast.makeText(Login.this, "Type your password", Toast.LENGTH_LONG).show();
+            edtPassword.setError("Please Enter Password");
 
         } else if (pass.equals(currentuser)) {
             Toast.makeText(Login.this, "Login Successfuly", Toast.LENGTH_LONG).show();

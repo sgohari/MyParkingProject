@@ -12,4 +12,6 @@
 
 
     <color name="custom_window">#03555A</color>
+
+    <color name="red">#ffff0000</color>
 </resources>

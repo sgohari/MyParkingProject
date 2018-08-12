@@ -3,7 +3,7 @@ package com.example.nasir.myparking;
  * Author: Syed Nasir Gohary
  * Date: 2018/07/15
  *Subject: Comp231
- * Project Name: myParking
+ * Project Name: myparking
  * */
 import android.content.ContentValues;
 import android.content.Context;

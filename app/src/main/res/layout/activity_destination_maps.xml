@@ -4,6 +4,7 @@
     andoir:layout_width="match_parent"
     andoir:layout_height="match_parent"
     andoir:orientation="vertical"
+    andoir:background="@drawable/gradient"
     >
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,7 +20,7 @@
 
     <Button
         andoir:id="@+id/btnReserveNowD"
-        andoir:layout_width="wrap_content"
+        andoir:layout_width="144dp"
         andoir:layout_height="wrap_content"
         andoir:layout_alignParentBottom="true"
         andoir:layout_alignParentEnd="true"
@@ -29,10 +30,10 @@
 
     <Button
         andoir:id="@+id/btnBack"
-        andoir:layout_width="wrap_content"
+        andoir:layout_width="144dp"
         andoir:layout_height="wrap_content"
-        andoir:onClick="move_Back"
         andoir:layout_alignParentBottom="true"
         andoir:layout_alignParentStart="true"
+        andoir:onClick="move_Back"
         andoir:text="Back" />
 </RelativeLayout>
