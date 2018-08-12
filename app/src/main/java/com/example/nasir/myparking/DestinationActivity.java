@@ -135,6 +135,20 @@ public class DestinationActivity extends AppCompatActivity {
 
         Intent intent = new Intent(DestinationActivity.this,DestinationMapsActivity.class);
         intent.putExtra("address",address);
+
+        if (streetName.getText().toString().isEmpty()) {
+            streetName.setError("Enter a street name");
+            return;
+
+        }
+        if (city.getText().toString().isEmpty()) {
+            city.setError("Enter a city name");
+            return;
+        }
+        if (postalCode.getText().toString().isEmpty()) {
+            postalCode.setError("Enter a postal code");
+            return;
+        }
         startActivity(intent);
 
     }

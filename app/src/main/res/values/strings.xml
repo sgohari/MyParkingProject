@@ -52,4 +52,28 @@
     <string name="heading_receipt">Here is Your Receipt</string>
 
     <string name="message">Thanks you for using MyParking app</string>
+
+    <string name="login_heading">Login With Your Credentials</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_register">Register Now</string>
+    <string name="btn_back">Back</string>
+    <string name="admin_heading">Administrator Use Only</string>
+
+
+
+
+    <string name="selection">Select User Login</string>
+    <string name="loginUser">User Name:</string>
+    <string name="register">Register</string>
+    <string name="login">Log In</string>
+    <string name="reg_Form">User Registration Form</string>
+    <string name="userName">User Name</string>
+    <string name="userPass">Password</string>
+    <string name="fName">First Name</string>
+    <string name="lNam">Last Name</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="pCode">Postal Code</string>
 </resources>

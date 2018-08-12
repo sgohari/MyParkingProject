@@ -147,14 +147,14 @@ public class ReservationsActivity extends AppCompatActivity {
                     StringBuffer buffer = new StringBuffer();
                     while (res.moveToNext()){
                         buffer.append("id :"+res.getString(0)+"\n");
-                        buffer.append("Customer Name :"+res.getString(1)+"\n");
-                        buffer.append("Parking Lot Name :"+res.getString(2)+"\n");
-                        buffer.append("Parking Lot Address : "+res.getString(3)+"\n");
-                        buffer.append("Timing From : "+res.getString(4)+"\n");
-                        buffer.append("Timing To : "+res.getString(5)+"\n");
-                        buffer.append("Card Number : "+res.getString(6)+"\n");
-                        buffer.append("Exprity Date : "+res.getString(7)+"\n");
-                        buffer.append("Security Code : "+res.getString(8)+"\n");
+                        buffer.append("\t"+"Customer Name :"+res.getString(1)+"\n");
+                        buffer.append("\t"+"Parking Lot Name :"+res.getString(2)+"\n");
+                        buffer.append("\t"+"Parking Lot Address : "+res.getString(3)+"\n");
+                        buffer.append("\t"+"Timing From : "+res.getString(4)+"\n");
+                        buffer.append("\t"+"Timing To : "+res.getString(5)+"\n");
+                        buffer.append("\t"+"Card Number : "+res.getString(6)+"\n");
+                        buffer.append("\t"+"Exprity Date : "+res.getString(7)+"\n");
+                        buffer.append("\t"+"Security Code : "+res.getString(8)+"\n");
                     }
 
                     //show all

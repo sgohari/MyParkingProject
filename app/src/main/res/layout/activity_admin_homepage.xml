@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminHomepage">
+
+    <TextView
+        android:id="@+id/lbAdminHeading"
+        style="@style/heading_for_activities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:text="@string/admin_heading" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/btnViewAll"
+        android:text="Add" />
+
+    <Button
+        android:id="@+id/btnViewAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/btnUpdate"
+        android:layout_marginEnd="82dp"
+        android:text="view all" />
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginBottom="12dp"
+        android:text="update" />
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/btnUpdate"
+        android:layout_marginStart="116dp"
+        android:text="Delete" />
+
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/admin_content_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/idET"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="11dp"
+        android:text="Search with ID" />
+
+    <EditText
+        android:id="@+id/idET"
+        style="@style/admin_content_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/lbAdminHeading"
+        android:ems="10"
+        android:hint="Search"
+        android:inputType="textUri|textPersonName|number" />
+
+    <EditText
+        android:id="@+id/custNameAdminET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/idET"
+        android:layout_marginStart="41dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/pkLotNameAdminET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/custNameAdminET"
+        android:layout_below="@+id/custNameAdminET"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/pkLotAddressAdminET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/custNameAdminET"
+        android:layout_below="@+id/pkLotNameAdminET"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/timingToAdminET"
+        android:layout_width="79dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/custNameAdminET"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/timingFromAdminET"
+        android:layout_width="79dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/custNameAdminET"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/cardNumberAdminET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/custNameAdminET"
+        android:layout_below="@+id/timingToAdminET"
+        android:ems="10"
+        android:inputType="textPersonName"
+        />
+
+    <EditText
+        android:id="@+id/expiryDateAdminET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/custNameAdminET"
+        android:layout_below="@+id/cardNumberAdminET"
+        android:ems="10"
+        android:inputType="textPersonName"
+         />
+
+    <EditText
+        android:id="@+id/securityCodeAdminET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/custNameAdminET"
+        android:layout_below="@+id/expiryDateAdminET"
+        android:ems="10"
+        android:inputType="textPersonName"
+        />
+
+    <Button
+        android:id="@+id/btnSearchAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnAdd"
+        android:layout_alignParentEnd="true"
+        android:text="Search" />
+
+
+</RelativeLayout>

@@ -28,5 +28,13 @@ public class CustomerHomePage extends AppCompatActivity {
                 startActivity(new Intent(CustomerHomePage.this,DestinationActivity.class));
             }
         });
+
+        Button btnBk = (Button)findViewById(R.id.btnBacks);
+        btnBk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                startActivity(new Intent(CustomerHomePage.this,Login.class));
+            }
+        });
     }
 }

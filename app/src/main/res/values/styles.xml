@@ -65,4 +65,16 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/blackColor</item>
     </style>
+
+    <style name="login_content_style">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/blackColor</item>
+    </style>
+
+    <style name="admin_content_style">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/blackColor</item>
+    </style>
 </resources>
