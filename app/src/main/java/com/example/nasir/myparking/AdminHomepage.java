@@ -14,9 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.nasir.myparking.Database.DBHelper;
+import com.example.nasir.myparking.Database.DataSource;
+
 public class AdminHomepage extends AppCompatActivity {
 
-    DBHelper myDB;
+    DataSource myDB;
 
     EditText id,custNameAdminET,pkLotNameAdminET,pkLotAddressAdminET,timingFromAdminET,timingToAdminET,cardNumberAdminET,expiryDateAdminET,securityCodeAdminET;
     Button btnAdd, btnView,btnUpdate,btnDelete,btnSearch;
@@ -25,7 +28,7 @@ public class AdminHomepage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_homepage);
 
-        myDB = new DBHelper(this);
+        myDB = new DataSource(this);
 
         custNameAdminET=(EditText)findViewById(R.id.custNameAdminET);
         pkLotNameAdminET=(EditText)findViewById(R.id.pkLotNameAdminET);
@@ -43,11 +46,6 @@ public class AdminHomepage extends AppCompatActivity {
         btnDelete=(Button)findViewById(R.id.btnDelete);
         btnSearch=(Button)findViewById(R.id.btnSearchAdmin);
 
-        //methods
-        addData();
-        viewAll();
-        updateData();
-        deleteData();
     }
 
     public void updateData(){
@@ -70,57 +68,14 @@ public class AdminHomepage extends AppCompatActivity {
         });
 */
     }
-    public void deleteData(){
 
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                Integer deletedRows=myDB.deleteData(id.getText().toString());
-
-                if (deletedRows>0){
-                    Toast.makeText(AdminHomepage.this,"Data is Deleted",Toast.LENGTH_LONG).show();
-                    id.setText("");
-
-                }else {
-                    Toast.makeText(AdminHomepage.this,"Data is not Deleted",Toast.LENGTH_LONG).show();
-
-                }
-            }
-        });
-    }
-    public void addData(){
-
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-
-                /*boolean isInserted= myDB.insertData(names.getText().toString(),address.getText().toString(),marks.getText().toString());
-
-                if (isInserted==true){
-                    Toast.makeText(AdminHomepage.this,"Data is Inserted",Toast.LENGTH_LONG).show();
-                    EditText[] editTexts = {names,address,marks,id};
-
-                    for (EditText et:editTexts
-                            ) {
-                        et.setText("");
-                    }
-
-                }else {
-                    Toast.makeText(AdminHomepage.this,"Data is not Inserted",Toast.LENGTH_LONG).show();
-
-                }*/
-
-            }
-        });
-    }
-
-    public void viewAll(){
+    /*public void viewAll(){
 
 
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                Cursor res= myDB.getAllData();
+                Cursor res= myDB();
 
                 if (res.getCount()==0){
                     showMessages("Error","Nothing is found");
@@ -143,7 +98,7 @@ public class AdminHomepage extends AppCompatActivity {
                 }
             }
         });
-    }
+    }*/
 
 
     public void showMessages(String title, String message){
@@ -153,5 +108,66 @@ public class AdminHomepage extends AppCompatActivity {
         builder.setTitle(title);
         builder.setMessage(message);
         builder.show();
+    }
+
+    //Search Reservation
+    public void searchReservation_OnClick(View view) {
+        int pk_reservationID = 0;
+
+        myDB.open();
+        Cursor c = myDB.getReservation(pk_reservationID); if (c.moveToFirst())
+        {
+            //Get reservation by ID
+            String reservationlInfo = "ID: "+c.getInt(0)+"\nParking name: "+c.getString(1)+"\nParking address "
+                    +c.getString(2)+"\nFrom: "+c.getString(3)+"\nTo: "+c.getString(4);
+            //Set text = reservationInfo
+        }
+        myDB.close();
+    }
+
+    //Update Reservation
+    public void updateReservation_OnClick(View view) {
+        //Assign value
+        int pk_reservationID = 0;
+        String timeFrom = null;
+        String timeTo = null;
+
+        myDB.open();
+        myDB.updateReservation(pk_reservationID,timeFrom,timeTo);
+        myDB.close();
+    }
+
+    //Delete Reservation
+    public void deleteReservation_OnClick(View view) {
+        //Assign ID value
+        int pk_reservationID = 0;
+
+        myDB.open();
+        myDB.deleteReservation(pk_reservationID);
+        myDB.close();
+    }
+
+    //View All Reservations
+    public void viewAllReservations_OnClick(View view) {
+
+    }
+
+    //Add reservation
+    public void addReservation_OnClick(View view) {
+
+        //Assign EditTexts to corresponding variables
+        int fk_userID = 0;  //Convert to Integer
+        String parkingName = null;
+        String parkingAddress = null;
+        String timeFrom = null;
+        String timeTo = null;
+        String cardNumber = null;
+        String expiryDate = null;
+        String CVV = null;
+
+        //Open and insert
+        myDB.open();
+        myDB.insertReservation(fk_userID,parkingName,parkingAddress,timeFrom,timeTo,cardNumber,expiryDate,CVV);
+        myDB.close();
     }
 }
