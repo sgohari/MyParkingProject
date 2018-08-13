@@ -36,8 +36,8 @@ public class DataSource {
     /*                                                              Reservation TABLE                                        */
 
     //---insert a reservation into the database---
-    public long insertReservation (int fk_userID, String parkingName, String parkingAddress, String timeFrom, String timeTo,String cardType,
-                                   String cardNumber, String expiryDate, String CVV) {
+    public long insertReservation (String fk_userID, String parkingName, String parkingAddress, String timeFrom, String timeTo,String cardType,
+                                   int cardNumber, String expiryDate, String CVV) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(reservationTable.FK_USER_ID, fk_userID);
         initialValues.put(reservationTable.KEY_PARKING_NAME, parkingName);
@@ -45,9 +45,9 @@ public class DataSource {
         initialValues.put(reservationTable.KEY_TIME_FROM, timeFrom);
         initialValues.put(reservationTable.KEY_TIME_TO, timeTo);
         initialValues.put(reservationTable.KEY_CARD_TYPE, cardType);
-        initialValues.put(reservationTable.KEY_CARD_NUMBER, Integer.parseInt( cardNumber));
+        initialValues.put(reservationTable.KEY_CARD_NUMBER, cardNumber);
         initialValues.put(reservationTable.KEY_EXPIRY_DATE, expiryDate);
-        initialValues.put(reservationTable.KEY_CVV, CVV);
+        initialValues.put(reservationTable.KEY_CVV,Integer.parseInt( CVV));
         return mDatabase.insert(RESERVATION_TABLE, null, initialValues);
     }
 
@@ -69,7 +69,7 @@ public class DataSource {
     public Cursor getReservation (int reservationID) throws SQLException {
         Cursor mCursor =
                 mDatabase.query(true, RESERVATION_TABLE, new String[]{reservationTable.PK_RESERVATION_ID, reservationTable.FK_USER_ID,
-                                reservationTable.KEY_NAME, reservationTable.KEY_PARKING_NAME, reservationTable.KEY_PARKING_ADDRESS,
+                                reservationTable.KEY_PARKING_NAME, reservationTable.KEY_PARKING_ADDRESS,
                                 reservationTable.KEY_TIME_FROM, reservationTable.KEY_TIME_TO,reservationTable.KEY_CARD_TYPE, reservationTable.KEY_CARD_NUMBER, reservationTable.KEY_CVV},
                         reservationTable.PK_RESERVATION_ID + "=" + reservationID, null,
                         null, null, null, null);
@@ -103,10 +103,10 @@ public class DataSource {
     }
 
     //Retrieve user
-    public Cursor getNameOfUser (int username) throws SQLException {
+    public Cursor getNameOfUser (String username) throws SQLException {
         Cursor mCursor =
-                mDatabase.query(true, RESERVATION_TABLE, new String[]{registrationTable.KEY_FIRST_NAME +" "+registrationTable.KEY_LAST_NAME},
-                        reservationTable.PK_RESERVATION_ID + "=" + username, null,
+                mDatabase.query(true, REGISTRATION_TABLE, new String[]{registrationTable.KEY_FIRST_NAME,registrationTable.KEY_LAST_NAME},
+                        registrationTable.PK_USER_ID + "=" + username, null,
                         null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();

@@ -35,11 +35,13 @@ public class ParkingAroundActivity extends FragmentActivity implements OnMapRead
     private GoogleMap mMap;
 
     LocationManager locationManager;
-
+    private String username;
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parking_around);
+        username = getIntent().getStringExtra("username");
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -147,7 +149,9 @@ else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
         btnReserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                startActivity(new Intent(ParkingAroundActivity.this,ReservationsActivity.class));
+                Intent intent = new Intent(ParkingAroundActivity.this,ReservationsActivity.class);
+                intent.putExtra("username",username);
+                startActivity(intent);
             }
         });
 

@@ -46,59 +46,6 @@ public class AdminHomepage extends AppCompatActivity {
 
     }
 
-    public void updateData(){
-
-       /* btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-
-                boolean isUpdated=myDB.updateData(id.getText().toString(),
-                        names.getText().toString(),address.getText().toString(),marks.getText().toString());
-
-                if (isUpdated==true){
-                    Toast.makeText(AdminHomepage.this,"Data is updated",Toast.LENGTH_LONG).show();
-
-                }else {
-                    Toast.makeText(AdminHomepage.this,"Data is not update",Toast.LENGTH_LONG).show();
-
-                }
-            }
-        });
-*/
-    }
-
-    /*public void viewAll(){
-
-
-        btnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                Cursor res= myDB();
-
-                if (res.getCount()==0){
-                    showMessages("Error","Nothing is found");
-
-                    return;
-                }else {
-
-                    StringBuffer buffer = new StringBuffer();
-                    while (res.moveToNext()){
-                        buffer.append("id :"+res.getString(0)+"\n");
-                        buffer.append("Name"+res.getString(1)+"\n");
-                        buffer.append("Parking Lot Name: "+res.getString(2)+"\n");
-                        buffer.append("Parking lot Address: "+res.getString(3)+"\n");
-
-                    }
-
-                    //show all
-
-                    showMessages("Data",buffer.toString());
-                }
-            }
-        });
-    }*/
-
-
     //Search Reservation
     public void searchReservation_OnClick(View view) {
         int pk_reservationID = 0;
@@ -146,12 +93,12 @@ public class AdminHomepage extends AppCompatActivity {
     public void addReservation_OnClick(View view) {
 
         //Assign EditTexts to corresponding variables
-        int fk_userID = 0;  //Convert to Integer
+        String fk_userID = null;  //Convert to Integer
         String parkingName = null;
         String parkingAddress = null;
         String timeFrom = null;
         String timeTo = null;
-        String cardNumber = null;
+        int cardNumber = 0;
         String expiryDate = null;
         String CVV = null;
         String cardType = null;

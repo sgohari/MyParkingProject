@@ -4,7 +4,6 @@ public class registrationTable {
 
     //Registration table fields
     public static final String PK_USER_ID = "userID"; //PK
-    public static final String FK_RESERVATION_ID = "reservationID"; //FK
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_FIRST_NAME = "firstName";
     public static final String KEY_LAST_NAME = "lastName";

@@ -24,6 +24,7 @@ import java.util.Locale;
 public class DestinationMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class DestinationMapsActivity extends FragmentActivity implements OnMapRe
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        username = getIntent().getStringExtra("username");
 
     }
 
@@ -147,8 +149,9 @@ public class DestinationMapsActivity extends FragmentActivity implements OnMapRe
     }
 
     public void Moving_Reseration (View view) {
-
-        startActivity(new Intent(DestinationMapsActivity.this,ReservationsActivity.class));
+        Intent intent = new Intent(this,ReservationsActivity.class);
+        intent.putExtra("username",username);
+        startActivity(intent);
     }
 
     public void move_Back (View view) {

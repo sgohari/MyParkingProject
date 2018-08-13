@@ -20,11 +20,13 @@ public class DestinationActivity extends AppCompatActivity {
     private EditText streetName;
     private EditText city;
     private EditText postalCode;
+    private String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_destination);
 
+        username = getIntent().getStringExtra("username");
         streetName = findViewById(R.id.streetET);
         city = findViewById(R.id.cityET);
         postalCode = findViewById(R.id.postalCodeET);
@@ -135,18 +137,24 @@ public class DestinationActivity extends AppCompatActivity {
 
         Intent intent = new Intent(DestinationActivity.this,DestinationMapsActivity.class);
         intent.putExtra("address",address);
+        intent.putExtra("username",username);
+        startActivity(intent);
 
         if (streetName.getText().toString().isEmpty()) {
             streetName.setError("Enter a street name");
+            streetName.setFocusable(true);
             return;
 
         }
         if (city.getText().toString().isEmpty()) {
             city.setError("Enter a city name");
+            city.setFocusable(true);
             return;
         }
         if (postalCode.getText().toString().isEmpty()) {
             postalCode.setError("Enter a postal code");
+            postalCode.setFocusable(true);
+
             return;
         }
         startActivity(intent);

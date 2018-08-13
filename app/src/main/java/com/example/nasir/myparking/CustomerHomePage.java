@@ -8,16 +8,20 @@ import android.widget.Button;
 
 public class CustomerHomePage extends AppCompatActivity {
 
+    String username;
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_home_page);
+        username = getIntent().getStringExtra("username");
 
         Button btnAroundMe=(Button)findViewById(R.id.btnAroundMe);
         btnAroundMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                startActivity(new Intent(CustomerHomePage.this,ParkingAroundActivity.class));
+                Intent intent = new Intent(CustomerHomePage.this,ParkingAroundActivity.class);
+                intent.putExtra("username",username);
+                startActivity(intent);
             }
         });
 
@@ -25,7 +29,9 @@ public class CustomerHomePage extends AppCompatActivity {
         btnParkingAtDestination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                startActivity(new Intent(CustomerHomePage.this,DestinationActivity.class));
+                Intent intent = new Intent(CustomerHomePage.this,DestinationActivity.class);
+                intent.putExtra("username",username);
+                startActivity(intent);
             }
         });
 
