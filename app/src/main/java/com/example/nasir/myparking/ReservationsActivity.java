@@ -35,8 +35,10 @@ public class ReservationsActivity extends AppCompatActivity {
     RadioGroup rdGroup;
     RadioButton rdCredit,rdDebit;
 
-    String username;
+    private static final String USERNAME_PREFS = "username_prefs";
 
+    String username;
+    SharedPreferences sharedPreferences;
     DataSource myDb;
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -46,7 +48,9 @@ public class ReservationsActivity extends AppCompatActivity {
         myDb = new DataSource(this);
 
         //get Intent extra (username)
-        username = getIntent().getStringExtra("username");
+        sharedPreferences = getSharedPreferences(USERNAME_PREFS, Context.MODE_PRIVATE);
+
+        username = sharedPreferences.getString("username_key","");
 
         parkingNameET = (EditText) findViewById(R.id.parkingNameET);
         parkingAddressET = (EditText) findViewById(R.id.parkingLotAddressET);
@@ -56,16 +60,6 @@ public class ReservationsActivity extends AppCompatActivity {
         expiryDateET = (EditText) findViewById(R.id.expireDateET);
         cvvET = (EditText) findViewById(R.id.securityCodeET);
 
-        //Assign Values
-        parkingName = parkingNameET.getText().toString();
-        parkingAddress = parkingAddressET.getText().toString();
-        timeFrom = timeFromET.getText().toString();
-        timeTO = timeToET.getText().toString();
-        cardNumber = cardNumberET.getText().toString();
-        expiryDate = expiryDateET.getText().toString();
-        cvv = cvvET.getText().toString();
-
-        displaySharedInfor();
         //Radio Group
         rdGroup = (RadioGroup) findViewById(R.id.rdgGenders);
 
@@ -85,14 +79,7 @@ public class ReservationsActivity extends AppCompatActivity {
         });
     }
 
-    public void displaySharedInfor(){
-        SharedPreferences sharedPreferences=getSharedPreferences("markerContent", Context.MODE_PRIVATE);
-        String title = sharedPreferences.getString("title","");
-        String snipped=sharedPreferences.getString("snipped","");
-        parkingNameET.setText(title);
-        parkingAddressET.setText(snipped);
 
-    }
     //Clear all fields
     public void clear_onClick(View view){
         btnClears.setOnClickListener(new View.OnClickListener() {
@@ -113,11 +100,20 @@ public class ReservationsActivity extends AppCompatActivity {
 
     //Confirm reservation
     public void reserve_OnClick(View view) {
+        //Assign Values
+        parkingName = parkingNameET.getText().toString();
+        parkingAddress = parkingAddressET.getText().toString();
+        timeFrom = timeFromET.getText().toString();
+        timeTO = timeToET.getText().toString();
+        cardNumber = cardNumberET.getText().toString();
+        expiryDate = expiryDateET.getText().toString();
+        cvv = cvvET.getText().toString();
+
         myDb.open();
-        myDb.insertReservation(Integer.parseInt(username),parkingName,parkingAddress,timeFrom,timeTO,cardType,cardNumber,expiryDate,cvv);
+        myDb.insertReservation(username,parkingName,parkingAddress,timeFrom,timeTO,cardType,Integer.parseInt(cardNumber),expiryDate,cvv);
         String name = null;
 
-       Cursor c=  myDb.getNameOfUser(Integer.parseInt(username));
+       Cursor c=  myDb.getNameOfUser(username);
         if (c.moveToFirst())
         {
             name = c.getString(0);

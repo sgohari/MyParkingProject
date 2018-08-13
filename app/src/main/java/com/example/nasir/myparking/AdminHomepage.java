@@ -21,6 +21,7 @@ public class AdminHomepage extends AppCompatActivity {
 
     EditText id,custNameAdminET,pkLotNameAdminET,pkLotAddressAdminET,timingFromAdminET,timingToAdminET,cardNumberAdminET,expiryDateAdminET,securityCodeAdminET;
     Button btnAdd, btnView,btnUpdate,btnDelete,btnSearch;
+    String reservationID;
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,19 +45,24 @@ public class AdminHomepage extends AppCompatActivity {
         btnDelete=(Button)findViewById(R.id.btnDelete);
         btnSearch=(Button)findViewById(R.id.btnSearchAdmin);
 
+
     }
 
     //Search Reservation
     public void searchReservation_OnClick(View view) {
-        int pk_reservationID = 0;
-
+        reservationID = id.getText().toString();
 
         myDB.open();
-        Cursor c = myDB.getReservation(pk_reservationID); if (c.moveToFirst())
+        Cursor c = myDB.getReservation(Integer.parseInt(reservationID));
+        if (c.moveToFirst())
         {
             //Get reservation by ID
-            String reservationlInfo = "ID: "+c.getInt(0)+"\nParking name: "+c.getString(1)+"\nParking address "
-                    +c.getString(2)+"\nFrom: "+c.getString(3)+"\nTo: "+c.getString(4);
+            pkLotNameAdminET.setText(c.getString(2));
+            pkLotAddressAdminET.setText(c.getString(3));
+            timingFromAdminET.setText(c.getString(4));
+            timingToAdminET.setText(c.getString(5));
+            cardNumberAdminET.setText(c.getString(7));
+            securityCodeAdminET.setText(c.getString(8));
             //Set text = reservationInfo
         }
         myDB.close();
@@ -65,47 +71,26 @@ public class AdminHomepage extends AppCompatActivity {
     //Update Reservation
     public void updateReservation_OnClick(View view) {
         //Assign value
-        int pk_reservationID = 0;
-        String timeFrom = null;
-        String timeTo = null;
+        reservationID = id.getText().toString();
+        String timeFrom = timingFromAdminET.getText().toString();
+        String timeTo = timingToAdminET.getText().toString();
 
         myDB.open();
-        myDB.updateReservation(pk_reservationID,timeFrom,timeTo);
+        myDB.updateReservation(Integer.parseInt(reservationID),timeFrom,timeTo);
         myDB.close();
     }
 
     //Delete Reservation
     public void deleteReservation_OnClick(View view) {
         //Assign ID value
-        int pk_reservationID = 0;
-
+        reservationID = id.getText().toString();
         myDB.open();
-        myDB.deleteReservation(pk_reservationID);
+        myDB.deleteReservation(Integer.parseInt(reservationID));
         myDB.close();
     }
 
     //View All Reservations
     public void viewAllReservations_OnClick(View view) {
 
-    }
-
-    //Add reservation
-    public void addReservation_OnClick(View view) {
-
-        //Assign EditTexts to corresponding variables
-        String fk_userID = null;  //Convert to Integer
-        String parkingName = null;
-        String parkingAddress = null;
-        String timeFrom = null;
-        String timeTo = null;
-        int cardNumber = 0;
-        String expiryDate = null;
-        String CVV = null;
-        String cardType = null;
-
-        //Open and insert
-        myDB.open();
-        myDB.insertReservation(fk_userID,parkingName,parkingAddress,timeFrom,timeTo,cardType,cardNumber,expiryDate,CVV);
-        myDB.close();
     }
 }

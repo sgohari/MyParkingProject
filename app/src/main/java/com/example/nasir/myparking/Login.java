@@ -21,7 +21,7 @@ import com.example.nasir.myparking.Database.DataSource;
 public class Login extends AppCompatActivity {
 
     //Shared preference
-    private static final String STUDENT_USERNAME_PREFS = "student_username_prefs";
+    private static final String USERNAME_PREFS = "username_prefs";
 
     DataSource myDB;
     Button btnLogin, btnRegister;
@@ -44,22 +44,24 @@ public class Login extends AppCompatActivity {
          String username = usernameET.getText().toString();
          String password = passwordET.getText().toString();
 
-        if(validate(username, password))
+        if(username.equals("admin") && password.equals("pass"))
+        {
+            Intent intent = new Intent(this,AdminHomepage.class);
+            startActivity(intent);
+        }
+
+       else if(validate(username, password))
         {
             SharedPreferences.Editor editor =
-                    getSharedPreferences(STUDENT_USERNAME_PREFS, MODE_PRIVATE).edit();
+                    getSharedPreferences(USERNAME_PREFS, MODE_PRIVATE).edit();
             editor.putString("username_key",username);
             editor.apply();
 
             //view student activity
             Toast.makeText(this, "valid", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this,CustomerHomePage.class);
-            intent.putExtra("username",Integer.parseInt(username));
+            intent.putExtra("username",username);
             startActivity(intent);
-        }
-
-        else if (username.equals("admin")|| password.equals("pass")){
-            startActivity(new Intent(Login.this,AdminHomepage.class));
         }
         else
         {
