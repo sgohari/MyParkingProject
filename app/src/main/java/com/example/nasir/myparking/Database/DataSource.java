@@ -101,6 +101,18 @@ public class DataSource {
         return mDatabase.insert(REGISTRATION_TABLE, null, initialValues);
     }
 
+    //Retrieve user
+    public Cursor getNameOfUser (int username) throws SQLException {
+        Cursor mCursor =
+                mDatabase.query(true, RESERVATION_TABLE, new String[]{registrationTable.KEY_FIRST_NAME +" "+registrationTable.KEY_LAST_NAME},
+                        reservationTable.PK_RESERVATION_ID + "=" + username, null,
+                        null, null, null, null);
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
+
     //Verify the username and password
     public Cursor validateUserPassword (Integer userID) throws SQLException {
         Cursor mCursor =

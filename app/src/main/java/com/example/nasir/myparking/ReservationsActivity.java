@@ -251,9 +251,20 @@ public class ReservationsActivity extends AppCompatActivity {
     public void reserve_OnClick(View view) {
         myDb.open();
         myDb.insertReservation(Integer.parseInt(username),parkingName,parkingAddress,timeFrom,timeTO,cardType,cardNumber,expiryDate,cvv);
+        String name = null;
+
+       Cursor c=  myDb.getNameOfUser(Integer.parseInt(username));
+        if (c.moveToFirst())
+        {
+            name = c.getString(0);
+        }
         myDb.close();
 
+        //Pass name, parking lot name and address to receipt
         Intent intent = new Intent(this,ReceiptActivity.class);
-        intent.putExtra("name",)
+        intent.putExtra("name",name);
+        intent.putExtra("parkingName",parkingName);
+        intent.putExtra("parkingAddress",parkingAddress);
+        startActivity(intent);
     }
 }
