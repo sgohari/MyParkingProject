@@ -3,7 +3,7 @@ package com.example.nasir.myparking;
 * Author: Syed Nasir Gohary
 * Date: 2018/08/06
 *Subject: Comp231
-* Project Name: myparking
+* Project Name: myParking
 * */
 import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
@@ -14,44 +14,43 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import javax.sql.DataSource;
+import com.example.nasir.myparking.Database.DBHelper;
+import com.example.nasir.myparking.Database.DataSource;
 
-//import com.example.nasir.myparking.Database.DBHelper;
-//import com.example.nasir.myparking.Database.DataSource;
+import javax.sql.DataSource;
 
 public class AdminHomepage extends AppCompatActivity {
 
-    //DataSource myDB;
+    DataSource myDB;
 
-    EditText id, custNameAdminET, pkLotNameAdminET, pkLotAddressAdminET, timingFromAdminET, timingToAdminET, cardNumberAdminET, expiryDateAdminET, securityCodeAdminET;
-    Button btnAdd, btnView, btnUpdate, btnDelete, btnSearch;
-
+    EditText id,custNameAdminET,pkLotNameAdminET,pkLotAddressAdminET,timingFromAdminET,timingToAdminET,cardNumberAdminET,expiryDateAdminET,securityCodeAdminET;
+    Button btnAdd, btnView,btnUpdate,btnDelete,btnSearch;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_homepage);
 
-        //myDB = new DataSource(this);
+        myDB = new DataSource(this);
 
-        custNameAdminET = (EditText) findViewById(R.id.custNameAdminET);
-        pkLotNameAdminET = (EditText) findViewById(R.id.pkLotNameAdminET);
-        pkLotAddressAdminET = (EditText) findViewById(R.id.pkLotAddressAdminET);
-        timingFromAdminET = (EditText) findViewById(R.id.timingFromAdminET);
-        timingToAdminET = (EditText) findViewById(R.id.timingToAdminET);
-        cardNumberAdminET = (EditText) findViewById(R.id.cardNumberAdminET);
-        expiryDateAdminET = (EditText) findViewById(R.id.expireDateET);
-        securityCodeAdminET = (EditText) findViewById(R.id.securityCodeAdminET);
-        id = (EditText) findViewById(R.id.idET);
-        btnAdd = (Button) findViewById(R.id.btnAdd);
+        custNameAdminET=(EditText)findViewById(R.id.custNameAdminET);
+        pkLotNameAdminET=(EditText)findViewById(R.id.pkLotNameAdminET);
+        pkLotAddressAdminET=(EditText)findViewById(R.id.pkLotAddressAdminET);
+        timingFromAdminET=(EditText)findViewById(R.id.timingFromAdminET);
+        timingToAdminET=(EditText)findViewById(R.id.timingToAdminET);
+        cardNumberAdminET=(EditText)findViewById(R.id.cardNumberAdminET);
+        expiryDateAdminET=(EditText)findViewById(R.id.expireDateET);
+        securityCodeAdminET=(EditText)findViewById(R.id.securityCodeAdminET);
+        id=(EditText)findViewById(R.id.idET);
+        btnAdd=(Button)findViewById(R.id.btnAdd);
 
-        btnView = (Button) findViewById(R.id.btnViewAll);
-        btnUpdate = (Button) findViewById(R.id.btnUpdate);
-        btnDelete = (Button) findViewById(R.id.btnDelete);
-        btnSearch = (Button) findViewById(R.id.btnSearchAdmin);
+        btnView = (Button)findViewById(R.id.btnViewAll);
+        btnUpdate=(Button)findViewById(R.id.btnUpdate);
+        btnDelete=(Button)findViewById(R.id.btnDelete);
+        btnSearch=(Button)findViewById(R.id.btnSearchAdmin);
 
     }
 
-    public void updateData() {
+    public void updateData(){
 
        /* btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,9 +103,9 @@ public class AdminHomepage extends AppCompatActivity {
     }*/
 
 
-    public void showMessages(String title, String message) {
+    public void showMessages(String title, String message){
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder= new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle(title);
         builder.setMessage(message);
@@ -117,7 +116,8 @@ public class AdminHomepage extends AppCompatActivity {
     public void searchReservation_OnClick(View view) {
         int pk_reservationID = 0;
 
-        /*myDB.open();
+        
+        myDB.open();
         Cursor c = myDB.getReservation(pk_reservationID); if (c.moveToFirst())
         {
             //Get reservation by ID
@@ -171,7 +171,6 @@ public class AdminHomepage extends AppCompatActivity {
         //Open and insert
         myDB.open();
         myDB.insertReservation(fk_userID,parkingName,parkingAddress,timeFrom,timeTo,cardNumber,expiryDate,CVV);
-        myDB.close();*/
+        myDB.close();
     }
 }
-
