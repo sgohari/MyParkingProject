@@ -72,17 +72,28 @@ public class ReservationsActivity extends AppCompatActivity {
         //Radio Group
         rdGroup=(RadioGroup)findViewById(R.id.rdgGenders);
 
+        //Assigning card type
+        rdGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int i) {
+                RadioButton checkedRadioButton = (RadioButton)group.findViewById(i);
+                // This puts the value (true/false) into the variable
+                boolean isChecked = checkedRadioButton.isChecked();
+                // If the radiobutton that has changed in check state is now checked...
+                if (isChecked)
+                {
+                    // Changes the textview's text to "Checked: example radiobutton text"
+                   cardType = checkedRadioButton.getText().toString();
+                }
+            }
+        });
 
 
-        insertingData();
-        viewAllRecords();
-        rdButton_View();
-
-        displaySharedInfor();
+        //insertingData();
 
     }
 
-    public void insertingData(){
+   /* public void insertingData(){
 
         btnSaves.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,7 +227,7 @@ public class ReservationsActivity extends AppCompatActivity {
 
         }
         );
-    }
+    }*/
 
     //Clear all fields
     public void clear_onClick(View view){
@@ -224,7 +235,7 @@ public class ReservationsActivity extends AppCompatActivity {
             @Override
             public void onClick (View v)
             {
-                EditText[] editTexts = {custNameET,pkLotName,pkAddress,timeFrom,timeTo,cardNumber,expDate,securityCode};
+                EditText[] editTexts = {parkingNameET,parkingAddressET,timeFromET,timeToET,cardNumberET,expiryDateET,cvvET};
 
                 for (EditText et:editTexts) {
                     et.setText("");
@@ -234,78 +245,15 @@ public class ReservationsActivity extends AppCompatActivity {
     }
 
     //for checking the database.
-    public void viewAllRecords(){
 
-        btnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                Cursor res= myDb.getAllData();
-
-                if (res.getCount()==0){
-                    showMessages("Error","Nothing is found");
-
-                    return;
-                }else {
-
-                    StringBuffer buffer = new StringBuffer();
-                    while (res.moveToNext()){
-                        buffer.append("id :"+res.getString(0)+"\n");
-                        buffer.append("\t"+"Customer Name :"+res.getString(1)+"\n");
-                        buffer.append("\t"+"Parking Lot Name :"+res.getString(2)+"\n");
-                        buffer.append("\t"+"Parking Lot Address : "+res.getString(3)+"\n");
-                        buffer.append("\t"+"Timing From : "+res.getString(4)+"\n");
-                        buffer.append("\t"+"Timing To : "+res.getString(5)+"\n");
-                        buffer.append("\t"+"Card Number : "+res.getString(6)+"\n");
-                        buffer.append("\t"+"Exprity Date : "+res.getString(7)+"\n");
-                        buffer.append("\t"+"Security Code : "+res.getString(8)+"\n");
-                    }
-
-                    //show all
-
-                    showMessages("Data",buffer.toString());
-                }
-            }
-        });
-    }
-
-
-    public void showMessages(String title, String message){
-
-        AlertDialog.Builder builder= new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.show();
-    }
-
-public void rdButton_View(){
-        rdGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged (RadioGroup group, int checkedId) {
-                rdCredit = (RadioButton)findViewById(R.id.rdCredit);
-                rdDebit =(RadioButton)findViewById(R.id.rdDebit);
-
-                if (checkedId==R.id.rdCredit) {
-                    cardTyps = "Credit";
-                }
-                else if (checkedId==R.id.rdDebit){
-                    cardTyps = "Debit";
-                }
-            }
-        });
-
-}
-    public void displaySharedInfor(){
-
-        SharedPreferences sharedPreferences=getSharedPreferences("markerContent", Context.MODE_PRIVATE);
-        String title = sharedPreferences.getString("title","");
-        String snipped=sharedPreferences.getString("snipped","");
-        pkLotName.setText(title);
-        pkAddress.setText(snipped);
-    }
 
     //Confirm reservation
     public void reserve_OnClick(View view) {
+        myDb.open();
+        myDb.insertReservation(Integer.parseInt(username),parkingName,parkingAddress,timeFrom,timeTO,cardType,cardNumber,expiryDate,cvv);
+        myDb.close();
 
+        Intent intent = new Intent(this,ReceiptActivity.class);
+        intent.putExtra("name",)
     }
 }
