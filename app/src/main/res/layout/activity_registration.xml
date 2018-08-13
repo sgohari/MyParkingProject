@@ -6,6 +6,8 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
     tools:context=".Registration">
 
 
@@ -36,6 +38,8 @@
             android:id="@+id/editUserName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:inputType="number"
+            style="@style/registration_content"
             android:background="#11000000"
             android:hint="@string/userName" />
 
@@ -50,6 +54,8 @@
             android:id="@+id/editPassword"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:inputType="textPassword"
+            style="@style/registration_content"
             android:background="#11000000"
             android:hint="@string/userPass" />
 
@@ -62,6 +68,7 @@
 
         <EditText
             android:id="@+id/editFName"
+            style="@style/registration_content"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#11000000"
@@ -78,6 +85,7 @@
             android:id="@+id/editLName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            style="@style/registration_content"
             android:background="#11000000"
             android:hint="@string/lNam" />
 
@@ -93,6 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#11000000"
+            style="@style/registration_content"
             android:hint="@string/address" />
 
     </LinearLayout>
@@ -107,6 +116,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#11000000"
+            style="@style/registration_content"
             android:hint="@string/city" />
 
     </LinearLayout>
@@ -121,6 +131,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#11000000"
+            style="@style/registration_content"
             android:hint="@string/pCode" />
 
     </LinearLayout>

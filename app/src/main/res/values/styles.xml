@@ -77,4 +77,13 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/blackColor</item>
     </style>
+
+
+    <style name="registration_content">
+        <item name="android:textSize">30px</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#fefffe</item>
+        <item name="android:padding">15dp</item>
+
+    </style>
 </resources>

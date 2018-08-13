@@ -53,9 +53,13 @@ public class Login extends AppCompatActivity {
 
             //view student activity
             Toast.makeText(this, "valid", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this,ReservationsActivity.class);
+            Intent intent = new Intent(this,CustomerHomePage.class);
             intent.putExtra("username",Integer.parseInt(username));
             startActivity(intent);
+        }
+
+        else if (username.equals("admin")|| password.equals("pass")){
+            startActivity(new Intent(Login.this,AdminHomepage.class));
         }
         else
         {
