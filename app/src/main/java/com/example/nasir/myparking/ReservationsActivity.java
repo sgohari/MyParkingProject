@@ -15,11 +15,15 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+import com.example.nasir.myparking.Database.DBHelper;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import com.example.nasir.myparking.Database.DataSource;
+
 
 public class ReservationsActivity extends AppCompatActivity {
 
@@ -57,168 +61,7 @@ public class ReservationsActivity extends AppCompatActivity {
 
 
 
-        insertingData();
-        viewAllRecords();
-        rdButton_View();
-
-        displaySharedInfor();
-
-    }
-
-    public void insertingData(){
-
-        btnSaves.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                Intent intentNext = new Intent(ReservationsActivity.this, ReceiptActivity.class);
-                intentNext.putExtra("Name", custNameET.getText().toString());
-                intentNext.putExtra("parkingLotName", pkLotName.getText().toString());
-                intentNext.putExtra("parkingAddress", pkAddress.getText().toString());
-
-                getName = custNameET.getText().toString();
-                getPkLotName=pkLotName.getText().toString();
-                getkAddress=pkAddress.getText().toString();
-                getFrom=timeFrom.getText().toString();
-                getTo=timeTo.getText().toString();
-                getCardNumber=cardNumber.getText().toString();
-                getExpireDate=expDate.getText().toString();
-                getSecurity=securityCode.getText().toString();
-
-                try
-                {
-                    DateFormat fmt = new SimpleDateFormat("HH:mm");
-                    DateFormat mmyy = new SimpleDateFormat("MM/yyyy");
-                    Calendar currentDate = Calendar.getInstance();
-                    mmyy.setLenient(false);
-                    result = mmyy.parse(getExpireDate); // <- should not be a valid date!
-
-                    RTimeFrom = fmt.parse(getFrom);
-                    RTimeTo = fmt.parse(getTo);
-
-
-
-                if (getName.equals("")|| getPkLotName.equals("")|| getkAddress.equals("")|| getFrom.equals("")|| getTo.equals("") || getCardNumber.equals("")|| getExpireDate.equals("")||getSecurity.equals(""))
-                {
-                    if (cardNumber.getText().toString().length()>16){
-                        Toast.makeText(ReservationsActivity.this,"card number Must be 16 digits",Toast.LENGTH_LONG).show();
-
-                    } else if (!currentDate.after(mmyy)){
-                        Toast.makeText(ReservationsActivity.this,"Date must be in 'MM/yyyy and greater than year format ",Toast.LENGTH_LONG).show();
-
-                    }else if (RTimeFrom.getTime() != RTimeFrom.compareTo(RTimeFrom) || timeFrom.length() > 4 || timeTo.length() > 4){
-                        Toast.makeText(ReservationsActivity.this,"time from must be in '00:00' format ",Toast.LENGTH_LONG).show();
-                    }
-
-                    else if (securityCode.getText().toString().length()>3){
-                        Toast.makeText(ReservationsActivity.this,"security code must be 3 digits ",Toast.LENGTH_LONG).show();
-
-                    }
-                    Toast.makeText(ReservationsActivity.this,"Fields are Required",Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                    boolean isInserted = myDb.insertData(custNameET.getText().toString(),pkLotName.getText().toString(),pkAddress.getText().toString(),RTimeFrom.toString(),RTimeTo.toString(), cardTyps,cardNumber.getText().toString(),result.toString(),securityCode.getText().toString());
-                if (isInserted==true){
-
-                    startActivity(intentNext);
-
-                    Toast.makeText(ReservationsActivity.this,"Record Added to DB",Toast.LENGTH_LONG).show();
-
-                }else {
-                    Toast.makeText(ReservationsActivity.this,"Record is not added to DB",Toast.LENGTH_LONG).show();
-                }
-                }catch(Exception e)
-                {
-                    Toast.makeText(ReservationsActivity.this,"Something Went Absolutely Wrong, " +
-                            "please follow the hints and make sure all fields are filled!!",Toast.LENGTH_LONG).show();
-                } }
-
-        }
-        );
-    }
-
-    public void clear_onClick(View view){
-        btnClears.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v)
-            {
-                EditText[] editTexts = {custNameET,pkLotName,pkAddress,timeFrom,timeTo,cardNumber,expDate,securityCode};
-
-                for (EditText et:editTexts) {
-                    et.setText("");
-                }
-            }
-        });
-    }
-
-    //for checking the database.
-    public void viewAllRecords(){
-
-        btnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                Cursor res= myDb.getAllData();
-
-                if (res.getCount()==0){
-                    showMessages("Error","Nothing is found");
-
-                    return;
-                }else {
-
-                    StringBuffer buffer = new StringBuffer();
-                    while (res.moveToNext()){
-                        buffer.append("id :"+res.getString(0)+"\n");
-                        buffer.append("\t"+"Customer Name :"+res.getString(1)+"\n");
-                        buffer.append("\t"+"Parking Lot Name :"+res.getString(2)+"\n");
-                        buffer.append("\t"+"Parking Lot Address : "+res.getString(3)+"\n");
-                        buffer.append("\t"+"Timing From : "+res.getString(4)+"\n");
-                        buffer.append("\t"+"Timing To : "+res.getString(5)+"\n");
-                        buffer.append("\t"+"Card Number : "+res.getString(6)+"\n");
-                        buffer.append("\t"+"Exprity Date : "+res.getString(7)+"\n");
-                        buffer.append("\t"+"Security Code : "+res.getString(8)+"\n");
-                    }
-
-                    //show all
-
-                    showMessages("Data",buffer.toString());
-                }
-            }
-        });
     }
 
 
-    public void showMessages(String title, String message){
-
-        AlertDialog.Builder builder= new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.show();
-    }
-
-public void rdButton_View(){
-        rdGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged (RadioGroup group, int checkedId) {
-                rdCredit = (RadioButton)findViewById(R.id.rdCredit);
-                rdDebit =(RadioButton)findViewById(R.id.rdDebit);
-
-                if (checkedId==R.id.rdCredit) {
-                    cardTyps =rdCredit.getText().toString();
-                }
-                else if (checkedId==R.id.rdDebit){
-                    cardTyps =rdDebit.getText().toString();
-                }
-            }
-        });
-
-}
-    public void displaySharedInfor(){
-
-        SharedPreferences sharedPreferences=getSharedPreferences("markerContent", Context.MODE_PRIVATE);
-        String title = sharedPreferences.getString("title","");
-        String snipped=sharedPreferences.getString("snipped","");
-        pkLotName.setText(title);
-        pkAddress.setText(snipped);
-    }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import com.example.nasir.myparking.Database.*;
 
 public class DBHelper extends SQLiteOpenHelper {
 

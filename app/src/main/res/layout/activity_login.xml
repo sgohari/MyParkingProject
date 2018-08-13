@@ -68,12 +68,10 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/lbheadings"
         android:layout_marginBottom="180dp"
-        android:onClick="btnclick"
         android:text="@string/btn_login" />
 
     <Button
         android:id="@+id/btnRegister"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/userNameET"

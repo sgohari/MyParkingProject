@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TabHost;
 import android.widget.Toast;
+
+import com.example.nasir.myparking.Database.DBHelper;
+import com.example.nasir.myparking.Database.DataSource;
 
 public class Registration extends AppCompatActivity {
     //Call Database
-    DBHelper myDB;
+    DataSource myDB;
     //Initialized Button
     Button registerRG;
     //Initialized Edit Text
@@ -20,6 +24,7 @@ public class Registration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        myDB=new DataSource(this);
         UserName = (EditText)findViewById(R.id.editUserName);
         Password = (EditText)findViewById(R.id.editPassword);
         FirstName = (EditText)findViewById(R.id.editFName);
@@ -27,33 +32,32 @@ public class Registration extends AppCompatActivity {
         Address = (EditText)findViewById(R.id.editAddress);
         City = (EditText)findViewById(R.id.editCity);
         Postal_Code = (EditText)findViewById(R.id.editPostCode);
-        
+
         //Initialized Button
         registerRG = (Button)findViewById(R.id.btnSave);
 
-        //Initialized Database
-        myDB = new DBHelper(this);
+    }
+    public void submitBtn_OnClick(View view) {
+        //create instance
+        String _username = UserName.getText().toString();
+        String _password = Password.getText().toString();
+        String _fname = FirstName.getText().toString();
+        String _lname = LastName.getText().toString();
+        String _address = Address.getText().toString();
+        String _city = City.getText().toString();
+        String _postalcode = Postal_Code.getText().toString();
 
-        //Called AddData
-       registerRG.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick (View v) {
-               boolean inserted = myDB.insertDataRegistration(UserName.getText().toString(), Password.getText().toString(), FirstName.getText().toString(), LastName.getText().toString(), Address.getText().toString(), City.getText().toString(), Postal_Code.getText().toString());
-               if (inserted == true) {
+        int username =Integer.parseInt(_username);
 
-                   EditText[] editTexts = {UserName, Password, FirstName, LastName, Address, City, Postal_Code};
-                   for (EditText et : editTexts) {
-                       if (et.getText().toString().equals("")) {
-                           Toast.makeText(Registration.this, "Fields are required", Toast.LENGTH_LONG).show();
-                           return;
-                       }
-                   }
-                   Toast.makeText(Registration.this, "Record Added to DB", Toast.LENGTH_LONG).show();
 
-                   startActivity(new Intent(Registration.this, Login.class));
-               }
-           }
-       });
+        //insert student after registering;
+        myDB.open();
+        myDB.insertRegistration(username,_password,_fname,_lname,_address,_city,_postalcode);
+        Toast.makeText(Registration.this,"Data Inserted", Toast.LENGTH_LONG).show();
+        myDB.close();
+
+        startActivity(new Intent(Registration.this,Login.class));
+        //pass username to Student page
     }
 
 
