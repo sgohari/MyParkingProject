@@ -60,6 +60,7 @@ public class ReservationsActivity extends AppCompatActivity {
         expiryDateET = (EditText) findViewById(R.id.expireDateET);
         cvvET = (EditText) findViewById(R.id.securityCodeET);
 
+        displaySharedInfor();
         //Radio Group
         rdGroup = (RadioGroup) findViewById(R.id.rdgGenders);
 
@@ -126,5 +127,14 @@ public class ReservationsActivity extends AppCompatActivity {
         intent.putExtra("parkingName",parkingName);
         intent.putExtra("parkingAddress",parkingAddress);
         startActivity(intent);
+    }
+
+
+    public void displaySharedInfor(){
+        SharedPreferences sharedPreferences=getSharedPreferences("markerContent", Context.MODE_PRIVATE);
+        String title = sharedPreferences.getString("title","");
+        String snipped=sharedPreferences.getString("snipped","");
+        parkingNameET.setText(title);
+        parkingAddressET.setText(snipped);
     }
 }

@@ -145,16 +145,6 @@ else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
             });
         }
 
-        Button btnReserve=(Button)findViewById(R.id.btnReserveNow);
-        btnReserve.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                Intent intent = new Intent(ParkingAroundActivity.this,ReservationsActivity.class);
-                intent.putExtra("username",username);
-                startActivity(intent);
-            }
-        });
-
     }
     /**
      * Manipulates the map once available.
