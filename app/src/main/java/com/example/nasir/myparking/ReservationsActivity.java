@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class ReservationsActivity extends AppCompatActivity {
 
@@ -86,47 +88,111 @@ public class ReservationsActivity extends AppCompatActivity {
 
                 try
                 {
-                    DateFormat fmt = new SimpleDateFormat("HH:mm");
-                    DateFormat mmyy = new SimpleDateFormat("MM/yyyy");
-                    Calendar currentDate = Calendar.getInstance();
-                    mmyy.setLenient(false);
-                    result = mmyy.parse(getExpireDate); // <- should not be a valid date!
 
+
+                   //Set Time Format
+                    DateFormat fmt = new SimpleDateFormat("HH:mm");
+
+                    //Set Expired Date Format
+                    DateFormat mmyy = new SimpleDateFormat("MM/yyyy");
+                    DateFormat yy = new SimpleDateFormat("yyyy");
+                    DateFormat mm = new SimpleDateFormat("MM");
+                    mmyy.setLenient(false);
+
+                    //Setting Current year, month
+                    Calendar calendar = new GregorianCalendar();
+                    int currentYear = calendar.get(Calendar.YEAR);
+                    int currentMonth  = calendar.get(Calendar.MONTH) + 1;
+
+                    //Full Result of expired Date
+                    result = mmyy.parse(getExpireDate); // returns the full date month year day etc
+
+                    //User inputed Year, month
+                    String year = yy.format(result);
+                    String month = mm.format(result);
+                    // Full Result of time
                     RTimeFrom = fmt.parse(getFrom);
                     RTimeTo = fmt.parse(getTo);
 
+                    //Checkers
+                    Boolean yearDateCheck = false;
+                    Boolean timeCheck = false;
+
+                    if(RTimeTo.after(RTimeFrom))
+                    {
+                        timeCheck = true;
+
+                    }
+                    else
+                        {
+                            Toast.makeText(ReservationsActivity.this,"Enter a valid booking time ",Toast.LENGTH_LONG).show();
+
+                        }
+
+                    if (Integer.parseInt(year) <= currentYear ){
+
+                    if (currentYear == Integer.parseInt(year) && yearDateCheck == false){
+                        if (currentMonth + 1 > Integer.parseInt(month)){
+                            Toast.makeText(ReservationsActivity.this,"Date must be in 'MM/yyyy and a month greater than " + currentMonth  ,Toast.LENGTH_LONG).show();
+                            yearDateCheck = false;
+                        }
+                        else
+                            {
+                                yearDateCheck = true;
+                            }
+
+                    }
+                    else if (Integer.parseInt(year) < currentYear && yearDateCheck && yearDateCheck )
+                    {
+                        yearDateCheck = false;
+                        Toast.makeText(ReservationsActivity.this,"Date must be in 'MM/yyyy and greater than year " + year ,Toast.LENGTH_LONG).show();
+                    }
 
 
-                if (getName.equals("")|| getPkLotName.equals("")|| getkAddress.equals("")|| getFrom.equals("")|| getTo.equals("") || getCardNumber.equals("")|| getExpireDate.equals("")||getSecurity.equals(""))
+                }
+                else
+                    {
+                        yearDateCheck = true;
+                    }
+
+                    if (getName.equals("")|| getPkLotName.equals("")|| getkAddress.equals("")|| getFrom.equals("")|| getTo.equals("") || getCardNumber.equals("")|| getExpireDate.equals("")||getSecurity.equals("")
+                         || yearDateCheck == false || timeCheck == false)
                 {
+
+
                     if (cardNumber.getText().toString().length()>16){
                         Toast.makeText(ReservationsActivity.this,"card number Must be 16 digits",Toast.LENGTH_LONG).show();
 
-                    } else if (!currentDate.after(mmyy)){
-                        Toast.makeText(ReservationsActivity.this,"Date must be in 'MM/yyyy and greater than year format ",Toast.LENGTH_LONG).show();
-
-                    }else if (RTimeFrom.getTime() != RTimeFrom.compareTo(RTimeFrom) || timeFrom.length() > 4 || timeTo.length() > 4){
-                        Toast.makeText(ReservationsActivity.this,"time from must be in '00:00' format ",Toast.LENGTH_LONG).show();
                     }
+
 
                     else if (securityCode.getText().toString().length()>3){
                         Toast.makeText(ReservationsActivity.this,"security code must be 3 digits ",Toast.LENGTH_LONG).show();
 
                     }
+
+
                     Toast.makeText(ReservationsActivity.this,"Fields are Required",Toast.LENGTH_LONG).show();
+                    expDate.setText(" ");
+                    expDate.setHint("MM/YYYY");
+                    timeFrom.setText("00:00");
+                    timeTo.setText("00:00");
+
+
+
                     return;
                 }
+                    boolean isInserted = myDb.insertData(custNameET.getText().toString(),pkLotName.getText().toString(),pkAddress.getText().toString(),RTimeFrom.toString(),RTimeTo.toString(), cardNumber.getText().toString(),result.toString(),securityCode.getText().toString());
+                    if (isInserted==true){
 
-                    boolean isInserted=false; //= myDb.insertData(custNameET.getText().toString(),pkLotName.getText().toString(),pkAddress.getText().toString(),RTimeFrom.toString(),RTimeTo.toString(), cardTyps,cardNumber.getText().toString(),result.toString(),securityCode.getText().toString());
-               if (isInserted==true){
+                        startActivity(intentNext);
 
-                    startActivity(intentNext);
+                        Toast.makeText(ReservationsActivity.this,"Record Added to DB",Toast.LENGTH_LONG).show();
 
-                    Toast.makeText(ReservationsActivity.this,"Record Added to DB",Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(ReservationsActivity.this,"Record is not added to DB",Toast.LENGTH_LONG).show();
+                    }
 
-               }else {
-                    Toast.makeText(ReservationsActivity.this,"Record is not added to DB",Toast.LENGTH_LONG).show();
-               }
                 }catch(Exception e)
                 {
                     Toast.makeText(ReservationsActivity.this,"Something Went Absolutely Wrong, " +
