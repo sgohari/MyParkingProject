@@ -2,6 +2,7 @@ package com.example.nasir.myparking.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -44,7 +45,7 @@ public class DataSource {
         initialValues.put(reservationTable.KEY_TIME_FROM, timeFrom);
         initialValues.put(reservationTable.KEY_TIME_TO, timeTo);
         initialValues.put(reservationTable.KEY_CARD_TYPE, cardType);
-        initialValues.put(reservationTable.KEY_CARD_NUMBER, cardNumber);
+        initialValues.put(reservationTable.KEY_CARD_NUMBER, Integer.parseInt( cardNumber));
         initialValues.put(reservationTable.KEY_EXPIRY_DATE, expiryDate);
         initialValues.put(reservationTable.KEY_CVV, CVV);
         return mDatabase.insert(RESERVATION_TABLE, null, initialValues);

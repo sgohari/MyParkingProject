@@ -10,7 +10,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //Database constants
     public static final String DATABASE_NAME = "parkingDB";
-    static final int DATABASE_VERSION = 1; //upgrade database
+    static final int DATABASE_VERSION = 3; //upgrade database
     static final String TAG = "DBHelper";
 
     public DBHelper(Context context) {

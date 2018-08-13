@@ -99,15 +99,6 @@ public class AdminHomepage extends AppCompatActivity {
     }*/
 
 
-    public void showMessages(String title, String message){
-
-        AlertDialog.Builder builder= new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.show();
-    }
-
     //Search Reservation
     public void searchReservation_OnClick(View view) {
         int pk_reservationID = 0;
@@ -163,10 +154,11 @@ public class AdminHomepage extends AppCompatActivity {
         String cardNumber = null;
         String expiryDate = null;
         String CVV = null;
+        String cardType = null;
 
         //Open and insert
         myDB.open();
-        myDB.insertReservation(fk_userID,parkingName,parkingAddress,timeFrom,timeTo,cardNumber,expiryDate,CVV);
+        myDB.insertReservation(fk_userID,parkingName,parkingAddress,timeFrom,timeTo,cardType,cardNumber,expiryDate,CVV);
         myDB.close();
     }
 }

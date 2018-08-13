@@ -34,6 +34,8 @@ public class Login extends AppCompatActivity {
 
         //Database
         myDB = new DataSource(this);
+        usernameET = findViewById(R.id.userNameET);
+        passwordET = findViewById(R.id.passwordET);
 
     }
 
@@ -69,6 +71,11 @@ public class Login extends AppCompatActivity {
         Cursor c = myDB.validateUserPassword(Integer.parseInt(username));
         myDB.close();
         return c.moveToFirst() && c.getString(0).equals(password);
+    }
+
+    public void register_OnClick(View view) {
+        Intent intent = new Intent(this,Registration.class);
+        startActivity(intent);
     }
 }
 

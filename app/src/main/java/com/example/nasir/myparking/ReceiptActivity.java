@@ -22,7 +22,7 @@ public class ReceiptActivity extends AppCompatActivity {
 
 
         Intent getMessage = getIntent();
-        String name= getMessage.getStringExtra("ame");
+        String name= getMessage.getStringExtra("name");
         String parkingLotName=getMessage.getStringExtra("parkingName");
         String parkingAddress=getMessage.getStringExtra("parkingAddress");
         TextView display=(TextView)findViewById(R.id.displayTxt);

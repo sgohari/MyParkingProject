@@ -48,10 +48,6 @@ public class ReservationsActivity extends AppCompatActivity {
         //get Intent extra (username)
         username = getIntent().getStringExtra("username");
 
-        btnSaves=(Button)findViewById(R.id.btnConfirmRV);
-        btnClears=(Button)findViewById(R.id.btnClearRV);
-        btnView =(Button)findViewById(R.id.btnAll);
-
         parkingNameET=(EditText)findViewById(R.id.parkingNameET);
         parkingAddressET=(EditText)findViewById(R.id.parkingLotAddressET);
         timeFromET=(EditText)findViewById(R.id.fromET);

@@ -35,7 +35,6 @@
         android:layout_height="50dp"
         android:layout_centerInParent="true"
         android:background="#11000000"
-        android:drawableLeft="@drawable/ic_action_user"
         android:ems="10"
         android:hint="@string/user_name"
         android:inputType="textPersonName" />
@@ -51,7 +50,6 @@
         android:layout_marginBottom="214dp"
         android:layout_marginTop="38dp"
         android:background="#11000000"
-        android:drawableLeft="@drawable/ic_action_pass"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword" />
@@ -74,7 +72,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="67dp"
-        android:text="@string/btn_register" />
+        android:text="@string/btn_register"
+        android:onClick="register_OnClick"/>
 
 
 </RelativeLayout>

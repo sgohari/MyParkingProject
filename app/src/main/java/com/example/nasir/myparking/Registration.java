@@ -37,7 +37,9 @@ public class Registration extends AppCompatActivity {
         registerRG = (Button)findViewById(R.id.btnSave);
 
     }
-    public void submitBtn_OnClick(View view) {
+
+
+    public void registerUser_OnClick(View view) {
         //create instance
         String _username = UserName.getText().toString();
         String _password = Password.getText().toString();
@@ -56,13 +58,10 @@ public class Registration extends AppCompatActivity {
         Toast.makeText(Registration.this,"Data Inserted", Toast.LENGTH_LONG).show();
         myDB.close();
 
-        startActivity(new Intent(Registration.this,Login.class));
+        startActivity(new Intent(this,Login.class));
         //pass username to Student page
     }
 
 
-    private void ToastMessage(String message){
-        Toast.makeText(Registration.this,message, Toast.LENGTH_LONG).show();
     }
 
-}
