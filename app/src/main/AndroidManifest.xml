@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".CustomerHomePage">
+        <activity android:name=".CustomerHomePage"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -43,29 +44,39 @@
 
         <activity
             android:name=".ParkingAroundActivity"
-            android:label="@string/title_activity_parking_around" />
+            android:label="@string/title_activity_parking_around"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".ParkingAtDestinationActivity"
-            android:label="@string/title_activity_parking_at_destination">
+            android:label="@string/title_activity_parking_at_destination"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-        <activity android:name=".DestinationActivity" />
+        <activity android:name=".DestinationActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".DestinationMapsActivity"
-            android:label="Map" />
-        <activity android:name=".ReservationsActivity" />
-        <activity android:name=".ReceiptActivity" />
-        <activity android:name=".Login">
+            android:label="Map"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".ReservationsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".ReceiptActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".Login"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdminHomepage" />
-        <activity android:name=".Registration"></activity>
+        <activity android:name=".AdminHomepage"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".Registration"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

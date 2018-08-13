@@ -3,7 +3,7 @@ package com.example.nasir.myparking;
  * Author: Syed Nasir Gohary
  * Date: 2018/08/06
  *Subject: Comp231
- * Project Name: myParking
+ * Project Name: myparking
  * */
 import android.content.Context;
 import android.content.Intent;
@@ -18,12 +18,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.nasir.myparking.Database.DBHelper;
-import com.example.nasir.myparking.Database.DataSource;
+import static com.example.nasir.myparking.DBHelper.COLUMN_PASSWORD;
+import static com.example.nasir.myparking.DBHelper.COLUMN_USERNAME;
+import static com.example.nasir.myparking.DBHelper.REGISTRATION_TABLE;
+
 public class Login extends AppCompatActivity {
 
 
-    DataSource myDatabaseHelper;
+    DBHelper myDatabaseHelper;
     Button btnLogin, btnRegister;
     EditText edtUserName, edtPassword;
 
@@ -35,7 +37,9 @@ public class Login extends AppCompatActivity {
         edtUserName = (EditText) findViewById(R.id.userNameET);
         edtPassword = (EditText) findViewById(R.id.passwordET);
 
-        myDatabaseHelper = new DataSource(this);
+
+        myDatabaseHelper = new DBHelper(getApplicationContext());
+
 
         btnRegister = (Button) findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -47,56 +51,37 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public void btnclick () {
+    public void btnclick (View view) {
 
         final String user = edtUserName.getText().toString();
         final String pass = edtPassword.getText().toString();
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
+        SharedPreferences userLogin= getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = userLogin.edit();
+        editor.putString("username",edtUserName.getText().toString());
+        editor.apply();
+
+        final String currentuser = myDatabaseHelper.SearchExistingAccount(user);
 
 
-                if (edtUserName.getText().toString().equals("")) {
-                    Toast.makeText(Login.this, "Type a User Name!!", Toast.LENGTH_LONG).show();
+        if (edtUserName.getText().toString().equals("")) {
+            edtUserName.setError("Please Enter Username");
 
-                }
-                else if (edtPassword.getText().toString().isEmpty()) {
-                    Toast.makeText(Login.this, "Type your password", Toast.LENGTH_LONG).show();
-                }
-                //checking from database
-                else if(validate(user,pass))
-                {
-                    //view student activity
-                    Toast.makeText(Login.this, "valid", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Login.this,CustomerHomePage.class));
-                }
-                else if (user.equals("admin") || pass.equals("password")) {
-                    startActivity(new Intent(Login.this, AdminHomepage.class));
-                }
-                else
-                {
-                    //throw error
-                    Toast.makeText(Login.this, "user-name and password does not exist", Toast.LENGTH_SHORT).show();
+        } else if (edtPassword.getText().toString().isEmpty()) {
+            edtPassword.setError("Please Enter Password");
 
-                }
-            }
-        });
+        } else if (pass.equals(currentuser)) {
+            Toast.makeText(Login.this, "Login Successfuly", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(Login.this, CustomerHomePage.class));
+        } else if (edtUserName.getText().toString().equals("admin") || edtPassword.getText().toString().equals("password")) {
+            startActivity(new Intent(Login.this, AdminHomepage.class));
 
+        } else {
 
-
-    }
-    //validate credentials
-    public boolean validate(String username, String password) {
-        myDatabaseHelper.open();
-        Cursor c = myDatabaseHelper.validateUserPassword(Integer.parseInt(username));
-        myDatabaseHelper.close();
-        if (c.moveToFirst())
-        {
-            return c.getString(0).equals(password);
+            Toast.makeText(Login.this, "Account Does not Exist" + currentuser, Toast.LENGTH_LONG).show();
         }
-        return false;
     }
+
 }
 
 
