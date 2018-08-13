@@ -21,23 +21,6 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/lbID"
-        style="@style/rv_content_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/customer_name" />
-
-    <EditText
-        android:id="@+id/customerNameET"
-        android:layout_width="188dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="18dp"
-        android:ems="10"
-        style="@style/rv_editText_content_style"
-        android:hint="@string/customer_name"
-        android:inputType="textPersonName" />
 </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -238,6 +221,7 @@
             android:id="@+id/btnConfirmRV"
             android:layout_width="135dp"
             android:layout_height="59dp"
+            android:onClick="reserve_OnClick"
             android:text="@string/btn_confirmation" />
         <Button
             android:id="@+id/btnClearRV"
@@ -246,11 +230,6 @@
             android:onClick="clear_onClick"
             android:text="@string/btn_clear" />
 
-        <Button
-            android:id="@+id/btnAll"
-            android:layout_width="wrap_content"
-            android:layout_height="59dp"
-            android:text="View All" />
     </LinearLayout>
 
 

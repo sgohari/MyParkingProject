@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
     tools:context=".Login"
     android:orientation="vertical">
 
@@ -15,8 +14,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
-        android:cropToPadding="true"
-        app:srcCompat="@drawable/myparking" />
+        android:cropToPadding="true"/>
 
     <TextView
         android:id="@+id/lbheadings"
@@ -65,7 +63,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="124dp"
-        android:onClick="btnclick"
+        android:onClick="login_OnClick"
         android:text="@string/btn_login" />
 
     <Button

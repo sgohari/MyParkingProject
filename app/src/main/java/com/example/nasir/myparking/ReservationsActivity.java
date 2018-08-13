@@ -17,6 +17,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.nasir.myparking.Database.DBHelper;
+import com.example.nasir.myparking.Database.DataSource;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,36 +28,48 @@ import java.util.GregorianCalendar;
 
 public class ReservationsActivity extends AppCompatActivity {
 
-    EditText custNameET,pkLotName,pkAddress,timeFrom,timeTo,cardNumber,expDate,securityCode;
-    String getName,getPkLotName,getkAddress,getFrom,getTo,getCardNumber,getExpireDate,getSecurity, cardTyps;
+    EditText parkingNameET,parkingAddressET,timeFromET,timeToET,cardNumberET,expiryDateET,cvvET;
+    String parkingName,parkingAddress,timeFrom,timeTO,cardNumber,expiryDate,cvv, cardType;
     Button btnSaves, btnClears,btnView;
     Date RTimeFrom, RTimeTo, result;
     RadioGroup rdGroup;
     RadioButton rdCredit,rdDebit;
 
-    DBHelper myDb;
+    String username;
+
+    DataSource myDb;
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservations);
 
-        myDb=new DBHelper(this);
+        myDb=new DataSource(this);
+
+        //get Intent extra (username)
+        username = getIntent().getStringExtra("username");
 
         btnSaves=(Button)findViewById(R.id.btnConfirmRV);
         btnClears=(Button)findViewById(R.id.btnClearRV);
         btnView =(Button)findViewById(R.id.btnAll);
 
-        custNameET= (EditText)findViewById(R.id.customerNameET);
+        parkingNameET=(EditText)findViewById(R.id.parkingNameET);
+        parkingAddressET=(EditText)findViewById(R.id.parkingLotAddressET);
+        timeFromET=(EditText)findViewById(R.id.fromET);
+        timeToET=(EditText)findViewById(R.id.toET);
+        cardNumberET=(EditText)findViewById(R.id.cardNumberET);
+        expiryDateET=(EditText)findViewById(R.id.expireDateET);
+        cvvET=(EditText)findViewById(R.id.securityCodeET);
 
-        pkLotName=(EditText)findViewById(R.id.parkingNameET);
-        pkLotName.setInputType(InputType.TYPE_CLASS_TEXT);
-        pkAddress=(EditText)findViewById(R.id.parkingLotAddressET);
-        timeFrom=(EditText)findViewById(R.id.fromET);
-        timeTo=(EditText)findViewById(R.id.toET);
-        cardNumber=(EditText)findViewById(R.id.cardNumberET);
-        expDate=(EditText)findViewById(R.id.expireDateET);
-        securityCode=(EditText)findViewById(R.id.securityCodeET);
+        //Assign Values
+        parkingName = parkingNameET.getText().toString();
+        parkingAddress = parkingAddressET.getText().toString();
+        timeFrom = timeFromET.getText().toString();
+        timeTO = timeToET.getText().toString();
+        cardNumber = cardNumberET.getText().toString();
+        expiryDate = expiryDateET.getText().toString();
+        cvv = cvvET.getText().toString();
 
+        //Radio Group
         rdGroup=(RadioGroup)findViewById(R.id.rdgGenders);
 
 
@@ -203,6 +218,7 @@ public class ReservationsActivity extends AppCompatActivity {
         );
     }
 
+    //Clear all fields
     public void clear_onClick(View view){
         btnClears.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -270,10 +286,10 @@ public void rdButton_View(){
                 rdDebit =(RadioButton)findViewById(R.id.rdDebit);
 
                 if (checkedId==R.id.rdCredit) {
-                    cardTyps =rdCredit.getText().toString();
+                    cardTyps = "Credit";
                 }
                 else if (checkedId==R.id.rdDebit){
-                    cardTyps =rdDebit.getText().toString();
+                    cardTyps = "Debit";
                 }
             }
         });
@@ -286,5 +302,10 @@ public void rdButton_View(){
         String snipped=sharedPreferences.getString("snipped","");
         pkLotName.setText(title);
         pkAddress.setText(snipped);
+    }
+
+    //Confirm reservation
+    public void reserve_OnClick(View view) {
+
     }
 }
