@@ -9,102 +9,72 @@
     android:paddingTop="20dp"
     tools:context=".DestinationActivity">
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="160dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="110dp"
-        android:layout_marginStart="122dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/TextViewLayout"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/myparking_logo" />
-
-    <LinearLayout
-        android:id="@+id/TextViewLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="253dp"
-        android:layout_marginTop="132dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4">
-
-
-        <TextView
-            style="@style/textViewStyle"
-            android:text="Street:" />
-
-        <TextView
-            style="@style/textViewStyle"
-            android:text="@string/cityTV" />
-
-        <TextView
-            style="@style/textViewStyle"
-            android:text="@string/provinceTV" />
-
-        <TextView
-            style="@style/textViewStyle"
-            android:text="@string/postal_codeTV" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="152dp"
-        android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@+id/TextViewLayout"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4">
-
         <LinearLayout
             android:id="@+id/EditTextLayout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="vertical"
-            app:layout_constraintStart_toEndOf="@+id/TextViewLayout"
             app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_marginBottom="32dp"
+                android:layout_marginEnd="110dp"
+                android:layout_marginStart="122dp"
+                android:layout_marginTop="16dp"
+                android:adjustViewBounds="true"
+                android:cropToPadding="true"
+                android:src="@drawable/myparking_logo"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/myparking_logo"
+                android:contentDescription="@string/logo" />
+
+            <TextView
+                style="@style/heading_for_activities"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:text="@string/enter_address"
+                android:textAlignment="center" />
 
             <EditText
                 android:id="@+id/streetET"
                 style="@style/editTextStyle"
-                android:hint="@string/enter_streetHint" />
+                android:hint="@string/enter_streetHint"
+                android:inputType="text"/>
 
             <EditText
                 android:id="@+id/cityET"
                 style="@style/editTextStyle"
-                android:hint="@string/enter_cityHint" />
-
-            <Spinner
-                android:id="@+id/provincesSP"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:spinnerMode="dialog">
-
-            </Spinner>
+                android:hint="@string/enter_cityHint"
+                android:inputType="text"/>
 
             <EditText
 
                 android:id="@+id/postalCodeET"
                 style="@style/editTextStyle"
-                android:hint="@string/enter_postal_codeHint" />
+                android:hint="@string/enter_postal_codeHint"
+                android:inputType="textPostalAddress"/>
+            <Spinner
+                android:id="@+id/provincesSP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog">
+
+            </Spinner>
         </LinearLayout>
-
-
-    </LinearLayout>
 
     <Button
         android:id="@+id/clearBtn"
         android:layout_width="144dp"
         android:layout_height="wrap_content"
         android:onClick="clearAddress_OnClick"
-        android:text="Clear"
+        android:text="@string/clear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -114,7 +84,7 @@
 
         android:layout_height="wrap_content"
         android:onClick="findDestination_OnClick"
-        android:text="Find"
+        android:text="@string/find"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -138,7 +138,7 @@ public class DestinationActivity extends AppCompatActivity {
         Intent intent = new Intent(DestinationActivity.this,DestinationMapsActivity.class);
         intent.putExtra("address",address);
         intent.putExtra("username",username);
-        startActivity(intent);
+
 
         if (streetName.getText().toString().isEmpty()) {
             streetName.setError("Enter a street name");

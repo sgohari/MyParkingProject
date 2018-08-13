@@ -25,7 +25,7 @@
         android:layout_gravity="center_horizontal"
         android:padding="15dp"
         android:text="@string/reg_Form"
-        android:textSize="50px"
+        android:textSize="25dp"
         android:textStyle="bold" />
 
 
@@ -36,12 +36,13 @@
 
         <EditText
             android:id="@+id/editUserName"
+            style="@style/registration_content"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:inputType="number"
-            style="@style/registration_content"
             android:background="#11000000"
-            android:hint="@string/userName" />
+            android:hint="@string/userID"
+            android:inputType="number"
+            android:textSize="18dp" />
 
     </LinearLayout>
 
@@ -52,12 +53,13 @@
 
         <EditText
             android:id="@+id/editPassword"
+            style="@style/registration_content"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:inputType="textPassword"
-            style="@style/registration_content"
             android:background="#11000000"
-            android:hint="@string/userPass" />
+            android:hint="@string/userPass"
+            android:inputType="textPassword"
+            android:textSize="18dp" />
 
     </LinearLayout>
 
@@ -72,7 +74,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#11000000"
-            android:hint="@string/fName" />
+            android:hint="@string/fName"
+            android:textSize="18dp" />
 
     </LinearLayout>
 
@@ -83,11 +86,12 @@
 
         <EditText
             android:id="@+id/editLName"
+            style="@style/registration_content"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            style="@style/registration_content"
             android:background="#11000000"
-            android:hint="@string/lNam" />
+            android:hint="@string/lNam"
+            android:textSize="18dp" />
 
     </LinearLayout>
 
@@ -98,11 +102,12 @@
 
         <EditText
             android:id="@+id/editAddress"
+            style="@style/registration_content"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#11000000"
-            style="@style/registration_content"
-            android:hint="@string/address" />
+            android:hint="@string/address"
+            android:textSize="18dp" />
 
     </LinearLayout>
 
@@ -113,11 +118,12 @@
 
         <EditText
             android:id="@+id/editCity"
+            style="@style/registration_content"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#11000000"
-            style="@style/registration_content"
-            android:hint="@string/city" />
+            android:hint="@string/city"
+            android:textSize="18dp" />
 
     </LinearLayout>
 
@@ -128,11 +134,12 @@
 
         <EditText
             android:id="@+id/editPostCode"
+            style="@style/registration_content"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#11000000"
-            style="@style/registration_content"
-            android:hint="@string/pCode" />
+            android:hint="@string/pCode"
+            android:textSize="18dp" />
 
     </LinearLayout>
 

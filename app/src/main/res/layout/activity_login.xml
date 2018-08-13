@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/gradient">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -14,7 +15,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
-        android:cropToPadding="true"/>
+        android:cropToPadding="true"
+        android:src="@drawable/myparking"
+        />
 
     <TextView
         android:id="@+id/lbheadings"
@@ -23,8 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="199dp"
         android:text="@string/login_heading" />
 
 
@@ -36,7 +39,8 @@
         android:layout_centerInParent="true"
         android:background="#11000000"
         android:ems="10"
-        android:hint="@string/user_name"
+        android:hint="@string/user_ID"
+        android:drawableLeft="@drawable/ic_action_user"
         android:inputType="textPersonName" />
 
 
@@ -52,6 +56,7 @@
         android:background="#11000000"
         android:ems="10"
         android:hint="@string/password"
+        android:drawableLeft="@drawable/ic_action_pass"
         android:inputType="textPassword" />
 
     <Button
