@@ -39,7 +39,7 @@
         android:layout_centerInParent="true"
         android:background="#11000000"
         android:ems="10"
-        android:hint="@string/user_name"
+        android:hint="@string/user_ID"
         android:drawableLeft="@drawable/ic_action_user"
         android:inputType="textPersonName" />
 

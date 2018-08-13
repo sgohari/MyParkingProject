@@ -54,7 +54,7 @@
     <string name="message">Thanks you for using MyParking app</string>
 
     <string name="login_heading">Login With Your Credentials</string>
-    <string name="user_name">User Name</string>
+    <string name="user_ID">User ID</string>
     <string name="password">Password</string>
     <string name="btn_login">Login</string>
     <string name="btn_register">Register Now</string>
@@ -69,7 +69,7 @@
     <string name="register">Register</string>
     <string name="login">Log In</string>
     <string name="reg_Form">User Registration Form</string>
-    <string name="userName"><font size="20">User Name</font></string>
+    <string name="userID"><font size="20">User ID</font></string>
     <string name="userPass"><font size="20">Password</font></string>
     <string name="fName"><font size="20">First Name</font></string>
     <string name="lNam"><font size="20">Last Name</font></string>
