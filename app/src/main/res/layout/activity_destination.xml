@@ -9,73 +9,80 @@
     android:paddingTop="20dp"
     tools:context=".DestinationActivity">
 
-        <LinearLayout
-            android:id="@+id/EditTextLayout"
-            android:layout_width="fill_parent"
+    <LinearLayout
+        android:id="@+id/EditTextLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btnBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="110dp"
+            android:layout_marginStart="122dp"
+            android:layout_marginTop="16dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/logo"
+            android:cropToPadding="true"
+            android:src="@drawable/myparking_logo"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/myparking_logo" />
+
+        <TextView
+            style="@style/heading_for_activities"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:text="@string/enter_address"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/streetET"
+            style="@style/editTextStyle"
+            android:hint="@string/enter_streetHint"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/cityET"
+            style="@style/editTextStyle"
+            android:hint="@string/enter_cityHint"
+            android:inputType="text" />
+
+        <EditText
+
+            android:id="@+id/postalCodeET"
+            style="@style/editTextStyle"
+            android:hint="@string/enter_postal_codeHint"
+            android:inputType="textPostalAddress" />
+
+        <Spinner
+            android:id="@+id/provincesSP"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="parent">
+            android:spinnerMode="dialog">
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:layout_marginBottom="32dp"
-                android:layout_marginEnd="110dp"
-                android:layout_marginStart="122dp"
-                android:layout_marginTop="16dp"
-                android:adjustViewBounds="true"
-                android:cropToPadding="true"
-                android:src="@drawable/myparking_logo"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/myparking_logo"
-                android:contentDescription="@string/logo" />
-
-            <TextView
-                style="@style/heading_for_activities"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:text="@string/enter_address"
-                android:textAlignment="center" />
-
-            <EditText
-                android:id="@+id/streetET"
-                style="@style/editTextStyle"
-                android:hint="@string/enter_streetHint"
-                android:inputType="text"/>
-
-            <EditText
-                android:id="@+id/cityET"
-                style="@style/editTextStyle"
-                android:hint="@string/enter_cityHint"
-                android:inputType="text"/>
-
-            <EditText
-
-                android:id="@+id/postalCodeET"
-                style="@style/editTextStyle"
-                android:hint="@string/enter_postal_codeHint"
-                android:inputType="textPostalAddress"/>
-            <Spinner
-                android:id="@+id/provincesSP"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:spinnerMode="dialog">
-
-            </Spinner>
-        </LinearLayout>
+        </Spinner>
+    </LinearLayout>
 
     <Button
         android:id="@+id/clearBtn"
-        android:layout_width="144dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="4dp"
         android:onClick="clearAddress_OnClick"
         android:text="@string/clear"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnBack"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -83,10 +90,23 @@
         android:layout_width="144dp"
 
         android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
         android:onClick="findDestination_OnClick"
         android:text="@string/find"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="19dp"
+        android:layout_marginEnd="148dp"
+        android:text="@string/back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/clearBtn"
+        app:layout_constraintTop_toBottomOf="@+id/EditTextLayout" />
 
 
 </android.support.constraint.ConstraintLayout>

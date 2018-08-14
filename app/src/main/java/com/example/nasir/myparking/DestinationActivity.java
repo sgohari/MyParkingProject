@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ public class DestinationActivity extends AppCompatActivity {
     private EditText city;
     private EditText postalCode;
     private String username;
+    Button back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +108,14 @@ public class DestinationActivity extends AppCompatActivity {
                         {
                             postalCode.setError("Enter valid postal code ");
                         }
+            }
+        });
+
+        back=findViewById(R.id.btnBack);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DestinationActivity.this,CustomerHomePage.class));
             }
         });
 
