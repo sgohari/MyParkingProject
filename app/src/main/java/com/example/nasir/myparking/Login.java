@@ -46,15 +46,19 @@ public class Login extends AppCompatActivity {
 
         if(username.equals("admin") && password.equals("pass"))
         {
-            if (username.length()==1){
-                if (password !=("pass")){
-                    passwordET.setError("Wrong Password");
-                }
+            if (password!="pass"){
+                passwordET.setError("Incorrect Password");
             }
             Intent intent = new Intent(this,AdminHomepage.class);
             startActivity(intent);
         }
 
+        else if (usernameET.length()==0){
+            usernameET.setError("UserName is Required");
+        }
+        else if (passwordET.length()==0){
+            passwordET.setError("Password is Required");
+        }
        else if(validate(username, password))
         {
             SharedPreferences.Editor editor =
