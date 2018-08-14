@@ -110,25 +110,33 @@ public class ReservationsActivity extends AppCompatActivity {
         expiryDate = expiryDateET.getText().toString();
         cvv = cvvET.getText().toString();
 
-        myDb.open();
-        myDb.insertReservation(username,parkingName,parkingAddress,timeFrom,timeTO,cardType,Integer.parseInt(cardNumber),expiryDate,cvv);
-        String name = null;
+        if (timeFrom.length() == 0 || timeFrom.length() > 5) {
+            timeFromET.setError("Only Time Format");
+        } else if (timeTO.length() == 0 || timeTO.length() > 5) {
+            timeToET.setError("Time Format!!");
+        } else if (cardNumber.length() == 0 || cardNumber.length() > 16) {
+            cardNumberET.setError("Card number is 1 to 16 Digits");
+        } else if (cvv.length() == 0 || cvv.length() > 3) {
+            cvvET.setError("The 3 Digit Security Code ");
+        } else {
+            myDb.open();
+            myDb.insertReservation(username, parkingName, parkingAddress, timeFrom, timeTO, cardType, Integer.parseInt(cardNumber), expiryDate, cvv);
+            String name = null;
 
-       Cursor c=  myDb.getNameOfUser(username);
-        if (c.moveToFirst())
-        {
-            name = c.getString(0);
+            Cursor c = myDb.getNameOfUser(username);
+            if (c.moveToFirst()) {
+                name = c.getString(0);
+            }
+            myDb.close();
+
+            //Pass name, parking lot name and address to receipt
+            Intent intent = new Intent(this, ReceiptActivity.class);
+            intent.putExtra("name", name);
+            intent.putExtra("parkingName", parkingName);
+            intent.putExtra("parkingAddress", parkingAddress);
+            startActivity(intent);
         }
-        myDb.close();
-
-        //Pass name, parking lot name and address to receipt
-        Intent intent = new Intent(this,ReceiptActivity.class);
-        intent.putExtra("name",name);
-        intent.putExtra("parkingName",parkingName);
-        intent.putExtra("parkingAddress",parkingAddress);
-        startActivity(intent);
     }
-
 
     public void displaySharedInfor(){
         SharedPreferences sharedPreferences=getSharedPreferences("markerContent", Context.MODE_PRIVATE);

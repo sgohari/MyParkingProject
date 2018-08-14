@@ -64,7 +64,7 @@ public class Registration extends AppCompatActivity {
         else if (City.length()==0){
             City.setError("Type the City Name");
         }
-        else if (City.getText().toString()!="Toronto" && City.getText().toString()!=("TORONTO"))
+        else if (City.getText().toString()!="Toronto" || City.getText().toString()!=("TORONTO"))
         {
             City.setError("Only Toronto or TORONTO");
 
