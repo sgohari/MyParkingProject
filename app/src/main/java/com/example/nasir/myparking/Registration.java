@@ -74,8 +74,8 @@ public class Registration extends AppCompatActivity {
         Pattern pattern = Pattern.compile(regex);
 
         //Address Validation Regex
-        String regex2 = "^[0-9]+ ?[A-Za-z]+ ?$";
-        Pattern pattern2 = Pattern.compile(regex2);
+        String regex2 = "^[0-9]+ ?[A-Za-z\\s]+$";
+        Pattern pattern2 = Pattern.compile(regex2); //Allow White Space afterwardsx
         boolean address_bool = false;
 
         for (String address : ad )
@@ -157,7 +157,7 @@ public class Registration extends AppCompatActivity {
 
          else if (!_cityJson.contains(City.getText().toString()) || _city.length() < 6)
          {
-                City.setError("Try another City name. e.g North York, Alberta");
+                City.setError("Try another City name. e.g North York, Alberta (First Letter Capitalized)");
 
           }
           else if (postalCode_bool == false)
