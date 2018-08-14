@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class CustomerHomePage extends AppCompatActivity {
 
@@ -40,7 +41,9 @@ public class CustomerHomePage extends AppCompatActivity {
             @Override
             public void onClick (View v) {
                 startActivity(new Intent(CustomerHomePage.this,Login.class));
+                Toast.makeText(CustomerHomePage.this,"LogOut Successful",Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }

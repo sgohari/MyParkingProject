@@ -80,4 +80,5 @@
     <string name="logo">LOGO</string>
     <string name="clear">Clear</string>
     <string name="find">Find</string>
+    <string name="logout">LogOut</string>
 </resources>
