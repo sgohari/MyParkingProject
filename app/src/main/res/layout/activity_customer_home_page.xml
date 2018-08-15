@@ -8,7 +8,7 @@
     tools:context=".CustomerHomePage">
 
     <TextView
-        android:id="@+id/lbHeading"
+        android:id="@+id/lbHeadingCS"
         style="@style/heading_style"
         android:layout_width="wrap_content"
         android:layout_height="39dp"

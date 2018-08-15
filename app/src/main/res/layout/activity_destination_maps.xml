@@ -4,6 +4,7 @@
     andoir:layout_width="match_parent"
     andoir:layout_height="match_parent"
     andoir:orientation="vertical"
+    andoir:id="@+id/fragmentContainer"
     andoir:background="@drawable/gradient"
     >
 
