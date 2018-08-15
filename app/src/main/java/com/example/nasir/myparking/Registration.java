@@ -219,4 +219,8 @@ public class Registration extends AppCompatActivity {
     public void fieldsValidation_onClick(){
 
     }
+    //simple concatenation test for JUnit
+    public String concatenate( String one, String two){
+        return one+two;
+    }
 }
