@@ -1,11 +1,12 @@
 package com.example.nasir.myparking;
 //Author: Jason Nguessan
 //Added Validations
-//date: 2018 - 08 - 2016
+//date: 2018 - 08 - 16
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -68,6 +69,10 @@ public class ReservationsActivity extends AppCompatActivity {
         displaySharedInfor();
         //Radio Group
         rdGroup = (RadioGroup) findViewById(R.id.rdgGenders);
+        rdDebit = findViewById(R.id.rdDebit);
+        rdCredit = findViewById(R.id.rdCredit);
+
+
 
         //Assigning card type
         rdGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -81,6 +86,10 @@ public class ReservationsActivity extends AppCompatActivity {
                     // Changes the textview's text to "Checked: example radiobutton text"
                     cardType = checkedRadioButton.getText().toString();
                 }
+                else
+                    {
+                        checkedRadioButton.setChecked(false);
+                    }
             }
         });
     }
@@ -88,19 +97,16 @@ public class ReservationsActivity extends AppCompatActivity {
 
     //Clear all fields
     public void clear_onClick(View view){
-        btnClears.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v)
-            {
 
-                EditText[] editTexts = {parkingNameET,parkingAddressET,timeFromET,timeToET,cardNumberET,expiryDateET,cvvET};
+                EditText[] editTexts = {parkingNameET,parkingAddressET,timeFromET,timeToET,cardNumberET,expiryDateET,cvvET };
+                rdDebit.setChecked(false);
+                rdCredit.setChecked(false);
 
-                for (EditText et:editTexts) {
+        for (EditText et:editTexts) {
                     et.setText("");
                 }
             }
-        });
-    }
+
 
     //for checking the database.
 
@@ -171,7 +177,7 @@ public class ReservationsActivity extends AppCompatActivity {
 
 
 
-            if(RTimeTo.after(RTimeFrom) || timeTO.length() <= 4 || timeFrom.length() <= 4)
+            if(RTimeTo.after(RTimeFrom) && timeTO.length() <= 5 && timeFrom.length() <= 5)
             {
                 timeCheck = true;
 
@@ -224,8 +230,12 @@ public class ReservationsActivity extends AppCompatActivity {
                 || yearDateCheck == false || timeCheck == false || address_bool == false ) {
             if (parkingName.length() < 5 || parkingAddress.length() < 3 || address_bool == false  )
             {
-                parkingNameET.setError("This field is too short");
-                if(parkingAddress.length() < 5)
+                if (parkingName.length() < 5 )
+                {
+                    parkingNameET.setError("This field is too short");
+                }
+
+                else if(parkingAddress.length() < 5 || address_bool == false)
                     {
                         parkingAddressET.setError("This field is improperly done e.g 1 Deauville Lane");
 
