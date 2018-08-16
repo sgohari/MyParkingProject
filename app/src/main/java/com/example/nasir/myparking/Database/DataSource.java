@@ -19,6 +19,7 @@ public class DataSource {
     static final String RESERVATION_TABLE = "reservation";
     static final String REGISTRATION_TABLE = "registration";
 
+
     public DataSource (Context context) {
         this.mContext = context;
         mDBHelper = new DBHelper(mContext);
@@ -116,6 +117,7 @@ public class DataSource {
 
     //Verify the username and password
     public Cursor validateUserPassword (Integer userID) throws SQLException {
+
         Cursor mCursor =
                 mDatabase.query(true, REGISTRATION_TABLE, new String[]{registrationTable.KEY_PASSWORD},
                         registrationTable.PK_USER_ID + "=" + userID, null,

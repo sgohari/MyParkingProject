@@ -1,7 +1,10 @@
 package com.example.nasir.myparking;
-//Author: Jason Nguessan
-//Added Validations
-//date: 2018 - 08 - 16
+
+/*
+Author: Jason Nguessan
+Date: 2018/08/16
+Description: Validated Reservation Page
+ */
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;

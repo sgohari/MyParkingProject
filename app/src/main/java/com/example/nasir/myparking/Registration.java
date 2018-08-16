@@ -24,7 +24,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /*
-Validated by Jason
+Author: Jason Nguessan
+Date: 2018/08/16
+Description: Validated Registration Page
  */
 
 public class Registration extends AppCompatActivity {
