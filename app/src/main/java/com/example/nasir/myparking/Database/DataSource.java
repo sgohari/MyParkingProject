@@ -37,7 +37,7 @@ public class DataSource {
 
     //---insert a reservation into the database---
     public long insertReservation (String fk_userID, String parkingName, String parkingAddress, String timeFrom, String timeTo,String cardType,
-                                   int cardNumber, String expiryDate, String CVV) {
+                                   String cardNumber, String expiryDate, String CVV) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(reservationTable.FK_USER_ID, fk_userID);
         initialValues.put(reservationTable.KEY_PARKING_NAME, parkingName);

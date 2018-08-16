@@ -60,11 +60,11 @@
             android:name=".DestinationMapsActivity"
             android:label="Map"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".ReservationsActivity"
+        <activity android:name=".Login"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".ReceiptActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".Login"
+        <activity android:name=".ReservationsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

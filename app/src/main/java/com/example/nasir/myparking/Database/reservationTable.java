@@ -16,6 +16,6 @@ public class reservationTable {
     //TARGET
     public static final String DATABASE_CREATE_RESERVATIONS =
             "create table if not exists reservation (reservationID integer primary key autoincrement,userID integer, " //username is int
-                    + "parkingName text not null, parkingAddress text not null, timeFrom text, timeTo text not null,cardType text , cardNumber integer not null, expiryDate text" +
+                    + "parkingName text not null, parkingAddress text not null, timeFrom text, timeTo text not null,cardType text , cardNumber text not null, expiryDate text" +
                     ",cvv integer not null,foreign key(userID) references registration(userID));"; //missing FK
 }
