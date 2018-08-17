@@ -21,40 +21,39 @@
 
     <Button
         android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
+        android:layout_width="121dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/btnViewAll"
         android:onClick="addReservation_OnClick"
         android:text="Add" />
 
     <Button
         android:id="@+id/btnViewAll"
-        android:layout_width="wrap_content"
+        android:layout_width="121dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/btnUpdate"
-        android:layout_marginEnd="97dp"
+        android:layout_marginBottom="67dp"
         android:onClick="viewAllReservations_OnClick"
         android:text="view all" />
 
     <Button
         android:id="@+id/btnUpdate"
-        android:layout_width="wrap_content"
+        android:layout_width="121dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginBottom="12dp"
+        android:layout_alignParentStart="true"
         android:onClick="updateReservation_OnClick"
         android:text="update" />
 
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/btnUpdate"
-        android:layout_marginStart="104dp"
+        android:layout_height="62dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
         android:onClick="deleteReservation_OnClick"
         android:text="Delete" />
 
@@ -157,10 +156,10 @@
 
     <Button
         android:id="@+id/btnSearchAdmin"
-        android:layout_width="wrap_content"
+        android:layout_width="121dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnAdd"
-        android:layout_alignEnd="@+id/btnDelete"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/btnViewAll"
         android:onClick="searchReservation_OnClick"
         android:text="Search" />
 
