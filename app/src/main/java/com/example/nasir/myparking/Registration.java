@@ -76,7 +76,7 @@ public class Registration extends AppCompatActivity {
         Pattern pattern = Pattern.compile(regex);
 
         //Address Validation Regex
-        String regex2 = "^[0-9]+ ?[A-Za-z\\s]+$";
+        String regex2 = "^\\s+[0-9]+ ?[A-Za-z\\s]+$";
         Pattern pattern2 = Pattern.compile(regex2); //Allow White Space afterwardsx
         boolean address_bool = false;
 
