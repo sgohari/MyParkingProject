@@ -212,7 +212,7 @@
            android:layout_height="wrap_content"
            android:ems="10"
            android:hint="@string/hint_security_code"
-           android:inputType="textPersonName" />
+           android:inputType="number" />
    </LinearLayout>
 
     <LinearLayout

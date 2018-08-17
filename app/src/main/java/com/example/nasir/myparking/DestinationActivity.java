@@ -56,7 +56,7 @@ public class DestinationActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!(isNumeric(streetName.getText().toString())) && !(TextUtils.isEmpty(streetName.getText()))) {
+                if (!(isNumeric(streetName.getText().toString())) && (TextUtils.isEmpty(streetName.getText()))) {
                     streetName.setError("Enter a valid street number");
                 }
             }
