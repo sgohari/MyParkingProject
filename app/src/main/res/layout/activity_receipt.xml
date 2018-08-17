@@ -38,4 +38,24 @@
         android:layout_marginStart="47dp"
         android:text="@string/message"
         style="@style/receipt_content_style"/>
+
+    <Button
+        android:id="@+id/btnDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="103dp"
+        android:text="@string/done"
+        android:onClick="goBack_onClick"/>
+
+    <ImageView
+        android:id="@+id/cariconlogo"
+        android:layout_width="89dp"
+        android:layout_height="44dp"
+        android:layout_alignBottom="@+id/lbHeadds"
+        android:layout_marginStart="7dp"
+        android:layout_toEndOf="@+id/lbHeadds"/>
+        //android:src="@drawable/caricon" />
+
 </RelativeLayout>

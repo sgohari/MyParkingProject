@@ -19,6 +19,7 @@ public class DataSource {
     static final String RESERVATION_TABLE = "reservation";
     static final String REGISTRATION_TABLE = "registration";
 
+
     public DataSource (Context context) {
         this.mContext = context;
         mDBHelper = new DBHelper(mContext);
@@ -37,7 +38,7 @@ public class DataSource {
 
     //---insert a reservation into the database---
     public long insertReservation (String fk_userID, String parkingName, String parkingAddress, String timeFrom, String timeTo,String cardType,
-                                   int cardNumber, String expiryDate, String CVV) {
+                                   String cardNumber, String expiryDate, String CVV) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(reservationTable.FK_USER_ID, fk_userID);
         initialValues.put(reservationTable.KEY_PARKING_NAME, parkingName);
@@ -116,6 +117,7 @@ public class DataSource {
 
     //Verify the username and password
     public Cursor validateUserPassword (Integer userID) throws SQLException {
+
         Cursor mCursor =
                 mDatabase.query(true, REGISTRATION_TABLE, new String[]{registrationTable.KEY_PASSWORD},
                         registrationTable.PK_USER_ID + "=" + userID, null,

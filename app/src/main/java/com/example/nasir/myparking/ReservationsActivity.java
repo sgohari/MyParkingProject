@@ -1,10 +1,15 @@
 package com.example.nasir.myparking;
-//Author
-//date
+
+/*
+Author: Jason Nguessan
+Date: 2018/08/16
+Description: Validated Reservation Page
+ */
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,9 +27,13 @@ import com.example.nasir.myparking.Database.DataSource;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ReservationsActivity extends AppCompatActivity {
 
@@ -63,6 +72,10 @@ public class ReservationsActivity extends AppCompatActivity {
         displaySharedInfor();
         //Radio Group
         rdGroup = (RadioGroup) findViewById(R.id.rdgGenders);
+        rdDebit = findViewById(R.id.rdDebit);
+        rdCredit = findViewById(R.id.rdCredit);
+
+
 
         //Assigning card type
         rdGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -76,6 +89,10 @@ public class ReservationsActivity extends AppCompatActivity {
                     // Changes the textview's text to "Checked: example radiobutton text"
                     cardType = checkedRadioButton.getText().toString();
                 }
+                else
+                    {
+                        checkedRadioButton.setChecked(false);
+                    }
             }
         });
     }
@@ -83,18 +100,16 @@ public class ReservationsActivity extends AppCompatActivity {
 
     //Clear all fields
     public void clear_onClick(View view){
-        btnClears.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v)
-            {
-                EditText[] editTexts = {parkingNameET,parkingAddressET,timeFromET,timeToET,cardNumberET,expiryDateET,cvvET};
 
-                for (EditText et:editTexts) {
+                EditText[] editTexts = {parkingNameET,parkingAddressET,timeFromET,timeToET,cardNumberET,expiryDateET,cvvET };
+                rdDebit.setChecked(false);
+                rdCredit.setChecked(false);
+
+        for (EditText et:editTexts) {
                     et.setText("");
                 }
             }
-        });
-    }
+
 
     //for checking the database.
 
@@ -110,17 +125,141 @@ public class ReservationsActivity extends AppCompatActivity {
         expiryDate = expiryDateET.getText().toString();
         cvv = cvvET.getText().toString();
 
-        if (timeFrom.length() == 0 || timeFrom.length() > 5) {
-            timeFromET.setError("Only Time Format");
-        } else if (timeTO.length() == 0 || timeTO.length() > 5) {
-            timeToET.setError("Time Format!!");
-        } else if (cardNumber.length() == 0 || cardNumber.length() > 16) {
-            cardNumberET.setError("Card number is 1 to 16 Digits");
-        } else if (cvv.length() == 0 || cvv.length() > 3) {
-            cvvET.setError("The 3 Digit Security Code ");
-        } else {
+
+
+        //Set Time Format
+        DateFormat fmt = new SimpleDateFormat("HH:mm");
+
+        //Set Expired Date Format
+        DateFormat mmyy = new SimpleDateFormat("MM/yyyy");
+        DateFormat yy = new SimpleDateFormat("yyyy");
+        DateFormat mm = new SimpleDateFormat("MM");
+        mmyy.setLenient(false);
+
+        //Setting Current year, month
+        Calendar calendar = new GregorianCalendar();
+        int currentYear = calendar.get(Calendar.YEAR);
+        int currentMonth  = calendar.get(Calendar.MONTH) + 1;
+        String year = null, month = null;
+        //Checkers
+        Boolean yearDateCheck = false;
+        Boolean timeCheck = false;
+
+
+        //Address Validation block - based on Registration page - can be reduced using a method
+        String regex2 = "^[0-9]+ ?[A-Za-z\\s]+$";
+        Pattern pattern2 = Pattern.compile(regex2); //Allow White Space afterwardsx
+        boolean address_bool = false;
+        List<String> ad = new ArrayList<String>();
+        ad.add(parkingAddress);
+
+
+        for (String address : ad ) {
+            Matcher matcher = pattern2.matcher(address);
+            if (matcher.matches()) {
+                address_bool = true;
+            } else {
+                address_bool = false;
+                ad.clear();
+
+            }
+        }
+
+        try
+        {
+            //Full Result of expired Date
+            result = mmyy.parse(expiryDate); // returns the full date month year day etc
+
+            // Full Result of time
+            RTimeFrom = fmt.parse(timeFrom);
+            RTimeTo = fmt.parse(timeTO);
+
+           // set inputed Year, month
+             year = yy.format(result);
+             month = mm.format(result);
+
+
+
+            if(RTimeTo.after(RTimeFrom) && timeTO.length() <= 5 && timeFrom.length() <= 5)
+            {
+                timeCheck = true;
+
+            }
+            else {
+                timeToET.setText("Enter a valid time interval");
+            }
+
+
+            if (Integer.parseInt(year) <= currentYear ){
+
+                if (currentYear == Integer.parseInt(year) && yearDateCheck == false){
+                    if (currentMonth + 1 > Integer.parseInt(month)){
+                        expiryDateET.setError("Date must be in 'MM/yyyy and a month greater than " + currentMonth);
+                        yearDateCheck = false;
+                    }
+                    else
+                    {
+                        yearDateCheck = true;
+                    }
+
+                }
+                else if (Integer.parseInt(year) < currentYear && yearDateCheck && yearDateCheck )
+                {
+                    yearDateCheck = false;
+                    expiryDateET.setError("Date must be in 'MM/yyyy and a month greater than " + currentMonth + "Date must be in 'MM/yyyy and greater than year " + year);
+                }
+
+            }
+
+            else
+            {
+                yearDateCheck = true;
+            }
+
+
+        }catch(Exception e)
+    {
+        Toast.makeText(this, "Something went absolutely wrong please re-input these fields", Toast.LENGTH_SHORT).show();
+        expiryDateET.setText("01/2018");
+        timeFromET.setText("0:00");
+        timeToET.setText("0:00");
+
+
+
+    }
+
+
+        if ( parkingName.length() < 5|| parkingAddress.length() < 3|| timeFrom.equals("")|| timeTO.equals("") || cardNumber.length() < 16|| cvv.length() < 3 || expiryDate.equals("")||cvv.equals("")
+                || yearDateCheck == false || timeCheck == false || address_bool == false ) {
+            if (parkingName.length() < 5 || parkingAddress.length() < 3 || address_bool == false  )
+            {
+                if (parkingName.length() < 5 )
+                {
+                    parkingNameET.setError("This field is too short");
+                }
+
+                else if(parkingAddress.length() < 5 || address_bool == false)
+                    {
+                        parkingAddressET.setError("This field is improperly done e.g 1 Deauville Lane");
+
+                    }
+            }
+
+            else if (cardNumber.length() < 16) {
+                Toast.makeText(ReservationsActivity.this, "card number Must be 16 digits", Toast.LENGTH_LONG).show();
+
+            } else if (cvv.length() < 3) {
+                Toast.makeText(ReservationsActivity.this, "security code must be 3 digits ", Toast.LENGTH_LONG).show();
+
+            }
+
+            Toast.makeText(ReservationsActivity.this,"Fields are Required",Toast.LENGTH_LONG).show();
+
+        }
+
+        else {
             myDb.open();
-            myDb.insertReservation(username, parkingName, parkingAddress, timeFrom, timeTO, cardType, Integer.parseInt(cardNumber), expiryDate, cvv);
+            myDb.insertReservation(username, parkingName, parkingAddress, timeFrom, timeTO, cardType,cardNumber, expiryDate, cvv);
             String name = null;
 
             Cursor c = myDb.getNameOfUser(username);

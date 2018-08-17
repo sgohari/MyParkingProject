@@ -22,6 +22,11 @@ public class DBHelper extends SQLiteOpenHelper {
         //Execute queries
         db.execSQL(reservationTable.DATABASE_CREATE_RESERVATIONS);
         db.execSQL(registrationTable.DATABASE_CREATE_USERS);
+
+        //Table Not In Used
+        db.execSQL(futureTables.DATABASE_FINANCE);
+        db.execSQL(futureTables.DATABASE_MAINTENANCE);
+
     }
 
     @Override
@@ -31,6 +36,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS reservation");
         db.execSQL("DROP TABLE IF EXISTS registration");
+
+        db.execSQL("DROP TABLE IF EXISTS FINANCE ");
+        db.execSQL("DROP TABLE IF EXISTS MAINTENANCE");
+
         onCreate(db);
     }
 }

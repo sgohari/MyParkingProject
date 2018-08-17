@@ -24,7 +24,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /*
-Validated by Jason
+Author: Jason Nguessan
+Date: 2018/08/16
+Description: Validated Registration Page
  */
 
 public class Registration extends AppCompatActivity {
@@ -74,7 +76,7 @@ public class Registration extends AppCompatActivity {
         Pattern pattern = Pattern.compile(regex);
 
         //Address Validation Regex
-        String regex2 = "^[0-9]+ ?[A-Za-z\\s]+$";
+        String regex2 = "^\\s+[0-9]+ ?[A-Za-z\\s]+$";
         Pattern pattern2 = Pattern.compile(regex2); //Allow White Space afterwardsx
         boolean address_bool = false;
 
@@ -219,8 +221,6 @@ public class Registration extends AppCompatActivity {
     public void fieldsValidation_onClick(){
 
     }
-
-
     //simple concatenation test for JUnit
     public String concatenate( String one, String two){
         return one+two;

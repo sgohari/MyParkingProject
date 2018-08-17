@@ -82,4 +82,5 @@
     <string name="find">Find</string>
     <string name="logout">LogOut</string>
     <string name="back">Back</string>
+    <string name="done">Done</string>
 </resources>
