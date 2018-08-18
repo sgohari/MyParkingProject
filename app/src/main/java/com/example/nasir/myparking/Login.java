@@ -55,9 +55,7 @@ public class Login extends AppCompatActivity {
 
             if(username.equals("admin") && password.equals("pass"))
             {
-                if (password!="pass"){
-                    passwordET.setError("Incorrect Password");
-                }
+
                 Intent intent = new Intent(this,AdminHomepage.class);
                 startActivity(intent);
             }
